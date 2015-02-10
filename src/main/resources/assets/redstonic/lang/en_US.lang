@@ -6,6 +6,7 @@ item.DiamondDrillHead.name=Diamond Drill Head
 item.HeavyDrillHead.name=Heavy Drill Head
 item.FortuitousDrillHead.name=Fortuitous Drill Head
 item.SilkyDrillHead.name=Silky Drill Head
+item.BlazerDrillHead.name=Blazer Drill Head
 
 item.IronDrillBody.name=Iron Drill Body
 item.ElectrumDrillBody.name=Electrum Drill Body
@@ -34,6 +35,7 @@ drill.diamond=Diamond
 drill.heavy=Heavy
 drill.fortuitous=Fortuitous
 drill.silky=Silky
+drill.blazer=Blazer
 drill.electrum=Electrum
 drill.enderium=Enderium
 drill.unknown=Unknown

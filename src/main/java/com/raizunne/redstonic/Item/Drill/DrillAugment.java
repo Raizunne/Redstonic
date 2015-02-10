@@ -43,6 +43,7 @@ public class DrillAugment extends Item {
                         case 3: hotswapHead = "Heavy"; break;
                         case 4: hotswapHead = "Fortuitous"; break;
                         case 5: hotswapHead = "Silky"; break;
+                        case 6: hotswapHead = "Blazer"; break;
                     }
                 }
                 list.add(EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head");
@@ -131,6 +132,7 @@ public class DrillAugment extends Item {
                 case 3: hotswapHead = new ItemStack(RedstonicItems.HeavyHead); break;
                 case 4: hotswapHead = new ItemStack(RedstonicItems.FortuitousHead); break;
                 case 5: hotswapHead = new ItemStack(RedstonicItems.SilkyHead); break;
+                case 6: hotswapHead = new ItemStack(RedstonicItems.BlazerHead); break;
                 case -1: hotswapHead = null;
             }
             stack.stackTagCompound.setBoolean("set", false);

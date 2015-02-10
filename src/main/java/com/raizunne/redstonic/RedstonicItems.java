@@ -20,6 +20,7 @@ public class RedstonicItems {
     public static Item HeavyHead = new DrillHead(4);
     public static Item FortuitousHead = new DrillHead(5);
     public static Item SilkyHead = new DrillHead(6);
+    public static Item BlazerHead = new DrillHead(7);
 
     public static Item IronBody = new DrillBody(1);
     public static Item ElectrumBody = new DrillBody(2);
@@ -39,6 +40,7 @@ public class RedstonicItems {
         GameRegistry.registerItem(HeavyHead, HeavyHead.getUnlocalizedName());
         GameRegistry.registerItem(FortuitousHead, FortuitousHead.getUnlocalizedName());
         GameRegistry.registerItem(SilkyHead, SilkyHead.getUnlocalizedName());
+        GameRegistry.registerItem(BlazerHead, BlazerHead.getUnlocalizedName());
 
         GameRegistry.registerItem(IronBody, IronBody.getUnlocalizedName());
         GameRegistry.registerItem(ElectrumBody, ElectrumBody.getUnlocalizedName());

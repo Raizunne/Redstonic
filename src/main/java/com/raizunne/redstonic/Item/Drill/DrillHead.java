@@ -43,13 +43,14 @@ public class DrillHead extends Item {
             case 4: return "HeavyDrillHead";
             case 5: return "FortuitousDrillHead";
             case 6: return "SilkyDrillHead";
+            case 7: return "BlazerDrillHead";
             default: return "UnknownDrillHead";
         }
     }
 
     @Override
     public void registerIcons(IIconRegister i) {
-        heads = new IIcon[7];
+        heads = new IIcon[8];
         heads[0] = i.registerIcon("redstonic:Drill/Heads/Icon/Unknown");
         heads[1] = i.registerIcon("redstonic:Drill/Heads/Icon/Iron");
         heads[2] = i.registerIcon("redstonic:Drill/Heads/Icon/Gold");
@@ -57,34 +58,16 @@ public class DrillHead extends Item {
         heads[4] = i.registerIcon("redstonic:Drill/Heads/Icon/Heavy");
         heads[5] = i.registerIcon("redstonic:Drill/Heads/Icon/Fortuitous");
         heads[6] = i.registerIcon("redstonic:Drill/Heads/Icon/Silky");
-
+        heads[7] = i.registerIcon("redstonic:Drill/Heads/Icon/Blazer");
     }
 
     @Override
     public IIcon getIcon(ItemStack stack, int pass) {
-        switch(material){
-            case 0: return heads[0];
-            case 1: return heads[1];
-            case 2: return heads[2];
-            case 3: return heads[3];
-            case 4: return heads[4];
-            case 5: return heads[5];
-            case 6: return heads[6];
-            default: return heads[0];
-        }
+        return heads[material];
     }
 
     @Override
     public IIcon getIconIndex(ItemStack p_77650_1_) {
-        switch(material){
-            case 0: return heads[0];
-            case 1: return heads[1];
-            case 2: return heads[2];
-            case 3: return heads[3];
-            case 4: return heads[4];
-            case 5: return heads[5];
-            case 6: return heads[6];
-            default: return heads[0];
-        }
+        return heads[material];
     }
 }

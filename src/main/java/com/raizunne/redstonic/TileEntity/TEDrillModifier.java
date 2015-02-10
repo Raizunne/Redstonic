@@ -127,18 +127,21 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     }
 
     public int getHead(){
-        if(getStackInSlot(1).getItem() == RedstonicItems.IronHead){
+        Item item = getStackInSlot(1).getItem();
+        if(item == RedstonicItems.IronHead){
             return 0;
-        }else if(getStackInSlot(1).getItem() == RedstonicItems.GoldHead){
+        }else if(item == RedstonicItems.GoldHead){
             return 1;
-        }else if(getStackInSlot(1).getItem() == RedstonicItems.DiamondHead){
+        }else if(item == RedstonicItems.DiamondHead){
             return 2;
-        }else if(getStackInSlot(1).getItem() == RedstonicItems.HeavyHead){
+        }else if(item == RedstonicItems.HeavyHead){
             return 3;
-        }else if(getStackInSlot(1).getItem() == RedstonicItems.FortuitousHead){
+        }else if(item == RedstonicItems.FortuitousHead){
             return 4;
-        }else if(getStackInSlot(1).getItem() == RedstonicItems.SilkyHead) {
+        }else if(item == RedstonicItems.SilkyHead){
             return 5;
+        }else if(item == RedstonicItems.BlazerHead){
+            return 6;
         }else{
             return 0;
         }
@@ -169,6 +172,8 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             case 4: setInventorySlotContents(1, new ItemStack(RedstonicItems.FortuitousHead));
                 break;
             case 5: setInventorySlotContents(1, new ItemStack(RedstonicItems.SilkyHead));
+                break;
+            case 6: setInventorySlotContents(1, new ItemStack(RedstonicItems.BlazerHead));
                 break;
         }
     }
