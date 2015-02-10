@@ -1,0 +1,16 @@
+[
+{
+  "modid": "redstonic",
+  "name": "Redstonic",
+  "description": "Several tools and blocks that use RF",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Raizunne"],
+  "credits": "Everyone that helped me on the MinecraftForge Forums!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

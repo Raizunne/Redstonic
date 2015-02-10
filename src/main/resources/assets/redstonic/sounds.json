@@ -1,0 +1,6 @@
+{
+	"pageflip1": {"category": "master","sounds": [{"name": "pageflip1","stream": false}]},
+	"pageflip2": {"category": "master","sounds": [{"name": "pageflip2","stream": false}]},
+	"pageflip3": {"category": "master","sounds": [{"name": "pageflip3","stream": false}]},
+	"pageflip4": {"category": "master","sounds": [{"name": "pageflip4","stream": false}]}
+}

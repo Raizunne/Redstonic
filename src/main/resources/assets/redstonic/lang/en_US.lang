@@ -1,0 +1,47 @@
+itemGroup.Redstonic=Redstonic
+
+item.IronDrillHead.name=Iron Drill Head
+item.GoldDrillHead.name=Gold Drill Head
+item.DiamondDrillHead.name=Diamond Drill Head
+item.HeavyDrillHead.name=Heavy Drill Head
+item.FortuitousDrillHead.name=Fortuitous Drill Head
+item.SilkyDrillHead.name=Silky Drill Head
+
+item.IronDrillBody.name=Iron Drill Body
+item.ElectrumDrillBody.name=Electrum Drill Body
+item.EnderiumDrillBody.name=Enderium Drill Body
+
+item.EnergyAugment.name=Energy Drill Augment
+item.SpeedAugment.name=Speed Drill Augment
+item.HotswapAugment.name=Hotswap Drill Augment
+
+item.RedstonicDrill.name=§cRedstonic Drill
+item.Manual.name=§cRedstonic Manual
+
+tile.DrillModifier.name=Drill Modifier
+
+drill.head=Head
+drill.body=Body
+drill.battery=Battery
+drill.digspeed=Dig Speed
+drill.energyusage=Energy Usage
+drill.hold=Hold
+drill.formoreinfo=for more info.
+
+drill.iron=Iron
+drill.gold=Gold
+drill.diamond=Diamond
+drill.heavy=Heavy
+drill.fortuitous=Fortuitous
+drill.silky=Silky
+drill.electrum=Electrum
+drill.enderium=Enderium
+drill.unknown=Unknown
+drill.augment=Augment
+
+entries.GettingStarted=Welcome to the world of Redstonic Drills! In this page I will show you how Redstonic Drills are made!                                  Redstonic Drills are made up from three basic components: Drill Head, Drill Body, and Energy Capacitor. Each of them have an entry in this manual. For more information in each one of them you can go to the previous menu.
+entries.Heads=The Drill Heads are what mines the block. It is what goes on top of the drill and determines the speed at which the drill mines or how fast the block breaks.                                  On the next page you can see the different drill head speeds.
+entries.Bodies=The Drill Bodies are the base of the drill. The drill body decides how many augments you can put in a drill, with a max of 3.                                       Other than that, all drill bodies are the same.
+entries.Energy=The Drill Energy is taken from Capacitors from Thermal Expansion. The max energy of the capacitor is reduced due to the size of it not being able to be used in the drill.
+entries.Augments=The Drill Augments are what modifies the drill apart from the base needs to create it. Each one of them has a different use.
+entries.HotswapAugment=This Drill Augment is a special augment that allows to change your drill head RIGHT ON THE SPOT! To change it, sneak and then right click the Redstonic Drill. It will cost a total of 1500 RF per change.                                        Check the next page for more info on crafting. To get your drill head back, simply hold right click with the augment on your hand and the drill head should come right off!
