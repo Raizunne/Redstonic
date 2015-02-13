@@ -1,19 +1,15 @@
 package com.raizunne.redstonic.Handler;
 
-import com.google.common.eventbus.Subscribe;
-import com.raizunne.redstonic.Block.BlockLooking;
+import com.raizunne.redstonic.Client.BlockLooking;
 import com.raizunne.redstonic.Item.RedstonicDrill;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent;
 
 /**

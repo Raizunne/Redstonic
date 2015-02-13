@@ -1,5 +1,6 @@
-package com.raizunne.redstonic.Block;
+package com.raizunne.redstonic.Client;
 
+import com.raizunne.redstonic.Block.DrillModifier;
 import com.raizunne.redstonic.Item.Manual;
 import com.raizunne.redstonic.RedstonicItems;
 import net.minecraft.block.Block;
@@ -29,12 +30,12 @@ public class BlockLooking {
                 if (block instanceof DrillModifier) {
                     int posx = (int)((event.resolution.getScaledWidth()/2)/0.8);
                     int posy = (int)((event.resolution.getScaledHeight()/2)/0.8);
-                    RenderItem.getInstance().renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, new ItemStack(RedstonicItems.ManualBook), (int)((posx+10)*0.8), (int)((posy-8)*0.8));
-                    GL11.glDisable(GL11.GL_LIGHTING);
                     if (event.isCancelable() || event.type != RenderGameOverlayEvent.ElementType.TEXT) {
                         return;
                     }
                     GL11.glPushMatrix();
+                    RenderItem.getInstance().renderItemIntoGUI(minecraft.fontRenderer, minecraft.renderEngine, new ItemStack(RedstonicItems.ManualBook), (int)((posx+10)*0.8), (int)((posy-8)*0.8));
+                    GL11.glDisable(GL11.GL_LIGHTING);
                     GL11.glScalef(0.8F, 0.8F, 0.8F);
                     minecraft.fontRenderer.drawStringWithShadow(EnumChatFormatting.RED + "Manual Entry:" + EnumChatFormatting.RESET, posx + 33, posy - 8, 0x404040);
                     minecraft.fontRenderer.drawStringWithShadow(EnumChatFormatting.GREEN + "Drill Modifier" + EnumChatFormatting.RESET, posx+33, posy+2, 0x404040);

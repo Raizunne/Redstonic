@@ -254,7 +254,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     }
 
     public boolean checkForAssemble(){
-        if(getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(2)!=null && getStackInSlot(3)!=null){
+        if(getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof DrillBody && getStackInSlot(3)!=null && checkCapacitor(3)){
             return true;
         }else{
             return false;

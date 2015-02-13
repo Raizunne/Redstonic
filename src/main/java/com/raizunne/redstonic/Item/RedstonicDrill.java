@@ -448,7 +448,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
             case 3: return (int)(800 * multiplier);
             case 4: return (int)(800 * multiplier);
             case 5: return (int)(500 * multiplier);
-            case 6: return (int)(500 * multiplier);
+            case 6: return (int)(800 * multiplier);
             default: return 0;
         }
     }

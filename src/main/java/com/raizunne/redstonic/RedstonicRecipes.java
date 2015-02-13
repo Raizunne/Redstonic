@@ -70,21 +70,27 @@ public class RedstonicRecipes {
                     "WIW",
                     "IGI",
                     "WIW", 'W', Blocks.log, 'I', Items.iron_ingot, 'G', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 136)});
-
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.HotswapAugment), new Object[]{
-                    "III",
-                    "DCD",
-                    "III", 'C', Blocks.chest, 'D', RedstonicItems.IronHead, 'I', Items.iron_ingot});
-
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.SilkyHead), new Object[]{
-                    " E ",
-                    "EGE",
-                    "GDG", 'E', Items.emerald, 'G', Items.gold_ingot, 'D', RedstonicItems.DiamondHead
-            });
-
-            IRecipe hotswap = new HotswapSet();
-            GameRegistry.addRecipe(hotswap);
         }
+
+        GameRegistry.addRecipe(new ItemStack(RedstonicItems.HotswapAugment), new Object[]{
+                "III",
+                "DCD",
+                "III", 'C', Blocks.chest, 'D', RedstonicItems.IronHead, 'I', Items.iron_ingot});
+
+        GameRegistry.addRecipe(new ItemStack(RedstonicItems.SilkyHead), new Object[]{
+                " E ",
+                "EGE",
+                "GDG", 'E', Items.emerald, 'G', Items.gold_ingot, 'D', RedstonicItems.DiamondHead
+        });
+
+        GameRegistry.addRecipe(new ItemStack(RedstonicItems.BlazerHead), new Object[]{
+                " C ",
+                "CGC",
+                "EDE", 'C', Blocks.coal_block, 'E', Items.emerald, 'G', RedstonicItems.DiamondHead, 'D', RedstonicItems.GoldHead
+        });
+
+        IRecipe hotswap = new HotswapSet();
+        GameRegistry.addRecipe(hotswap);
     }
 
 }

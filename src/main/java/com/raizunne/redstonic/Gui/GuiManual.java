@@ -64,7 +64,7 @@ public class GuiManual extends GuiScreen {
         GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(posX, posY, 0, 0, xSizeofTexture, ySizeofTexture);
-        if(page=="index" || page=="drills" || page=="extras"){
+        if(page=="index" || page=="drills" || page=="extras" || page=="Contribute!"){
             mc.renderEngine.bindTexture(misc);
             drawTexturedModalRect(posX+20, posY+20, 0, 0, 99, 94);
             drawTexturedModalRect(posX+18, posY+120, 0, 95, 102, 23);
@@ -83,12 +83,18 @@ public class GuiManual extends GuiScreen {
             drawStatsText("Iron Body", "1 Augment Slot", 0x404040, 0x009933, 160, 20); drawStatsText("Electrum Body", "2 Augment Slot", 0x404040, 0x009933, 160, 40);
             drawStatsText("Enderium Body", "3 Augment Slot", 0x404040, 0x009933, 160, 60);
             drawItem(RedstonicItems.IronBody, 140, 20, x, y); drawItem(RedstonicItems.ElectrumBody, 140, 40, x, y); drawItem(RedstonicItems.EnderiumBody, 140, 60, x, y);
-        }else if(page=="Energy"){
-            drawStatsText("Hardened Capacitor", "480,000 RF Storage", 0x404040, 0x009933, 160, 20); drawStatsText("Reinforced Capacitor", "640,000 RF Storage", 0x404040, 0x009933, 160, 40);
+        }else if(page=="Energy") {
+            drawStatsText("Hardened Capacitor", "480,000 RF Storage", 0x404040, 0x009933, 160, 20);
+            drawStatsText("Reinforced Capacitor", "640,000 RF Storage", 0x404040, 0x009933, 160, 40);
             drawStatsText("Resonant Capacitor", "1,000,000 RF Storage", 0x404040, 0x009933, 160, 60);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1), 140, 20, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1), 140, 40, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1), 140, 60, x, y);
+        }else if(page=="Contribute!"){
+            drawText("Redstonic is made completely by Raizunne, but he is also limited in his capabilities!. If you wish to contribute with Redstonic, Raizunne (Me), is looking for some work done for Redstonic!", 135, 135, 20);
+            drawStatsText("Model for Drill Modifier", "(Dont like current!)", 0x990000, 0x990000, 135, 85);
+            drawStatsText("Model for Drills", "(Make them 3D!)", 0x990000, 0x990000, 135, 105);
+            drawText("Contact: @Raizunne on Twitter", 135, 135, 135);
         }else if(page=="Augments"){
             if(subPage==1){
                 drawStatsText("Speed Augment I", "x1.5 Dig Speed Mutli", 0x404040, 0x009933, 160, 20); drawStatsText("Energy Augment I", "x1.5 Max Energy Multi", 0x404040, 0x009933, 160, 40);
@@ -117,9 +123,9 @@ public class GuiManual extends GuiScreen {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
 
-        String[] indexTitles = {"Drills", "Extras"};
+        String[] indexTitles = {"Drills", "Extras", "Contribute!"};
         String[] drillsTitles = {"Getting Started", "Heads", "Bodies", "Energy", "Augments"};
-        String[] extrasTitles = {"Report a Bug", "Website", "CurseForge", "Patreon"};
+        String[] extrasTitles = {"Report a Bug", "Website", "Patreon"};
 
         ButtonMenu[] index = new ButtonMenu[indexTitles.length];
         ButtonMenu[] drills = new ButtonMenu[drillsTitles.length];
@@ -160,11 +166,12 @@ public class GuiManual extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         super.actionPerformed(button);
         switch(button.id){
-            case -3: if(page=="drills" || page=="extras"){page="index"; maxPages=1; subPage=1;}else{page=prevPage; maxPages=1; subPage=1;} break;
+            case -3: if(page=="drills" || page=="extras" || page=="Contribute!"){page="index"; maxPages=1; subPage=1;}else{page=prevPage; maxPages=1; subPage=1;} break;
             case -2: subPage+=1; break;
             case -1: subPage-=1; break;
             case 0: page="drills"; prevPage="index"; break;
             case 1: page="extras"; prevPage="index"; break;
+            case 2: page="Contribute!"; prevPage="index"; break;
 
             case 100: page="Getting Started"; prevPage="drills"; break;
             case 101: page="Heads"; prevPage="drills"; break;
@@ -173,9 +180,8 @@ public class GuiManual extends GuiScreen {
             case 104: page="Augments"; prevPage="drills"; maxPages=2; break;
 
             case 900: try {Desktop.getDesktop().browse(URI.create("https://github.com/Raizunne/Redstonic/issues")); } catch(Exception e) {e.printStackTrace();} break;
-            case 901: try {Desktop.getDesktop().browse(URI.create("http://raizunne.wordpress.com")); } catch(Exception e) {e.printStackTrace();} break;
-            case 902: try {Desktop.getDesktop().browse(URI.create("http://www.curseforge.com/")); } catch(Exception e) {e.printStackTrace();} break;
-            case 903: try {Desktop.getDesktop().browse(URI.create("https://www.patreon.com/raizunne")); } catch(Exception e) {e.printStackTrace();} break;
+            case 901: try {Desktop.getDesktop().browse(URI.create("http://raizunne.github.io")); } catch(Exception e) {e.printStackTrace();} break;
+            case 902: try {Desktop.getDesktop().browse(URI.create("https://www.patreon.com/raizunne")); } catch(Exception e) {e.printStackTrace();} break;
         }
     }
 
