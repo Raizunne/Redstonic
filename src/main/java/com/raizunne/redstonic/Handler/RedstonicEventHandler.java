@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -46,20 +47,19 @@ public class RedstonicEventHandler {
     }
 
     @SubscribeEvent
-    public void LoginEvent(EntityJoinWorldEvent event){
-        if(event.world.isRemote && event.entity==Minecraft.getMinecraft().thePlayer){
-            if(ClientProxy.version!=null || ClientProxy.version!=""){
-                if(ClientProxy.version!= Redstonic.VERSION) {
-                    Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("AOSNDAOSND"));
-                }else{
-                    System.out.println("[REDSTONIC] Using latest version.");
-                }
-            }else{
-               try {
-                   ClientProxy.checkVersion();
-               }catch (Exception e){
-                   e.printStackTrace();
-               }
+    public void LoginEvent(EntityJoinWorldEvent event) {
+        if (event.world.isRemote && event.entity == Minecraft.getMinecraft().thePlayer) {
+            try {
+                ClientProxy.checkVersion();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (!ClientProxy.version.equals(Redstonic.VERSION)) {
+                Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Redstonic " + EnumChatFormatting.WHITE + "Outdated! New version is " + EnumChatFormatting.YELLOW + ClientProxy.version));
+                Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("Changes: " + ));
+            }else {
+                System.out.println("[REDSTONIC] Using latest version.");
             }
         }
     }

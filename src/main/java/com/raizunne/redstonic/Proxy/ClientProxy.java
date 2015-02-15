@@ -29,7 +29,19 @@ public class ClientProxy extends CommonProxy {
 
     public static void checkVersion() throws Exception{
         int timeout = 10000;
-        URL url = new URL("https://raw.githubusercontent.com/Raizunne/Miscellany/master/extras/Version.txt");
+        URL url = new URL("https://raw.githubusercontent.com/Raizunne/Redstonic/master/src/versions/latest.txt");
+        URLConnection text = url.openConnection();
+        text.setConnectTimeout(timeout);
+        text.setReadTimeout(timeout);
+
+        @SuppressWarnings("resource")
+        Scanner scannerino = new Scanner(text.getInputStream());
+        version = scannerino.nextLine();
+    }
+
+    public static void newVersionChangelog() throws Exception{
+        int timeout = 10000;
+        URL url = new URL("https://raw.githubusercontent.com/Raizunne/Redstonic/master/src/versions/latest.txt");
         URLConnection text = url.openConnection();
         text.setConnectTimeout(timeout);
         text.setReadTimeout(timeout);
