@@ -26,11 +26,15 @@ public class Manual extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        MovingObjectPosition mop = player.rayTrace(200, 1.0F);
-        Block block = player.worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ);
-        player.playSound(randomSound(), 1F, 1F);
-        if(block== RedstonicBlocks.Modifier){
-            player.openGui(Redstonic.instance, 2, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+        MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, true);
+        if(mop!=null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+            Block block = world.getBlock(mop.blockX, mop.blockY, mop.blockZ);
+            player.playSound(randomSound(), 1F, 1F);
+            if (block == RedstonicBlocks.Modifier) {
+                player.openGui(Redstonic.instance, 2, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+            } else {
+                player.openGui(Redstonic.instance, 1, world, (int) player.posX, (int) player.posY, (int) player.posZ);
+            }
         }else{
             player.openGui(Redstonic.instance, 1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
         }

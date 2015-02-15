@@ -2,14 +2,21 @@ package com.raizunne.redstonic.Handler;
 
 import com.raizunne.redstonic.Client.BlockLooking;
 import com.raizunne.redstonic.Item.RedstonicDrill;
+import com.raizunne.redstonic.Proxy.ClientProxy;
+import com.raizunne.redstonic.Redstonic;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 /**
@@ -31,10 +38,28 @@ public class RedstonicEventHandler {
                     !(event.block instanceof BlockLog)) {
                 ItemStack stack = FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(event.block, 1, event.blockMetadata));
                 if (stack != null) {
-                    MovingObjectPosition mop = event.harvester.rayTrace(200, 1.0F);
                     event.drops.clear();
                     event.drops.add(stack.copy());
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void LoginEvent(EntityJoinWorldEvent event){
+        if(event.world.isRemote && event.entity==Minecraft.getMinecraft().thePlayer){
+            if(ClientProxy.version!=null || ClientProxy.version!=""){
+                if(ClientProxy.version!= Redstonic.VERSION) {
+                    Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("AOSNDAOSND"));
+                }else{
+                    System.out.println("[REDSTONIC] Using latest version.");
+                }
+            }else{
+               try {
+                   ClientProxy.checkVersion();
+               }catch (Exception e){
+                   e.printStackTrace();
+               }
             }
         }
     }
