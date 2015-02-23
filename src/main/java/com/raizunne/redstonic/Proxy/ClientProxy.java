@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class ClientProxy extends CommonProxy {
 
     public static String version;
+    public static String newChangelog;
 
     public void initRenderers(){
         TileEntitySpecialRenderer modifier = new RenderDrillModifier();
@@ -41,14 +42,14 @@ public class ClientProxy extends CommonProxy {
 
     public static void newVersionChangelog() throws Exception{
         int timeout = 10000;
-        URL url = new URL("https://raw.githubusercontent.com/Raizunne/Redstonic/master/src/versions/latest.txt");
+        URL url = new URL("https://raw.githubusercontent.com/Raizunne/Redstonic/master/src/versions/changelog.txt");
         URLConnection text = url.openConnection();
         text.setConnectTimeout(timeout);
         text.setReadTimeout(timeout);
 
         @SuppressWarnings("resource")
         Scanner scannerino = new Scanner(text.getInputStream());
-        version = scannerino.nextLine();
+        newChangelog = scannerino.nextLine();
     }
 
 }

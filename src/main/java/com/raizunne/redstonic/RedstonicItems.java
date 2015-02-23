@@ -21,6 +21,7 @@ public class RedstonicItems {
     public static Item FortuitousHead = new DrillHead(5);
     public static Item SilkyHead = new DrillHead(6);
     public static Item BlazerHead = new DrillHead(7);
+    public static Item EndHead = new DrillHead(8);
 
     public static Item IronBody = new DrillBody(1);
     public static Item ElectrumBody = new DrillBody(2);
@@ -29,6 +30,7 @@ public class RedstonicItems {
     public static Item SpeedAugment = new DrillAugment(0);
     public static Item EnergyAugment = new DrillAugment(1);
     public static Item HotswapAugment = new DrillAugment(2);
+    public static Item TorchAugment = new DrillAugment(3);
 
     public static Item RedDrill = new RedstonicDrill(Item.ToolMaterial.EMERALD);
     public static Item ManualBook = new Manual();
@@ -41,6 +43,7 @@ public class RedstonicItems {
         GameRegistry.registerItem(FortuitousHead, FortuitousHead.getUnlocalizedName());
         GameRegistry.registerItem(SilkyHead, SilkyHead.getUnlocalizedName());
         GameRegistry.registerItem(BlazerHead, BlazerHead.getUnlocalizedName());
+        GameRegistry.registerItem(EndHead, EndHead.getUnlocalizedName());
 
         GameRegistry.registerItem(IronBody, IronBody.getUnlocalizedName());
         GameRegistry.registerItem(ElectrumBody, ElectrumBody.getUnlocalizedName());

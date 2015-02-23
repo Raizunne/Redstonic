@@ -15,6 +15,7 @@ item.EnderiumDrillBody.name=Enderium Drill Body
 item.EnergyAugment.name=Energy Drill Augment
 item.SpeedAugment.name=Speed Drill Augment
 item.HotswapAugment.name=Hotswap Drill Augment
+item.TorchAugment.name=Torch Placing Drill Augment
 
 item.RedstonicDrill.name=§cRedstonic Drill
 item.Manual.name=§cRedstonic Manual

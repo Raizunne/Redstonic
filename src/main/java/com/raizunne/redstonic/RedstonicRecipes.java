@@ -15,6 +15,8 @@ import net.minecraft.item.crafting.IRecipe;
 public class RedstonicRecipes {
 
     public static void init(){
+        GameRegistry.addShapelessRecipe(new ItemStack(RedstonicItems.ManualBook), new Object[]{Items.book, Items.stone_pickaxe});
+
         GameRegistry.addRecipe(new ItemStack(RedstonicItems.IronHead), new Object[]{
                 " I ",
                 "IBI",

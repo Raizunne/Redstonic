@@ -51,13 +51,14 @@ public class RedstonicEventHandler {
         if (event.world.isRemote && event.entity == Minecraft.getMinecraft().thePlayer) {
             try {
                 ClientProxy.checkVersion();
+                ClientProxy.newVersionChangelog();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             if (!ClientProxy.version.equals(Redstonic.VERSION)) {
                 Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Redstonic " + EnumChatFormatting.WHITE + "Outdated! New version is " + EnumChatFormatting.YELLOW + ClientProxy.version));
-                Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("Changes: " + ));
+                Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Changes: " + EnumChatFormatting.WHITE + ClientProxy.newChangelog));
             }else {
                 System.out.println("[REDSTONIC] Using latest version.");
             }

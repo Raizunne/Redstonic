@@ -44,13 +44,14 @@ public class DrillHead extends Item {
             case 5: return "FortuitousDrillHead";
             case 6: return "SilkyDrillHead";
             case 7: return "BlazerDrillHead";
+            case 8: return "EndDrillHead";
             default: return "UnknownDrillHead";
         }
     }
 
     @Override
     public void registerIcons(IIconRegister i) {
-        heads = new IIcon[8];
+        heads = new IIcon[9];
         heads[0] = i.registerIcon("redstonic:Drill/Heads/Icon/Unknown");
         heads[1] = i.registerIcon("redstonic:Drill/Heads/Icon/Iron");
         heads[2] = i.registerIcon("redstonic:Drill/Heads/Icon/Gold");
@@ -59,6 +60,7 @@ public class DrillHead extends Item {
         heads[5] = i.registerIcon("redstonic:Drill/Heads/Icon/Fortuitous");
         heads[6] = i.registerIcon("redstonic:Drill/Heads/Icon/Silky");
         heads[7] = i.registerIcon("redstonic:Drill/Heads/Icon/Blazer");
+        heads[8] = i.registerIcon("redstonic:Drill/Heads/Icon/End");
     }
 
     @Override

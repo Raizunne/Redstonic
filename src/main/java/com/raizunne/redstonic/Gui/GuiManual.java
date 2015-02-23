@@ -3,6 +3,8 @@ package com.raizunne.redstonic.Gui;
 import com.raizunne.redstonic.Gui.Button.ButtonDirectional;
 import com.raizunne.redstonic.Gui.Button.ButtonMenu;
 import com.raizunne.redstonic.Gui.Button.ButtonPage;
+import com.raizunne.redstonic.Proxy.ClientProxy;
+import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.Lang;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -73,7 +75,11 @@ public class GuiManual extends GuiScreen {
                 newEntry(this.page, new String[]{Lang.translate("entries." + this.page.replaceAll(" ", ""))});
             }
         }
-        if(page=="Heads"){
+        if(page=="index"){
+            if(!ClientProxy.version.equals(Redstonic.VERSION)) {
+                drawStatsText("Redstonic is outadated!", "", 0x000000, 0x404040, 140, 140);
+            }
+        }else if(page=="Heads"){
             drawStatsText("Iron Head", "Medium Speed", 0x404040, 0x009933, 160, 20); drawStatsText("Gold Head", "Very Fast Speed", 0x404040, 0x009933, 160, 40);
             drawStatsText("Diamond Head", "Fast Speed", 0x404040, 0x009933, 160, 60); drawStatsText("Fortuitous Head", "Slow - Fortune Mining", 0x404040, 0x009933, 160, 80);
             drawStatsText("Heavy Head", "Slow - 3x3 Mining", 0x404040, 0x009933, 160, 100); drawStatsText("Silky Head", "Slow - Silk Touch I", 0x404040, 0x009933, 160, 120);
@@ -133,11 +139,15 @@ public class GuiManual extends GuiScreen {
         ButtonDirectional right = new ButtonDirectional(-2, posX + 232, posY + 171, "right");
         ButtonDirectional left = new ButtonDirectional(-1, posX + 6, posY + 171, "left");
         ButtonPage ret = new ButtonPage(-3, posX + 95, posY + 171, 100, 14, "Return");
+        ButtonMenu changelog = new ButtonMenu(10000, posX + 160, posY + 145, 30, "Changelog", 0x3366FF, 0x2447B2, true);
 
         if(page=="index") {
             for (int i = 0; i < index.length; i++) {
                 index[i] = new ButtonMenu(i, posX + 140, posY + 15 + i * 12, 10+(indexTitles[i].length()*5), indexTitles[i], color1, color2, true);
                 buttonList.add(index[i]);
+            }
+            if(!ClientProxy.version.equals(Redstonic.VERSION)) {
+                buttonList.add(changelog);
             }
         }else if(page=="drills" || page=="Getting Started"){
             for (int i = 0; i < drills.length; i++) {
@@ -169,6 +179,7 @@ public class GuiManual extends GuiScreen {
             case -3: if(page=="drills" || page=="extras" || page=="Contribute!"){page="index"; maxPages=1; subPage=1;}else{page=prevPage; maxPages=1; subPage=1;} break;
             case -2: subPage+=1; break;
             case -1: subPage-=1; break;
+            case 10000: try {Desktop.getDesktop().browse(URI.create("http://raizunne.github.io/Mods/Redstonic/Changelog.html#" + ClientProxy.version)); } catch(Exception e) {e.printStackTrace();} break;
             case 0: page="drills"; prevPage="index"; break;
             case 1: page="extras"; prevPage="index"; break;
             case 2: page="Contribute!"; prevPage="index"; break;

@@ -1,1 +1,1 @@
-Pleas update. Fixed MAJOR bug when opening manual. Fixed MAJOR bug when using Blazing drill. 
+Please update. Fixed MAJOR bug when opening manual. Fixed MAJOR bug when using Blazing drill. 

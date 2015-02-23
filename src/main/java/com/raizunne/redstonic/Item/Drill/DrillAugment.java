@@ -2,6 +2,7 @@ package com.raizunne.redstonic.Item.Drill;
 
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
+import com.raizunne.redstonic.Util.Util;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -36,19 +37,12 @@ public class DrillAugment extends Item {
                 list.add("Quick exchange of Drill Heads");
                 list.add("1500 RF per change.");
                 if(stack.stackTagCompound!=null) {
-                    switch (stack.stackTagCompound.getInteger("hotswapHead")) {
-                        case 0: hotswapHead = "Iron"; break;
-                        case 1: hotswapHead = "Gold"; break;
-                        case 2: hotswapHead = "Diamond"; break;
-                        case 3: hotswapHead = "Heavy"; break;
-                        case 4: hotswapHead = "Fortuitous"; break;
-                        case 5: hotswapHead = "Silky"; break;
-                        case 6: hotswapHead = "Blazer"; break;
-                    }
+                    hotswapHead = Util.getDrillHeadName(stack.stackTagCompound.getInteger("hotswapHead"));
                 }
                 list.add(EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head");
                 list.add(EnumChatFormatting.GRAY + "Hold" + EnumChatFormatting.BLUE + " Right Click" + EnumChatFormatting.GRAY + " to empty.");
                 break;
+            case 3: list.add("Right click to place a torch.");
         }
     }
 
@@ -65,6 +59,7 @@ public class DrillAugment extends Item {
             case 0: return "SpeedAugment";
             case 1: return "EnergyAugment";
             case 2: return "HotswapAugment";
+            case 3: return "TorchAugment";
             default: return "UnknownAugment";
         }
     }
@@ -82,10 +77,11 @@ public class DrillAugment extends Item {
 
     @Override
     public void registerIcons(IIconRegister i) {
-        icons = new IIcon[3];
+        icons = new IIcon[4];
         icons[0] = i.registerIcon("redstonic:Drill/Augment/Icon/Speed");
         icons[1] = i.registerIcon("redstonic:Drill/Augment/Icon/Energy");
         icons[2] = i.registerIcon("redstonic:Drill/Augment/Icon/Hotswap");
+        icons[3] = i.registerIcon("redstonic:Drill/Augment/Icon/Torch");
     }
 
     @Override
@@ -96,6 +92,8 @@ public class DrillAugment extends Item {
             case 0: return icons[0];
             case 1: return icons[1];
             case 2: return icons[2];
+            case 3: return icons[3];
+            case 4: return icons[4];
             default: return null;
         }
     }
@@ -108,6 +106,8 @@ public class DrillAugment extends Item {
             case 0: return icons[0];
             case 1: return icons[1];
             case 2: return icons[2];
+            case 3: return icons[3];
+            case 4: return icons[4];
             default: return null;
         }
     }
@@ -125,16 +125,7 @@ public class DrillAugment extends Item {
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if(type==2 && stack.stackTagCompound!=null) {
             ItemStack hotswapHead = null;
-            switch (stack.stackTagCompound.getInteger("hotswapHead")) {
-                case 0: hotswapHead = new ItemStack(RedstonicItems.IronHead); break;
-                case 1: hotswapHead = new ItemStack(RedstonicItems.GoldHead); break;
-                case 2: hotswapHead = new ItemStack(RedstonicItems.DiamondHead); break;
-                case 3: hotswapHead = new ItemStack(RedstonicItems.HeavyHead); break;
-                case 4: hotswapHead = new ItemStack(RedstonicItems.FortuitousHead); break;
-                case 5: hotswapHead = new ItemStack(RedstonicItems.SilkyHead); break;
-                case 6: hotswapHead = new ItemStack(RedstonicItems.BlazerHead); break;
-                case -1: hotswapHead = null;
-            }
+            hotswapHead = Util.getDrillHead(stack.stackTagCompound.getInteger("hotswapHead"));
             stack.stackTagCompound.setBoolean("set", false);
             stack.stackTagCompound.setInteger("hotswapHead", -1);
             if(player.inventory.addItemStackToInventory(hotswapHead)){

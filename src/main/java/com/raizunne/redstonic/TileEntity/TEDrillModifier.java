@@ -4,6 +4,7 @@ import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
 import com.raizunne.redstonic.Item.RedstonicDrill;
 import com.raizunne.redstonic.RedstonicItems;
+import com.raizunne.redstonic.Util.Util;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,9 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     @Override
     public void updateEntity() {
         super.updateEntity();
+        if(getStackInSlot(0)!=null){
+            System.out.println(getStackInSlot(0).stackTagCompound);
+        }
         if(checkForAssemble() && mode==1){
             assemble();
         }else if(checkForDisassemble() && mode==2){
@@ -50,9 +54,9 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         ItemStack drill = getStackInSlot(0);
         drill.stackTagCompound = new NBTTagCompound();
         NBTTagCompound tag = drill.stackTagCompound;
-        tag.setInteger("head", getHead());
-        tag.setInteger("body", getBody());
-        tag.setInteger("maxEnergy", getEnergy());
+        tag.setInteger("head", Util.getHeadNumber(getStackInSlot(1)));
+        tag.setInteger("body", Util.getBodyNumber(getStackInSlot(2)));
+        tag.setInteger("maxEnergy", Util.getEnergyAmount(getStackInSlot(3)));
 
         checkMaxAugments();
 
@@ -68,7 +72,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             if(getAug1()==3 && getStackInSlot(5).stackTagCompound!=null){
                 hotswapHead=getStackInSlot(5).stackTagCompound.getInteger("hotswapHead");
             }
-            applyAug(getAug1());
+            Util.applyAug(getAug1(), drill, hotswapHead);
             maxAug-=1;
             getStackInSlot(0).stackTagCompound.setInteger("aug1", getAug1());
             setInventorySlotContents(5, null);
@@ -78,7 +82,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             if(getAug2()==3 && getStackInSlot(6).stackTagCompound!=null){
                 hotswapHead=getStackInSlot(6).stackTagCompound.getInteger("hotswapHead");
             }
-            applyAug(getAug2());
+            Util.applyAug(getAug2(), drill, hotswapHead);
             maxAug-=1;
             getStackInSlot(0).stackTagCompound.setInteger("aug2", getAug2());
             setInventorySlotContents(6, null);
@@ -88,7 +92,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             if(getAug3()==3 && getStackInSlot(7).stackTagCompound!=null){
                 hotswapHead=getStackInSlot(7).stackTagCompound.getInteger("hotswapHead");
             }
-            applyAug(getAug3());
+            Util.applyAug(getAug3(), drill, hotswapHead);
             getStackInSlot(0).stackTagCompound.setInteger("aug3", getAug3());
             setInventorySlotContents(7, null);
         }
@@ -119,195 +123,39 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         int body = getStackInSlot(0).stackTagCompound.getInteger("body");
         int maxEnergy = getStackInSlot(0).stackTagCompound.getInteger("maxEnergy");
 
-        setHead(head);
-        setBody(body);
-        setEnergy(maxEnergy);
+        setInventorySlotContents(1, Util.getDrillHead(head));
+        setInventorySlotContents(2, Util.getDrillBody(body));
+        setInventorySlotContents(3, Util.getEnergy(maxEnergy, getStackInSlot(0), getStackInSlot(3)));
         setAug(getStackInSlot(0));
         setInventorySlotContents(0, null);
     }
 
-    public int getHead(){
-        Item item = getStackInSlot(1).getItem();
-        if(item == RedstonicItems.IronHead){
-            return 0;
-        }else if(item == RedstonicItems.GoldHead){
-            return 1;
-        }else if(item == RedstonicItems.DiamondHead){
-            return 2;
-        }else if(item == RedstonicItems.HeavyHead){
-            return 3;
-        }else if(item == RedstonicItems.FortuitousHead){
-            return 4;
-        }else if(item == RedstonicItems.SilkyHead){
-            return 5;
-        }else if(item == RedstonicItems.BlazerHead){
-            return 6;
-        }else{
-            return 0;
-        }
-    }
-
-    public int getBody(){
-        if(getStackInSlot(2).getItem() == RedstonicItems.IronBody){
-            return 0;
-        }else if(getStackInSlot(2).getItem() == RedstonicItems.ElectrumBody){
-            return 1;
-        }else if(getStackInSlot(2).getItem() == RedstonicItems.EnderiumBody){
-            return 2;
-        }else{
-            return 0;
-        }
-    }
-
-    public void setHead(int i){
-        switch(i){
-            case 0: setInventorySlotContents(1, new ItemStack(RedstonicItems.IronHead));
-                break;
-            case 1: setInventorySlotContents(1, new ItemStack(RedstonicItems.GoldHead));
-                break;
-            case 2: setInventorySlotContents(1, new ItemStack(RedstonicItems.DiamondHead));
-                break;
-            case 3: setInventorySlotContents(1, new ItemStack(RedstonicItems.HeavyHead));
-                break;
-            case 4: setInventorySlotContents(1, new ItemStack(RedstonicItems.FortuitousHead));
-                break;
-            case 5: setInventorySlotContents(1, new ItemStack(RedstonicItems.SilkyHead));
-                break;
-            case 6: setInventorySlotContents(1, new ItemStack(RedstonicItems.BlazerHead));
-                break;
-        }
-    }
-
-    public void setBody(int i){
-        switch(i){
-            case 0: setInventorySlotContents(2, new ItemStack(RedstonicItems.IronBody));
-                break;
-            case 1: setInventorySlotContents(2, new ItemStack(RedstonicItems.ElectrumBody));
-                break;
-            case 2: setInventorySlotContents(2, new ItemStack(RedstonicItems.EnderiumBody));
-                break;
-        }
-    }
-
-    public void setEnergy(int i){
-        ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
-        ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
-        ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
-        float multiplier = getStackInSlot(0).stackTagCompound.getFloat("energyMulti");
-        if(multiplier==0){multiplier = 1;}
-        int total = (int)(i / multiplier);
-        switch(total){
-            case 480000:
-                setInventorySlotContents(3, hardened);
-                if(getStackInSlot(3).stackTagCompound==null){
-                    getStackInSlot(3).stackTagCompound = new NBTTagCompound();
-                }
-                getStackInSlot(3).stackTagCompound.setInteger("Energy", getStackInSlot(0).stackTagCompound.getInteger("energy"));
-                break;
-            case 640000:
-                setInventorySlotContents(3, reinforced);
-                if(getStackInSlot(3).stackTagCompound==null){
-                    getStackInSlot(3).stackTagCompound = new NBTTagCompound();
-                }
-                getStackInSlot(3).stackTagCompound.setInteger("Energy", getStackInSlot(0).stackTagCompound.getInteger("energy"));
-                break;
-            case 1000000:
-                setInventorySlotContents(3, resonant);
-                if(getStackInSlot(3).stackTagCompound==null){
-                    getStackInSlot(3).stackTagCompound = new NBTTagCompound();
-                }
-                getStackInSlot(3).stackTagCompound.setInteger("Energy", getStackInSlot(0).stackTagCompound.getInteger("energy"));
-                break;
-        }
-    }
-
-    public int getEnergy(){
-        ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
-        ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
-        ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
-        if(getStackInSlot(3).isItemEqual(hardened)){
-            return 480000;
-        }else if(getStackInSlot(3).isItemEqual(reinforced)){
-            return 640000;
-        }else if(getStackInSlot(3).isItemEqual(resonant)){
-            return 1000000;
-        }
-        return 0;
-    }
-
     public boolean checkParts(){
-        if(getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2).getItem() instanceof DrillBody && checkCapacitor(3)){
-            return true;
-        }else{
-            return false;
-        }
+        return getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2).getItem() instanceof DrillBody && checkCapacitor(3);
     }
 
     public boolean checkCapacitor(int i){
         ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
         ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
         ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
-        if(getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant)){
-            return true;
-        }
-        return false;
+        return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant);
     }
 
     public boolean checkForAssemble(){
-        if(getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof DrillBody && getStackInSlot(3)!=null && checkCapacitor(3)){
-            return true;
-        }else{
-            return false;
-        }
+        return getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof DrillBody && getStackInSlot(3)!=null && checkCapacitor(3) && checkParts() && inspectAugments();
     }
 
     public boolean checkForDisassemble(){
-        if(getStackInSlot(0)!=null && getStackInSlot(0).getItem() instanceof RedstonicDrill && getStackInSlot(1)==null && getStackInSlot(2)==null && getStackInSlot(3)==null && getStackInSlot(4)==null && getStackInSlot(5)==null&& getStackInSlot(6)==null){
-            return true;
-        }else{
-            return false;
-        }
+        return getStackInSlot(0)!=null && getStackInSlot(0).getItem() instanceof RedstonicDrill && getStackInSlot(1)==null && getStackInSlot(2)==null && getStackInSlot(3)==null && getStackInSlot(4)==null && getStackInSlot(5)==null&& getStackInSlot(6)==null;
     }
 
     public void setAug(ItemStack stack){
         NBTTagCompound tag = stack.stackTagCompound;
-        if(tag.getInteger("aug1")!=0){
-            switch(tag.getInteger("aug1")){
-                case 1: setInventorySlotContents(5, new ItemStack(RedstonicItems.SpeedAugment)); break;
-                case 2: setInventorySlotContents(5, new ItemStack(RedstonicItems.EnergyAugment)); break;
-                case 3:
-                    int hot = getStackInSlot(0).stackTagCompound.getInteger("hotswapHead");
-                    ItemStack aug = new ItemStack(RedstonicItems.HotswapAugment);
-                    aug.stackTagCompound = new NBTTagCompound();
-                    aug.stackTagCompound.setInteger("hotswapHead", getStackInSlot(0).stackTagCompound.getInteger("hotswapHead"));
-                    setInventorySlotContents(5, aug);
-                    break;
-            }
-        }
-        if(tag.getInteger("aug2")!=0){
-            switch(tag.getInteger("aug2")){
-                case 1: setInventorySlotContents(6, new ItemStack(RedstonicItems.SpeedAugment)); break;
-                case 2: setInventorySlotContents(6, new ItemStack(RedstonicItems.EnergyAugment)); break;
-                case 3:
-                    int hot = getStackInSlot(0).stackTagCompound.getInteger("hotswapHead");
-                    ItemStack aug = new ItemStack(RedstonicItems.HotswapAugment);
-                    aug.stackTagCompound = new NBTTagCompound();
-                    aug.stackTagCompound.setInteger("hotswapHead", getStackInSlot(0).stackTagCompound.getInteger("hotswapHead"));
-                    setInventorySlotContents(6, aug);
-                    break;
-            }
-        }
-        if(tag.getInteger("aug3")!=0){
-            switch(tag.getInteger("aug3")){
-                case 1: setInventorySlotContents(7, new ItemStack(RedstonicItems.SpeedAugment)); break;
-                case 2: setInventorySlotContents(7, new ItemStack(RedstonicItems.EnergyAugment)); break;
-                case 3:
-                    int hot = getStackInSlot(0).stackTagCompound.getInteger("hotswapHead");
-                    ItemStack aug = new ItemStack(RedstonicItems.HotswapAugment);
-                    aug.stackTagCompound = new NBTTagCompound();
-                    aug.stackTagCompound.setInteger("hotswapHead", getStackInSlot(0).stackTagCompound.getInteger("hotswapHead"));
-                    setInventorySlotContents(7, aug);
-                    break;
+        int hot = tag.getInteger("hotswapHead");
+
+        for(int i=1; i<4; i++){
+            if(tag.getInteger("aug" + i)!=0){
+                setInventorySlotContents(4+i, Util.getAugments(tag.getInteger("aug"+i), hot));
             }
         }
     }
@@ -341,32 +189,10 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
     }
 
-    public void applyAug(int aug){
-        switch(aug){
-            case 1: getStackInSlot(0).stackTagCompound.setFloat("speedMulti", 1.5F); break;
-            case 2: getStackInSlot(0).stackTagCompound.setFloat("energyMulti", 2.5F); break;
-            case 3: getStackInSlot(0).stackTagCompound.setInteger("hotswapHead", hotswapHead); break;
-            case 0: return;
-            default: return;
-        }
-    }
-
-    public int augmenterino(Item i){
-        if(i==RedstonicItems.SpeedAugment){
-            return 1;
-        }else if(i==RedstonicItems.EnergyAugment){
-            return 2;
-        }else if(i==RedstonicItems.HotswapAugment){
-            return 3;
-        }else{
-            return 0;
-        }
-    }
-
     public int getAug1() {
         if(getStackInSlot(5)!=null){
             Item item = getStackInSlot(5).getItem();
-            aug1 = augmenterino(item);
+            aug1 = Util.getAugNumber(item);
         }
         return aug1;
     }
@@ -374,7 +200,8 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public int getAug2() {
         if(getStackInSlot(6)!=null){
             Item item = getStackInSlot(6).getItem();
-            aug2 = augmenterino(item);
+            aug2 = Util.getAugNumber(item);
+//            System.out.println(aug2);
         }
         return aug2;
     }
@@ -382,7 +209,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public int getAug3() {
         if(getStackInSlot(7)!=null){
             Item item = getStackInSlot(7).getItem();
-            aug3 = augmenterino(item);
+            aug3 = Util.getAugNumber(item);
         }
         return aug3;
     }
