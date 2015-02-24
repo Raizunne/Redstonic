@@ -1,12 +1,15 @@
 package com.raizunne.redstonic;
 
 import com.raizunne.redstonic.Item.IRecipes.HotswapSet;
-import cpw.mods.fml.common.Loader;
+import com.raizunne.redstonic.Util.TEHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 /**
  * Created by Raizunne as a part of Redstonic
@@ -47,32 +50,30 @@ public class RedstonicRecipes {
                 "IBI",
                 "III", 'I', Items.iron_ingot, 'B', RedstonicItems.GoldHead});
 
-        if(Loader.isModLoaded("ThermalExpansion") && Loader.isModLoaded("ThermalFoundation")){
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
-                    "III",
-                    "IBI",
-                    "III", 'I', Items.iron_ingot, 'B', new ItemStack(GameRegistry.findItem("ThermalExpansion", "capacitor"), 1, 4)});
+        GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
+                "III",
+                "IBI",
+                "III", 'I', Items.iron_ingot, 'B', TEHelper.capacitorRedstone});
 
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.IronBody), new Object[]{
-                    " G ",
-                    "IBG",
-                    "II ", 'I', Items.iron_ingot, 'B', new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 3), 'G', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 12)});
+        GameRegistry.addRecipe(new ItemStack(RedstonicItems.IronBody), new Object[]{
+                " G ",
+                "IBG",
+                "II ", 'I', Items.iron_ingot, 'B', TEHelper.coilElectrum, 'G', TEHelper.gearIron});
 
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.ElectrumBody), new Object[]{
-                    " G ",
-                    "IBG",
-                    "II ", 'I', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 71), 'B', new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 3), 'G', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 135)});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.ElectrumBody),
+                " G ",
+                "IBG",
+                "II ", 'I', "ingotElectrum", 'B', TEHelper.coilElectrum, 'G', TEHelper.gearElectrum));
 
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnderiumBody), new Object[]{
-                    " G ",
-                    "IBG",
-                    "II ", 'I', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 76), 'B', new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 3), 'G', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 140)});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnderiumBody),
+                " G ",
+                "IBG",
+                "II ", 'I', "ingotEnderium", 'B', TEHelper.coilElectrum, 'G', TEHelper.gearEnderium));
 
-            GameRegistry.addRecipe(new ItemStack(RedstonicBlocks.Modifier), new Object[]{
-                    "WIW",
-                    "IGI",
-                    "WIW", 'W', Blocks.log, 'I', Items.iron_ingot, 'G', new ItemStack(GameRegistry.findItem("ThermalFoundation", "material"), 1, 136)});
-        }
+        GameRegistry.addRecipe(new ItemStack(RedstonicBlocks.Modifier), new Object[]{
+                "WIW",
+                "IGI",
+                "WIW", 'W', Blocks.log, 'I', Items.iron_ingot, 'G', TEHelper.gearInvar});
 
         GameRegistry.addRecipe(new ItemStack(RedstonicItems.HotswapAugment), new Object[]{
                 "III",
@@ -91,8 +92,25 @@ public class RedstonicRecipes {
                 "EDE", 'C', Blocks.coal_block, 'E', Items.emerald, 'G', RedstonicItems.DiamondHead, 'D', RedstonicItems.GoldHead
         });
 
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.Energizer),
+                "LUL",
+                "UHU",
+                "LUL", 'L', "ingotLead", 'U', "ingotLumium", 'H', "blockGlassHardened", 'D', RedstonicItems.GoldHead));
+
+        GameRegistry.addRecipe(new ItemStack(RedstonicItems.EndHead), new Object[]{
+                " D ",
+                "IWG",
+                "ECE", 'D', RedstonicItems.DiamondHead, 'I', RedstonicItems.IronHead, 'W', Items.nether_star, 'G', RedstonicItems.GoldHead, 'E', RedstonicItems.EnergizerFull, 'C', TEHelper.coilElectrum});
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.UltimateBody),
+                " G ",
+                "IWG",
+                "II ", 'W', Items.nether_star, 'I',  "ingotPlatinum", 'B', TEHelper.coilElectrum, 'G', RedstonicItems.EnergizerFull));
+
         IRecipe hotswap = new HotswapSet();
         GameRegistry.addRecipe(hotswap);
+        TEHelper.addTransposerFill(10000, new ItemStack(RedstonicItems.Energizer), new ItemStack(RedstonicItems.EnergizerFull), new FluidStack(FluidRegistry.getFluid("redstone"), 64000), false);
+
     }
 
 }

@@ -1,1 +1,1 @@
-Please update. Fixed MAJOR bug when opening manual. Fixed MAJOR bug when using Blazing drill. 
+Added a instant super fast mining speed drill head! Also ability to place torches with a right click!

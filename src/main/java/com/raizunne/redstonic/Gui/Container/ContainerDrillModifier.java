@@ -54,6 +54,7 @@ public class ContainerDrillModifier extends Container {
         ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
         ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
         ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
+        ItemStack creative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);
 
@@ -80,7 +81,7 @@ public class ContainerDrillModifier extends Container {
                             return null;
                         }
                     }
-                }else if(itemstack1.isItemEqual(hardened) || itemstack1.isItemEqual(reinforced) || itemstack1.isItemEqual(resonant)) {
+                }else if(itemstack1.isItemEqual(hardened) || itemstack1.isItemEqual(reinforced) || itemstack1.isItemEqual(resonant) || itemstack1.isItemEqual(creative)) {
                     if (!mergeItemStack(itemstack1, 39, 40, false)) {
                         if (!mergeItemStack(itemstack1, 9, 35, false)) {
                             return null;

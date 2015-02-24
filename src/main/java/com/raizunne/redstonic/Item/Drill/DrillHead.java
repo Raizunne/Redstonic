@@ -1,13 +1,18 @@
 package com.raizunne.redstonic.Item.Drill;
 
 import com.raizunne.redstonic.Redstonic;
+import com.raizunne.redstonic.Util.Util;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
+
+import java.util.List;
 
 /**
  * Created by Raizunne as a part of Redstonic
@@ -23,6 +28,26 @@ public class DrillHead extends Item {
         setCreativeTab(Redstonic.redTab);
         setMaxStackSize(1);
         setUnlocalizedName(getUnlocalizedName());
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer p_77624_2_, List list, boolean p_77624_4_) {
+        String[] info = Util.getHeadInfo(material);
+        if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+            list.add(Util.ItemShiftInfo);
+        }
+        if(info!=null){
+            if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+                for(int i=0; i<info.length; i++){
+                    list.add(info[i]);
+                }
+            }
+        }
+        if(stack.stackTagCompound!=null) {
+            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+                list.add("Blocks Mined: " + stack.stackTagCompound.getInteger("blocks"));
+            }
+        }
     }
 
     @Override

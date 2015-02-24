@@ -3,6 +3,7 @@ package com.raizunne.redstonic;
 import com.raizunne.redstonic.Item.Drill.DrillAugment;
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
+import com.raizunne.redstonic.Item.ItemMaterial;
 import com.raizunne.redstonic.Item.Manual;
 import com.raizunne.redstonic.Item.RedstonicDrill;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -26,14 +27,17 @@ public class RedstonicItems {
     public static Item IronBody = new DrillBody(1);
     public static Item ElectrumBody = new DrillBody(2);
     public static Item EnderiumBody = new DrillBody(3);
+    public static Item UltimateBody = new DrillBody(4);
 
     public static Item SpeedAugment = new DrillAugment(0);
     public static Item EnergyAugment = new DrillAugment(1);
     public static Item HotswapAugment = new DrillAugment(2);
-    public static Item TorchAugment = new DrillAugment(3);
 
-    public static Item RedDrill = new RedstonicDrill(Item.ToolMaterial.EMERALD);
+    public static Item RedDrill = new RedstonicDrill(0, 0, 0);
     public static Item ManualBook = new Manual();
+
+    public static Item Energizer = new ItemMaterial(0);
+    public static Item EnergizerFull = new ItemMaterial(1);
 
     public static void init(){
         GameRegistry.registerItem(IronHead, IronHead.getUnlocalizedName());
@@ -48,6 +52,7 @@ public class RedstonicItems {
         GameRegistry.registerItem(IronBody, IronBody.getUnlocalizedName());
         GameRegistry.registerItem(ElectrumBody, ElectrumBody.getUnlocalizedName());
         GameRegistry.registerItem(EnderiumBody, EnderiumBody.getUnlocalizedName());
+        GameRegistry.registerItem(UltimateBody, UltimateBody.getUnlocalizedName());
 
         GameRegistry.registerItem(SpeedAugment, SpeedAugment.getUnlocalizedName());
         GameRegistry.registerItem(EnergyAugment, EnergyAugment.getUnlocalizedName());
@@ -55,6 +60,9 @@ public class RedstonicItems {
 
         GameRegistry.registerItem(RedDrill, RedDrill.getUnlocalizedName());
         GameRegistry.registerItem(ManualBook, ManualBook.getUnlocalizedName());
+
+        GameRegistry.registerItem(Energizer, Energizer.getUnlocalizedName());
+        GameRegistry.registerItem(EnergizerFull, EnergizerFull.getUnlocalizedName());
     }
 
 }

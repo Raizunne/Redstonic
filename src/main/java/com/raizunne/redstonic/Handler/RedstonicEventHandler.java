@@ -11,6 +11,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ChatComponentText;
@@ -34,10 +36,14 @@ public class RedstonicEventHandler {
 
     @SubscribeEvent
     public void BlazerBlaze(BlockEvent.HarvestDropsEvent event){
+//        System.out.println(event.block);
         if (event.harvester != null) {
             if (event.harvester.getHeldItem() != null && event.harvester.getHeldItem().getItem() instanceof RedstonicDrill && event.harvester.getHeldItem().stackTagCompound.getInteger("head")==6 &&
                     !(event.block instanceof BlockLog)) {
                 ItemStack stack = FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(event.block, 1, event.blockMetadata));
+                if(event.block == Blocks.stone){
+                    stack = new ItemStack(Blocks.stone, 1, event.blockMetadata);
+                }
                 if (stack != null) {
                     event.drops.clear();
                     event.drops.add(stack.copy());

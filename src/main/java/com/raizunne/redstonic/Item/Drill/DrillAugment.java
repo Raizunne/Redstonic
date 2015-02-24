@@ -2,6 +2,7 @@ package com.raizunne.redstonic.Item.Drill;
 
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
+import com.raizunne.redstonic.Util.DrillUtil;
 import com.raizunne.redstonic.Util.Util;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -29,21 +31,22 @@ public class DrillAugment extends Item {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
-        switch(type){
-            case 0: list.add("x1.5 Drill Speed Multiplier"); list.add("x1.1 Energy Usage"); break;
-            case 1: list.add("x2.5 Drill Energy Multiplier"); list.add("x1.1 Energy Usage"); break;
-            case 2:
-                String hotswapHead = "Empty";
-                list.add("Quick exchange of Drill Heads");
-                list.add("1500 RF per change.");
-                if(stack.stackTagCompound!=null) {
-                    hotswapHead = Util.getDrillHeadName(stack.stackTagCompound.getInteger("hotswapHead"));
-                }
-                list.add(EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head");
-                list.add(EnumChatFormatting.GRAY + "Hold" + EnumChatFormatting.BLUE + " Right Click" + EnumChatFormatting.GRAY + " to empty.");
-                break;
-            case 3: list.add("Right click to place a torch.");
+        String[] info = Util.getAugmentInfo(type, stack);
+        String hotswapHead = "Empty";
+        if(stack.stackTagCompound!=null) {
+            hotswapHead = DrillUtil.getDrillHeadName(stack.stackTagCompound.getInteger("hotswapHead"));
         }
+        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    list.add(info[i]);
+                }
+            }
+        }else{
+            if(type==2){list.add(EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head");}
+            list.add(Util.ItemShiftInfo);
+        }
+
     }
 
     public DrillAugment(int type){
@@ -125,7 +128,7 @@ public class DrillAugment extends Item {
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if(type==2 && stack.stackTagCompound!=null) {
             ItemStack hotswapHead = null;
-            hotswapHead = Util.getDrillHead(stack.stackTagCompound.getInteger("hotswapHead"));
+            hotswapHead = DrillUtil.getDrillHead(stack.stackTagCompound.getInteger("hotswapHead"));
             stack.stackTagCompound.setBoolean("set", false);
             stack.stackTagCompound.setInteger("hotswapHead", -1);
             if(player.inventory.addItemStackToInventory(hotswapHead)){

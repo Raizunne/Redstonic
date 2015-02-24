@@ -80,22 +80,27 @@ public class GuiManual extends GuiScreen {
                 drawStatsText("Redstonic is outadated!", "", 0x000000, 0x404040, 140, 140);
             }
         }else if(page=="Heads"){
-            drawStatsText("Iron Head", "Medium Speed", 0x404040, 0x009933, 160, 20); drawStatsText("Gold Head", "Very Fast Speed", 0x404040, 0x009933, 160, 40);
-            drawStatsText("Diamond Head", "Fast Speed", 0x404040, 0x009933, 160, 60); drawStatsText("Fortuitous Head", "Slow - Fortune Mining", 0x404040, 0x009933, 160, 80);
-            drawStatsText("Heavy Head", "Slow - 3x3 Mining", 0x404040, 0x009933, 160, 100); drawStatsText("Silky Head", "Slow - Silk Touch I", 0x404040, 0x009933, 160, 120);
-            drawItem(RedstonicItems.IronHead, 140, 20, x, y); drawItem(RedstonicItems.GoldHead, 140, 40, x, y); drawItem(RedstonicItems.DiamondHead, 140, 60, x, y);
-            drawItem(RedstonicItems.FortuitousHead, 140, 80, x, y); drawItem(RedstonicItems.HeavyHead, 140, 100, x, y); drawItem(RedstonicItems.SilkyHead, 140, 120, x, y);
+            drawStatsText("Iron Head", "Medium Speed", 0x404040, 0x009933, 160, 15); drawStatsText("Gold Head", "Very Fast Speed", 0x404040, 0x009933, 160, 35);
+            drawStatsText("Diamond Head", "Fast Speed", 0x404040, 0x009933, 160, 55); drawStatsText("Fortuitous Head", "Slow - Fortune Mining", 0x404040, 0x009933, 160, 75);
+            drawStatsText("Heavy Head", "Medium - 3x3 Mining", 0x404040, 0x009933, 160, 95); drawStatsText("Silky Head", "Slow - Silk Touch I", 0x404040, 0x009933, 160, 115);
+            drawStatsText("End Drill Head", "Instant Speed",0x404040, 0x009933, 160, 135);
+            drawItem(RedstonicItems.IronHead, 140, 15, x, y); drawItem(RedstonicItems.GoldHead, 140, 35, x, y); drawItem(RedstonicItems.DiamondHead, 140, 55, x, y);
+            drawItem(RedstonicItems.FortuitousHead, 140, 75, x, y); drawItem(RedstonicItems.HeavyHead, 140, 95, x, y); drawItem(RedstonicItems.SilkyHead, 140, 115, x, y);
+            drawItem(RedstonicItems.EndHead, 140, 135, x, y);
         }else if(page=="Bodies"){
             drawStatsText("Iron Body", "1 Augment Slot", 0x404040, 0x009933, 160, 20); drawStatsText("Electrum Body", "2 Augment Slot", 0x404040, 0x009933, 160, 40);
-            drawStatsText("Enderium Body", "3 Augment Slot", 0x404040, 0x009933, 160, 60);
+            drawStatsText("Enderium Body", "3 Augment Slot", 0x404040, 0x009933, 160, 60); drawStatsText("Ultimate Body", "0 Augment Slot", 0x404040, 0x009933, 160, 80);
             drawItem(RedstonicItems.IronBody, 140, 20, x, y); drawItem(RedstonicItems.ElectrumBody, 140, 40, x, y); drawItem(RedstonicItems.EnderiumBody, 140, 60, x, y);
+            drawItem(RedstonicItems.UltimateBody, 140, 80, x, y);
         }else if(page=="Energy") {
             drawStatsText("Hardened Capacitor", "480,000 RF Storage", 0x404040, 0x009933, 160, 20);
             drawStatsText("Reinforced Capacitor", "640,000 RF Storage", 0x404040, 0x009933, 160, 40);
             drawStatsText("Resonant Capacitor", "1,000,000 RF Storage", 0x404040, 0x009933, 160, 60);
+            drawStatsText("Creative Capacitor", "Infinite RF Storage", 0x404040, 0x009933, 160, 80);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1), 140, 20, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1), 140, 40, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1), 140, 60, x, y);
+            drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1), 140, 80, x, y);
         }else if(page=="Contribute!"){
             drawText("Redstonic is made completely by Raizunne, but he is also limited in his capabilities!. If you wish to contribute with Redstonic, Raizunne (Me), is looking for some work done for Redstonic!", 135, 135, 20);
             drawStatsText("Model for Drill Modifier", "(Dont like current!)", 0x990000, 0x990000, 135, 85);

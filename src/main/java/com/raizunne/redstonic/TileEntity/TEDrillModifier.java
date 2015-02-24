@@ -3,8 +3,9 @@ package com.raizunne.redstonic.TileEntity;
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
 import com.raizunne.redstonic.Item.RedstonicDrill;
+import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
-import com.raizunne.redstonic.Util.Util;
+import com.raizunne.redstonic.Util.DrillUtil;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,9 +39,9 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public void updateEntity() {
         super.updateEntity();
         if(getStackInSlot(0)!=null){
-            System.out.println(getStackInSlot(0).stackTagCompound);
+//            System.out.println(getStackInSlot(0).stackTagCompound);
         }
-        if(checkForAssemble() && mode==1){
+        if(checkForAssemble() && checkUltimate() && mode==1){
             assemble();
         }else if(checkForDisassemble() && mode==2){
             disassemble();
@@ -54,9 +55,11 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         ItemStack drill = getStackInSlot(0);
         drill.stackTagCompound = new NBTTagCompound();
         NBTTagCompound tag = drill.stackTagCompound;
-        tag.setInteger("head", Util.getHeadNumber(getStackInSlot(1)));
-        tag.setInteger("body", Util.getBodyNumber(getStackInSlot(2)));
-        tag.setInteger("maxEnergy", Util.getEnergyAmount(getStackInSlot(3)));
+        tag.setInteger("head", DrillUtil.getHeadNumber(getStackInSlot(1)));
+        tag.setInteger("body", DrillUtil.getBodyNumber(getStackInSlot(2)));
+        tag.setInteger("maxEnergy", DrillUtil.getEnergyAmount(getStackInSlot(3), drill));
+        tag.setInteger("blocks", getStackInSlot(1).stackTagCompound.getInteger("blocks"));
+        tag.setInteger("milestone", getStackInSlot(1).stackTagCompound.getInteger("milestone"));
 
         checkMaxAugments();
 
@@ -72,7 +75,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             if(getAug1()==3 && getStackInSlot(5).stackTagCompound!=null){
                 hotswapHead=getStackInSlot(5).stackTagCompound.getInteger("hotswapHead");
             }
-            Util.applyAug(getAug1(), drill, hotswapHead);
+            DrillUtil.applyAug(getAug1(), drill, hotswapHead);
             maxAug-=1;
             getStackInSlot(0).stackTagCompound.setInteger("aug1", getAug1());
             setInventorySlotContents(5, null);
@@ -82,7 +85,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             if(getAug2()==3 && getStackInSlot(6).stackTagCompound!=null){
                 hotswapHead=getStackInSlot(6).stackTagCompound.getInteger("hotswapHead");
             }
-            Util.applyAug(getAug2(), drill, hotswapHead);
+            DrillUtil.applyAug(getAug2(), drill, hotswapHead);
             maxAug-=1;
             getStackInSlot(0).stackTagCompound.setInteger("aug2", getAug2());
             setInventorySlotContents(6, null);
@@ -92,7 +95,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             if(getAug3()==3 && getStackInSlot(7).stackTagCompound!=null){
                 hotswapHead=getStackInSlot(7).stackTagCompound.getInteger("hotswapHead");
             }
-            Util.applyAug(getAug3(), drill, hotswapHead);
+            DrillUtil.applyAug(getAug3(), drill, hotswapHead);
             getStackInSlot(0).stackTagCompound.setInteger("aug3", getAug3());
             setInventorySlotContents(7, null);
         }
@@ -122,10 +125,20 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         int head = getStackInSlot(0).stackTagCompound.getInteger("head");
         int body = getStackInSlot(0).stackTagCompound.getInteger("body");
         int maxEnergy = getStackInSlot(0).stackTagCompound.getInteger("maxEnergy");
+        int blocks = getStackInSlot(0).stackTagCompound.getInteger("blocks");
+        int milestone = getStackInSlot(0).stackTagCompound.getInteger("milestone");
 
-        setInventorySlotContents(1, Util.getDrillHead(head));
-        setInventorySlotContents(2, Util.getDrillBody(body));
-        setInventorySlotContents(3, Util.getEnergy(maxEnergy, getStackInSlot(0), getStackInSlot(3)));
+        setInventorySlotContents(1, DrillUtil.getDrillHead(head));
+        if(getStackInSlot(1).stackTagCompound==null){
+            getStackInSlot(1).stackTagCompound=new NBTTagCompound();
+            getStackInSlot(1).stackTagCompound.setInteger("blocks", blocks);
+            getStackInSlot(1).stackTagCompound.setInteger("milestone", milestone);
+        }else{
+            getStackInSlot(1).stackTagCompound.setInteger("blocks", blocks);
+            getStackInSlot(1).stackTagCompound.setInteger("milestone", milestone);
+        }
+        setInventorySlotContents(2, DrillUtil.getDrillBody(body));
+        setInventorySlotContents(3, DrillUtil.getEnergy(maxEnergy, getStackInSlot(0), getStackInSlot(3)));
         setAug(getStackInSlot(0));
         setInventorySlotContents(0, null);
     }
@@ -138,11 +151,25 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
         ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
         ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
-        return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant);
+        ItemStack creative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
+        return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant) || getStackInSlot(i).isItemEqual(creative);
     }
 
     public boolean checkForAssemble(){
-        return getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof DrillBody && getStackInSlot(3)!=null && checkCapacitor(3) && checkParts() && inspectAugments();
+        return getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof DrillBody &&
+                getStackInSlot(3)!=null && checkCapacitor(3) && checkParts() && inspectAugments();
+    }
+
+    public boolean checkUltimate(){
+        if(getStackInSlot(1).getItem()==RedstonicItems.EndHead){
+            if(getStackInSlot(2).getItem()!= RedstonicItems.UltimateBody){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
     }
 
     public boolean checkForDisassemble(){
@@ -155,7 +182,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
 
         for(int i=1; i<4; i++){
             if(tag.getInteger("aug" + i)!=0){
-                setInventorySlotContents(4+i, Util.getAugments(tag.getInteger("aug"+i), hot));
+                setInventorySlotContents(4+i, DrillUtil.getAugments(tag.getInteger("aug" + i), hot));
             }
         }
     }
@@ -183,6 +210,8 @@ public class TEDrillModifier extends TileEntity implements IInventory {
                 this.augments = 2;
             }else if(getStackInSlot(2).getItem() == RedstonicItems.EnderiumBody){
                 this.augments = 3;
+            }else if(getStackInSlot(2).getItem() == RedstonicItems.UltimateBody){
+                this.augments = 0;
             }
         }else{
             this.augments = 0;
@@ -192,7 +221,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public int getAug1() {
         if(getStackInSlot(5)!=null){
             Item item = getStackInSlot(5).getItem();
-            aug1 = Util.getAugNumber(item);
+            aug1 = DrillUtil.getAugNumber(item);
         }
         return aug1;
     }
@@ -200,7 +229,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public int getAug2() {
         if(getStackInSlot(6)!=null){
             Item item = getStackInSlot(6).getItem();
-            aug2 = Util.getAugNumber(item);
+            aug2 = DrillUtil.getAugNumber(item);
 //            System.out.println(aug2);
         }
         return aug2;
@@ -209,7 +238,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public int getAug3() {
         if(getStackInSlot(7)!=null){
             Item item = getStackInSlot(7).getItem();
-            aug3 = Util.getAugNumber(item);
+            aug3 = DrillUtil.getAugNumber(item);
         }
         return aug3;
     }
