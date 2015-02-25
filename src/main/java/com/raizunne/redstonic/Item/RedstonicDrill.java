@@ -338,7 +338,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
         super.registerIcons(i);
         heads = new IIcon[8];
         body = new IIcon[4];
-        augments = new IIcon[3];
+        augments = new IIcon[4];
 
         heads[0] = i.registerIcon("redstonic:Drill/Heads/Render/Iron");
         heads[1] = i.registerIcon("redstonic:Drill/Heads/Render/Gold");
@@ -357,6 +357,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
         augments[0] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
         augments[1] = i.registerIcon("redstonic:Drill/Augment/Render/Speed");
         augments[2] = i.registerIcon("redstonic:Drill/Augment/Render/Energy");
+        augments[3] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
     }
 
     @Override
