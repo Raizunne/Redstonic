@@ -1,1 +1,1 @@
-Added SUPER MINING DRILL! Fixed bug with Hotswap Augment
+Added EnderIO support, now TE free!

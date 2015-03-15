@@ -2,7 +2,9 @@ package com.raizunne.redstonic;
 
 import com.raizunne.redstonic.Block.BlockCompressed;
 import com.raizunne.redstonic.Block.DrillModifier;
+import com.raizunne.redstonic.Block.Driller;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
+import com.raizunne.redstonic.TileEntity.TEDriller;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,12 +19,17 @@ public class RedstonicBlocks {
     public static Block GlowSteel = new BlockCompressed(0);
     public static Block Vibrantium = new BlockCompressed(1);
 
+    public static Block Driller = new Driller(Material.ground);
+
     public static void init(){
         GameRegistry.registerBlock(Modifier, Modifier.getUnlocalizedName());
         GameRegistry.registerBlock(Vibrantium, Vibrantium.getUnlocalizedName());
         GameRegistry.registerBlock(GlowSteel, GlowSteel.getUnlocalizedName());
 
+        GameRegistry.registerBlock(Driller, Driller.getUnlocalizedName());
+
         GameRegistry.registerTileEntity(TEDrillModifier.class, "TEDrillModifier");
+        GameRegistry.registerTileEntity(TEDriller.class, "TEDriller");
     }
 
 }

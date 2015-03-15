@@ -1,9 +1,11 @@
 package com.raizunne.redstonic.Proxy;
 
 import com.raizunne.redstonic.Client.Render.RenderDrillModifier;
+import com.raizunne.redstonic.Client.Render.RenderDriller;
 import com.raizunne.redstonic.Client.RenderItem.ItemDrillModifier;
 import com.raizunne.redstonic.RedstonicBlocks;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
+import com.raizunne.redstonic.TileEntity.TEDriller;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
@@ -23,9 +25,15 @@ public class ClientProxy extends CommonProxy {
     public static String newChangelog;
 
     public void initRenderers(){
+        //MODIFIER
         TileEntitySpecialRenderer modifier = new RenderDrillModifier();
         ClientRegistry.bindTileEntitySpecialRenderer(TEDrillModifier.class, modifier);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedstonicBlocks.Modifier), new ItemDrillModifier(modifier, new TEDrillModifier()));
+
+        //DRILLER
+        TileEntitySpecialRenderer driller = new RenderDriller();
+        ClientRegistry.bindTileEntitySpecialRenderer(TEDriller.class, driller);
+//        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedstonicBlocks.Driller), new Ite);
     }
 
     public static void checkVersion() throws Exception{
