@@ -21,6 +21,7 @@ public class TEHelper {
     public static ItemStack capacitorHardened = new ItemStack(GameRegistry.findItem("ThermalExpansion", "capacitor"), 1, 3);
     public static ItemStack capacitorRedstone = new ItemStack(GameRegistry.findItem("ThermalExpansion", "capacitor"), 1, 4);
     public static ItemStack capacitorResonant = new ItemStack(GameRegistry.findItem("ThermalExpansion", "capacitor"), 1, 5);
+    public static ItemStack capacitorCreative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
     public static ItemStack coilGold = new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 1);
     public static ItemStack coilSilver = new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 2);
     public static ItemStack coilElectrum = new ItemStack(GameRegistry.findItem("ThermalExpansion", "material"), 1, 3);

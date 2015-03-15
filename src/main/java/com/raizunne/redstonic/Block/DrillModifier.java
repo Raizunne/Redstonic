@@ -29,6 +29,7 @@ public class DrillModifier extends BlockContainer {
         setBlockName("DrillModifier");
         setBlockTextureName("redstonic:DrillModifier");
         setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+        setHardness(2F);
     }
 
     @Override

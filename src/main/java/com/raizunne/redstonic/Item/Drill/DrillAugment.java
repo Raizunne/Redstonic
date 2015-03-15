@@ -62,7 +62,7 @@ public class DrillAugment extends Item {
             case 0: return "SpeedAugment";
             case 1: return "EnergyAugment";
             case 2: return "HotswapAugment";
-            case 3: return "TorchAugment";
+            case 3: return "BlockAugment";
             default: return "UnknownAugment";
         }
     }
@@ -84,35 +84,21 @@ public class DrillAugment extends Item {
         icons[0] = i.registerIcon("redstonic:Drill/Augment/Icon/Speed");
         icons[1] = i.registerIcon("redstonic:Drill/Augment/Icon/Energy");
         icons[2] = i.registerIcon("redstonic:Drill/Augment/Icon/Hotswap");
-        icons[3] = i.registerIcon("redstonic:Drill/Augment/Icon/Torch");
+        icons[3] = i.registerIcon("redstonic:Drill/Augment/Icon/Block");
     }
 
     @Override
     public IIcon getIcon(ItemStack stack, int pass) {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glEnable(GL11.GL_BLEND);
-        switch(type){
-            case 0: return icons[0];
-            case 1: return icons[1];
-            case 2: return icons[2];
-            case 3: return icons[3];
-            case 4: return icons[4];
-            default: return null;
-        }
+        return icons[type];
     }
 
     @Override
     public IIcon getIconIndex(ItemStack itemstack) {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glEnable(GL11.GL_BLEND);
-        switch(type){
-            case 0: return icons[0];
-            case 1: return icons[1];
-            case 2: return icons[2];
-            case 3: return icons[3];
-            case 4: return icons[4];
-            default: return null;
-        }
+        return icons[type];
     }
 
     @Override

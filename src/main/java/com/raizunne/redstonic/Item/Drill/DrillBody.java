@@ -36,6 +36,8 @@ public class DrillBody extends Item{
             case 2: return "ElectrumDrillBody";
             case 3: return "EnderiumDrillBody";
             case 4: return "UltimateDrillBody";
+            case 5: return "EnergeticDrillBody";
+            case 6: return "VibrantDrillBody";
             default: return "UnknownDrillBody";
         }
     }
@@ -63,7 +65,8 @@ public class DrillBody extends Item{
         body[2] = i.registerIcon("redstonic:Drill/Bodies/Icon/Electrum");
         body[3] = i.registerIcon("redstonic:Drill/Bodies/Icon/Enderium");
         body[4] = i.registerIcon("redstonic:Drill/Bodies/Icon/End");
-
+        body[5] = i.registerIcon("redstonic:Drill/Bodies/Icon/Energetic");
+        body[6] = i.registerIcon("redstonic:Drill/Bodies/Icon/Vibrant");
     }
 
     @Override

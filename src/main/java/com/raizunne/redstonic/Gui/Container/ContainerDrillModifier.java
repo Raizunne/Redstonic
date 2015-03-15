@@ -4,6 +4,7 @@ import com.raizunne.redstonic.Gui.Slot.SlotAugment;
 import com.raizunne.redstonic.Item.Drill.DrillAugment;
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
+import com.raizunne.redstonic.Item.ItemBattery;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -81,7 +82,7 @@ public class ContainerDrillModifier extends Container {
                             return null;
                         }
                     }
-                }else if(itemstack1.isItemEqual(hardened) || itemstack1.isItemEqual(reinforced) || itemstack1.isItemEqual(resonant) || itemstack1.isItemEqual(creative)) {
+                }else if(itemstack1.isItemEqual(hardened) || itemstack1.isItemEqual(reinforced) || itemstack1.isItemEqual(resonant) || itemstack1.isItemEqual(creative) || itemstack1.getItem() instanceof ItemBattery) {
                     if (!mergeItemStack(itemstack1, 39, 40, false)) {
                         if (!mergeItemStack(itemstack1, 9, 35, false)) {
                             return null;

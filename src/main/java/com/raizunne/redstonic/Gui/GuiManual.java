@@ -89,18 +89,27 @@ public class GuiManual extends GuiScreen {
             drawItem(RedstonicItems.EndHead, 140, 135, x, y);
         }else if(page=="Bodies"){
             drawStatsText("Iron Body", "1 Augment Slot", 0x404040, 0x009933, 160, 20); drawStatsText("Electrum Body", "2 Augment Slot", 0x404040, 0x009933, 160, 40);
-            drawStatsText("Enderium Body", "3 Augment Slot", 0x404040, 0x009933, 160, 60); drawStatsText("Ultimate Body", "0 Augment Slot", 0x404040, 0x009933, 160, 80);
+            drawStatsText("Enderium Body", "3 Augment Slot", 0x404040, 0x009933, 160, 60); drawStatsText("Energetic Body", "2 Augment Slot", 0x404040, 0x009933, 160, 80);
+            drawStatsText("Vibrant Body", "3 Augment Slot", 0x404040, 0x009933, 160, 100); drawStatsText("Ultimate Body", "0 Augment Slot", 0x404040, 0x009933, 160, 120);
             drawItem(RedstonicItems.IronBody, 140, 20, x, y); drawItem(RedstonicItems.ElectrumBody, 140, 40, x, y); drawItem(RedstonicItems.EnderiumBody, 140, 60, x, y);
-            drawItem(RedstonicItems.UltimateBody, 140, 80, x, y);
+            drawItem(RedstonicItems.EnergeticBody, 140, 80, x, y); drawItem(RedstonicItems.VibrantBody, 140, 100, x, y); drawItem(RedstonicItems.UltimateBody, 140, 120, x, y);
         }else if(page=="Energy") {
-            drawStatsText("Hardened Capacitor", "480,000 RF Storage", 0x404040, 0x009933, 160, 20);
-            drawStatsText("Reinforced Capacitor", "640,000 RF Storage", 0x404040, 0x009933, 160, 40);
-            drawStatsText("Resonant Capacitor", "1,000,000 RF Storage", 0x404040, 0x009933, 160, 60);
+            drawStatsText("Hardened Capacitor", "320,000 RF Storage", 0x404040, 0x009933, 160, 20);
+            drawStatsText("Reinforced Capacitor", "1,280,000 RF Storage", 0x404040, 0x009933, 160, 40);
+            drawStatsText("Resonant Capacitor", "3,200,000 RF Storage", 0x404040, 0x009933, 160, 60);
             drawStatsText("Creative Capacitor", "Infinite RF Storage", 0x404040, 0x009933, 160, 80);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1), 140, 20, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1), 140, 40, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1), 140, 60, x, y);
             drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1), 140, 80, x, y);
+            drawItem(RedstonicItems.greatBattery, 20, 130, x, y);
+
+            drawStatsText("Basic Battery", "320,000 RF Storage", 0x404040, 0x009933, 40, 90);
+            drawStatsText("Energized Battery", "1,280,000 RF Storage", 0x404040, 0x009933, 40, 110);
+            drawStatsText("Great Battery", "3,200,000 RF Storage", 0x404040, 0x009933, 40, 130);
+            drawItem(RedstonicItems.basicBattery, 20, 90, x, y);
+            drawItem(RedstonicItems.energizedBattery, 20, 110, x, y);
+            drawItem(RedstonicItems.greatBattery, 20, 130, x, y);
         }else if(page=="Contribute!"){
             drawText("Redstonic is made completely by Raizunne, but he is also limited in his capabilities!. If you wish to contribute with Redstonic, Raizunne (Me), is looking for some work done for Redstonic!", 135, 135, 20);
             drawStatsText("Model for Drill Modifier", "(Dont like current!)", 0x990000, 0x990000, 135, 85);
@@ -109,9 +118,9 @@ public class GuiManual extends GuiScreen {
         }else if(page=="Augments"){
             if(subPage==1){
                 drawStatsText("Speed Augment I", "x1.5 Dig Speed Mutli", 0x404040, 0x009933, 160, 20); drawStatsText("Energy Augment I", "x1.5 Max Energy Multi", 0x404040, 0x009933, 160, 40);
-                drawStatsText("Hotswap Augment", "See next page", 0x404040, 0x009933, 160, 60);
+                drawStatsText("Hotswap Augment", "See next page", 0x404040, 0x009933, 160, 60); drawStatsText("Block Placer Augment", "Place blocks", 0x404040, 0x009933, 160, 80);
                 drawItem(RedstonicItems.SpeedAugment, 140, 20, x, y); drawItem(RedstonicItems.EnergyAugment, 140, 40, x, y);
-                drawItem(RedstonicItems.HotswapAugment, 140, 60, x, y);
+                drawItem(RedstonicItems.HotswapAugment, 140, 60, x, y); drawItem(RedstonicItems.BlockAugment, 140, 80, x, y);
             }else if(subPage==2){
                 drawText("Replace the drill ontop with the drill of your choice.", 135, 140, 20);
                 ItemStack augmenterino = new ItemStack(RedstonicItems.HotswapAugment);

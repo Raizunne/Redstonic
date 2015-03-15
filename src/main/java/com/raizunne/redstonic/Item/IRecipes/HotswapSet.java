@@ -20,7 +20,7 @@ public class HotswapSet implements IRecipe {
     public boolean matches(InventoryCrafting inv, World p_77569_2_) {
         this.inv = inv;
         if(slot(1)!=null && slot(4)!=null){
-            if(item(4)== RedstonicItems.HotswapAugment && item(1) instanceof DrillHead && slot(4).stackTagCompound.getInteger("hotswapHead")==-1){
+            if(item(4)== RedstonicItems.HotswapAugment && item(1) instanceof DrillHead && slot(4).stackTagCompound.getInteger("hotswapHead")==-1 && item(1)!=RedstonicItems.EndHead){
                 return true;
             }
         }

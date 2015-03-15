@@ -28,9 +28,14 @@ public class ItemMaterial extends Item {
 
     @Override
     public void registerIcons(IIconRegister i) {
-        icon = new IIcon[2];
+        icon = new IIcon[7];
         icon[0] = i.registerIcon("redstonic:Material/EnergizerCapsuleEMPTY");
         icon[1] = i.registerIcon("redstonic:Material/EnergizerCapsuleFULL");
+        icon[2] = i.registerIcon("redstonic:Material/ingotVibrantium");
+        icon[3] = i.registerIcon("redstonic:Material/gearIron");
+        icon[4] = i.registerIcon("redstonic:Material/gearEnergized");
+        icon[5] = i.registerIcon("redstonic:Material/gearVibrant");
+        icon[6] = i.registerIcon("redstonic:Material/ingotGlowSteel");
     }
 
     @Override
@@ -49,15 +54,17 @@ public class ItemMaterial extends Item {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+        String[] info = Util.getMaterialInfo(type);
         if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-            String[] info = Util.getMaterialInfo(type);
             if(info!=null) {
                 for (int i = 0; i < info.length; i++) {
                     list.add(info[i]);
                 }
             }
         }else{
-            list.add(Util.ItemShiftInfo);
+            if(info!=null){
+                list.add(Util.ItemShiftInfo);
+            }
         }
     }
 
@@ -66,6 +73,11 @@ public class ItemMaterial extends Item {
         switch(type){
             case 0: return "EnergizerCapsule";
             case 1: return "EnergizerCapsuleFULL";
+            case 2: return "Vibrantium";
+            case 3: return "gearIron";
+            case 4: return "gearEnergized";
+            case 5: return "gearVibrant";
+            case 6: return "ingotGlowSteel";
             default: return "RedstonicUnknownItem";
         }
     }
@@ -74,7 +86,16 @@ public class ItemMaterial extends Item {
         switch(type){
             case 0: return 64;
             case 1: return 1;
+            case 2: return 64;
             default: return 64;
+        }
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack p_77636_1_, int pass) {
+        switch(type){
+            case 2: return true;
+            default: return false;
         }
     }
 }

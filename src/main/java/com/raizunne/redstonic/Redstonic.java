@@ -5,10 +5,13 @@ package com.raizunne.redstonic;
  * on 03/02/2015, 09:47 PM.
  */
 
+import com.raizunne.redstonic.Handler.ConfigHandler;
 import com.raizunne.redstonic.Handler.GUIHandler;
 import com.raizunne.redstonic.Handler.RedstonicEventHandler;
 import com.raizunne.redstonic.Network.PacketDrill;
 import com.raizunne.redstonic.Proxy.CommonProxy;
+import com.raizunne.redstonic.Util.EIOHelper;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,20 +24,23 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = Redstonic.MODID, version = Redstonic.VERSION, dependencies = "required-after:CoFHCore;required-after:ThermalExpansion;required-after:ThermalFoundation")
+@Mod(modid = Redstonic.MODID, version = Redstonic.VERSION, dependencies = "after:ThermalExpansion;after:EnderIO")
 public class Redstonic {
 
     public static final String MODID = "Redstonic";
-    public static final String VERSION = "1.1.1";
+    public static final String VERSION = "1.2";
 
     @Mod.Instance
     public static Redstonic instance;
     @SidedProxy(clientSide = "com.raizunne.redstonic.Proxy.ClientProxy", serverSide = "com.raizunne.redstonic.Proxy.CommonProxy")
     public static CommonProxy proxy;
     public static SimpleNetworkWrapper network;
+    public static Configuration configFile;
 
     public static CreativeTabs redTab = new CreativeTabs("Redstonic"){
         @Override
@@ -47,11 +53,19 @@ public class Redstonic {
         Redstonic.network.registerMessage(PacketDrill.Handler.class, PacketDrill.class, 0, Side.SERVER);
 
         MinecraftForge.EVENT_BUS.register(new RedstonicEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ConfigHandler());
 
+        if(Loader.isModLoaded("EnderIO")){
+            EIOHelper.init();
+        }
         RedstonicItems.init();
         RedstonicBlocks.init();
         RedstonicRecipes.init();
         proxy.initRenderers();
+
+        configFile = new Configuration(e.getSuggestedConfigurationFile());
+        configFile.load();
+        ConfigHandler.RedstonicConfig(configFile);
     }
 
     @Mod.EventHandler

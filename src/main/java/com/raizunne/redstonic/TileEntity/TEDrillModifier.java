@@ -2,8 +2,8 @@ package com.raizunne.redstonic.TileEntity;
 
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
+import com.raizunne.redstonic.Item.ItemBattery;
 import com.raizunne.redstonic.Item.RedstonicDrill;
-import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.DrillUtil;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -60,8 +60,9 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         tag.setInteger("maxEnergy", DrillUtil.getEnergyAmount(getStackInSlot(3), drill));
         tag.setInteger("blocks", getStackInSlot(1).stackTagCompound.getInteger("blocks"));
         tag.setInteger("milestone", getStackInSlot(1).stackTagCompound.getInteger("milestone"));
+        tag.setInteger("battery", DrillUtil.getBatteryNumber(getStackInSlot(3)));
 
-        checkMaxAugments();
+        this.augments = DrillUtil.checkMaxAugments(getStackInSlot(2));
 
         int maxAug = this.augments;
 
@@ -100,7 +101,10 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             setInventorySlotContents(7, null);
         }
 
-        int energy = getStackInSlot(3).stackTagCompound.getInteger("Energy");
+        int energy = 0;
+        if(getStackInSlot(3).stackTagCompound!=null) {
+            energy = getStackInSlot(3).stackTagCompound.getInteger("Energy");
+        }
         int maxEnergy = getStackInSlot(0).stackTagCompound.getInteger("maxEnergy");
 
         if(getStackInSlot(0).stackTagCompound.getFloat("energyMulti")!=0){
@@ -115,7 +119,6 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         getStackInSlot(0).stackTagCompound.setInteger("energy", energy);
         double modifier = (double)80/maxEnergy;
         getStackInSlot(0).setItemDamage((int)(80 - energy*modifier));
-
         setInventorySlotContents(1, null);
         setInventorySlotContents(2, null);
         setInventorySlotContents(3, null);
@@ -124,9 +127,9 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public void disassemble(){
         int head = getStackInSlot(0).stackTagCompound.getInteger("head");
         int body = getStackInSlot(0).stackTagCompound.getInteger("body");
-        int maxEnergy = getStackInSlot(0).stackTagCompound.getInteger("maxEnergy");
         int blocks = getStackInSlot(0).stackTagCompound.getInteger("blocks");
         int milestone = getStackInSlot(0).stackTagCompound.getInteger("milestone");
+        int battery = getStackInSlot(0).stackTagCompound.getInteger("battery");
 
         setInventorySlotContents(1, DrillUtil.getDrillHead(head));
         if(getStackInSlot(1).stackTagCompound==null){
@@ -138,7 +141,11 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             getStackInSlot(1).stackTagCompound.setInteger("milestone", milestone);
         }
         setInventorySlotContents(2, DrillUtil.getDrillBody(body));
-        setInventorySlotContents(3, DrillUtil.getEnergy(maxEnergy, getStackInSlot(0), getStackInSlot(3)));
+        setInventorySlotContents(3, DrillUtil.getDrillBattery(battery, getStackInSlot(0)));
+        if(getStackInSlot(3).getItem() instanceof ItemBattery && getStackInSlot(3).getItem()!=RedstonicItems.infiniteBattery){
+            double modifier = (double)80/getStackInSlot(3).stackTagCompound.getInteger("maxEnergy");
+            getStackInSlot(3).setItemDamage((int)(80 - getStackInSlot(3).stackTagCompound.getInteger("Energy")*modifier));
+        }
         setAug(getStackInSlot(0));
         setInventorySlotContents(0, null);
     }
@@ -152,7 +159,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
         ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
         ItemStack creative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
-        return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant) || getStackInSlot(i).isItemEqual(creative);
+        return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant) || getStackInSlot(i).isItemEqual(creative) || getStackInSlot(i).getItem() instanceof ItemBattery;
     }
 
     public boolean checkForAssemble(){
@@ -202,25 +209,9 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         return check1 && check2 && check3;
     }
 
-    public void checkMaxAugments(){
-        if(getStackInSlot(2)!=null){
-            if(getStackInSlot(2).getItem() == RedstonicItems.IronBody){
-                this.augments = 1;
-            }else if(getStackInSlot(2).getItem() == RedstonicItems.ElectrumBody){
-                this.augments = 2;
-            }else if(getStackInSlot(2).getItem() == RedstonicItems.EnderiumBody){
-                this.augments = 3;
-            }else if(getStackInSlot(2).getItem() == RedstonicItems.UltimateBody){
-                this.augments = 0;
-            }
-        }else{
-            this.augments = 0;
-        }
-    }
-
     public int getAug1() {
         if(getStackInSlot(5)!=null){
-            Item item = getStackInSlot(5).getItem();
+            ItemStack item = getStackInSlot(5);
             aug1 = DrillUtil.getAugNumber(item);
         }
         return aug1;
@@ -228,7 +219,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
 
     public int getAug2() {
         if(getStackInSlot(6)!=null){
-            Item item = getStackInSlot(6).getItem();
+            ItemStack item = getStackInSlot(6);
             aug2 = DrillUtil.getAugNumber(item);
 //            System.out.println(aug2);
         }
@@ -237,7 +228,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
 
     public int getAug3() {
         if(getStackInSlot(7)!=null){
-            Item item = getStackInSlot(7).getItem();
+            ItemStack item = getStackInSlot(7);
             aug3 = DrillUtil.getAugNumber(item);
         }
         return aug3;
