@@ -1,39 +1,55 @@
 itemGroup.Redstonic=Redstonic
 
-item.IronDrillHead.name=Головка Железной Дрели
-item.GoldDrillHead.name=Головка Золотой Дрели
-item.DiamondDrillHead.name=Головка Алмазной Дрели
-item.HeavyDrillHead.name=Головка Тяжелой Дрели
-item.FortuitousDrillHead.name=Головка Удачливой Дрели
-item.SilkyDrillHead.name=Головка Шелковистой Дрели
-item.BlazerDrillHead.name=Головка Блейзерской Дрели
-item.EndDrillHead.name=Головка Конечной Дрели
+item.IronDrillHead.name=Головка железной дрели
+item.GoldDrillHead.name=Головка золотой дрели
+item.DiamondDrillHead.name=Головка алмазной дрели
+item.HeavyDrillHead.name=Головка тяжелой дрели
+item.FortuitousDrillHead.name=Головка удачливой дрели
+item.SilkyDrillHead.name=Головка шелковистой дрели
+item.BlazerDrillHead.name=Головка блейзерской дрели
+item.EndDrillHead.name=Головка конечной дрели
 
-item.IronDrillBody.name=Тело Железной Дрели
-item.ElectrumDrillBody.name=Тело Электрической Дрели
-item.EnderiumDrillBody.name=Тело Эндермической Дрели
-item.UltimateDrillBody.name=Тело Максимальной Дрели
+item.IronDrillBody.name=Основа Железной Дрели
+item.ElectrumDrillBody.name=Основа электрической дрели
+item.EnderiumDrillBody.name=Основа эндермической дрели
+item.UltimateDrillBody.name=Основа максимальной дрели
+item.EnergeticDrillBody.name=Основа энергетической дрели
+item.VibrantDrillBody.name=Основа резонирующей дрели
 
 item.EnergyAugment.name=Усиление Дрели: Энергия
 item.SpeedAugment.name=Усиление Дрели: Скорость
 item.HotswapAugment.name=Усиление Дрели: Горячая замена
 item.TorchAugment.name=Усиление Дрели: Размещение факелов
+item.BlockAugment.name=Усиление Дрели: Размещение блоков
 
 item.RedstonicDrill.name=§cRedstonic Дрели
 item.Manual.name=§cRedstonic Руководство
 
 item.EnergizerCapsule.name=Энерджайзерная капсула (Пустая)
 item.EnergizerCapsuleFULL.name=§cЭнерджайзерная капсула
+item.Vibrantium.name=Резонирующий Слиток
+item.gearIron.name=Железная шестерёнка
+item.gearEnergized.name=Шестерёнка из энергетического сплава
+item.gearVibrant.name=Шестерёнка из резонирующего сплава
+item.ingotGlowSteel.name=Светящаяся заряженная сталь
 
-tile.DrillModifier.name=Модификатор Дрели
+item.basicBattery.name=Основная потоковая батарейка
+item.energizedBattery.name=Заряженная потоковая батарейка
+item.greatBattery.name=Великая потоковая батарейка
+item.infiniteBattery.name=Бесконечная потоковая батарейка
+
+tile.DrillModifier.name=Модификатор дрели
+tile.blockVibrantium.name=Резонирующий блок
+tile.blockGlowSteel.name=Светящийся заряженный стальной блок
 
 drill.head=Головка
-drill.body=Тело
+drill.body=Основа
 drill.battery=Батарея
-drill.digspeed=Скорость Копания
-drill.energyusage=Использование Энергия
+drill.digspeed=Скорость копания
+drill.energyusage=Использование энергия
 drill.hold=Удерживайте§e
-drill.formoreinfo=§кдля деталей.
+drill.formoreinfo=для деталей.
+drill.formoreauginfo=для деталей усилений.
 
 drill.iron=Железной
 drill.gold=Золотой
