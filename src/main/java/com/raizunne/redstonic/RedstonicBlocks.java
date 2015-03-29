@@ -26,7 +26,7 @@ public class RedstonicBlocks {
         GameRegistry.registerBlock(Vibrantium, Vibrantium.getUnlocalizedName());
         GameRegistry.registerBlock(GlowSteel, GlowSteel.getUnlocalizedName());
 
-        GameRegistry.registerBlock(Driller, Driller.getUnlocalizedName());
+//        GameRegistry.registerBlock(Driller, Driller.getUnlocalizedName());
 
         GameRegistry.registerTileEntity(TEDrillModifier.class, "TEDrillModifier");
         GameRegistry.registerTileEntity(TEDriller.class, "TEDriller");

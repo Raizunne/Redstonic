@@ -21,6 +21,8 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.lwjgl.input.Mouse;
 
+import java.net.InetAddress;
+
 /**
  * Created by Raizunne as a part of Redstonic
  * on 08/02/2015, 01:34 PM.
@@ -61,8 +63,7 @@ public class RedstonicEventHandler {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            if (ClientProxy.version!="" && !ClientProxy.version.equals(Redstonic.VERSION)) {
+            if (ClientProxy.version!="" && !ClientProxy.version.equals(Redstonic.VERSION) && ClientProxy.version!="0.0") {
                 Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Redstonic " + EnumChatFormatting.WHITE + "Outdated! New version is " + EnumChatFormatting.YELLOW + ClientProxy.version));
                 Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Changes: " + EnumChatFormatting.WHITE + ClientProxy.newChangelog));
             }else {

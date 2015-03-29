@@ -21,8 +21,8 @@ import java.util.Scanner;
  */
 public class ClientProxy extends CommonProxy {
 
-    public static String version;
-    public static String newChangelog;
+    public static String version = "0.0";
+    public static String newChangelog = "0.0";
 
     public void initRenderers(){
         //MODIFIER

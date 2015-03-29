@@ -1,1 +1,1 @@
-Added EnderIO support, now TE free!
+Fixed bug that crashed on startup. Update pls.
