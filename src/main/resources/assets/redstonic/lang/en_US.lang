@@ -32,6 +32,7 @@ item.gearIron.name=Iron Gear
 item.gearEnergized.name=Energetic Alloy Gear
 item.gearVibrant.name=Vibrant Alloy Gear
 item.ingotGlowSteel.name=Glowstone Infused Steel
+item.capacitor.name=Capacitor
 
 item.basicBattery.name=Basic Flux Battery
 item.energizedBattery.name=Energized Flux Battery

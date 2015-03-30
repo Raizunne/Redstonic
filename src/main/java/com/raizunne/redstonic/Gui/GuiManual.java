@@ -7,6 +7,7 @@ import com.raizunne.redstonic.Proxy.ClientProxy;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.Lang;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -94,15 +95,16 @@ public class GuiManual extends GuiScreen {
             drawItem(RedstonicItems.IronBody, 140, 20, x, y); drawItem(RedstonicItems.ElectrumBody, 140, 40, x, y); drawItem(RedstonicItems.EnderiumBody, 140, 60, x, y);
             drawItem(RedstonicItems.EnergeticBody, 140, 80, x, y); drawItem(RedstonicItems.VibrantBody, 140, 100, x, y); drawItem(RedstonicItems.UltimateBody, 140, 120, x, y);
         }else if(page=="Energy") {
-            drawStatsText("Hardened Capacitor", "320,000 RF Storage", 0x404040, 0x009933, 160, 20);
-            drawStatsText("Reinforced Capacitor", "1,280,000 RF Storage", 0x404040, 0x009933, 160, 40);
-            drawStatsText("Resonant Capacitor", "3,200,000 RF Storage", 0x404040, 0x009933, 160, 60);
-            drawStatsText("Creative Capacitor", "Infinite RF Storage", 0x404040, 0x009933, 160, 80);
-            drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1), 140, 20, x, y);
-            drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1), 140, 40, x, y);
-            drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1), 140, 60, x, y);
-            drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1), 140, 80, x, y);
-            drawItem(RedstonicItems.greatBattery, 20, 130, x, y);
+            if(Loader.isModLoaded("ThermalExpansion")) {
+                drawStatsText("Hardened Capacitor", "320,000 RF Storage", 0x404040, 0x009933, 160, 20);
+                drawStatsText("Reinforced Capacitor", "1,280,000 RF Storage", 0x404040, 0x009933, 160, 40);
+                drawStatsText("Resonant Capacitor", "3,200,000 RF Storage", 0x404040, 0x009933, 160, 60);
+                drawStatsText("Creative Capacitor", "Infinite RF Storage", 0x404040, 0x009933, 160, 80);
+                drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1), 140, 20, x, y);
+                drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1), 140, 40, x, y);
+                drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1), 140, 60, x, y);
+                drawItem(GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1), 140, 80, x, y);
+            }
 
             drawStatsText("Basic Battery", "320,000 RF Storage", 0x404040, 0x009933, 40, 90);
             drawStatsText("Energized Battery", "1,280,000 RF Storage", 0x404040, 0x009933, 40, 110);

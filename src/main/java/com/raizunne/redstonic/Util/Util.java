@@ -1,5 +1,7 @@
 package com.raizunne.redstonic.Util;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModClassLoader;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -13,13 +15,16 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class Util {
 
-   public static final String ItemShiftInfo = Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.RED + " Shift " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreinfo");
-   public static final String ItemCtrlInfo = Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.YELLOW + " Ctrl " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreauginfo");
+    public static final String ItemShiftInfo = Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.RED + " Shift " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreinfo");
+    public static final String ItemCtrlInfo = Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.YELLOW + " Ctrl " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreauginfo");
+    public static final String missingTE = "Missing mod" + EnumChatFormatting.DARK_AQUA + " Thermal Expansion";
+    public static final String missingEIO = "Missing mod" + EnumChatFormatting.DARK_AQUA + " EnderIO";
 
     public static String[] getMaterialInfo(int i){
         switch(i){
             case 0: return new String[]{"Crafting Material", "Requires " + EnumChatFormatting.RED + "64000" + EnumChatFormatting.GRAY + " Destabilized Redstone to fill.", "or 72 Redstone Blocks"};
             case 1: return new String[]{"Crafting Material", "Contains " + EnumChatFormatting.RED + "64000" + EnumChatFormatting.GRAY + " Destabilized Redstone."};
+            case 2: return new String[]{Loader.isModLoaded("EnderIO")?"":"Needs EnderIO"};
             default: return null;
         }
     }

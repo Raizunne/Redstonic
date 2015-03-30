@@ -49,6 +49,7 @@ public class RedstonicItems {
     public static Item gearEnergized = new ItemMaterial(4);
     public static Item gearVibrant = new ItemMaterial(5);
     public static Item ingotGlowSteel = new ItemMaterial(6);
+    public static Item capacitor = new ItemMaterial(7);
 
     public static Item basicBattery = new ItemBattery(0);
     public static Item energizedBattery = new ItemBattery(1);
@@ -66,14 +67,16 @@ public class RedstonicItems {
         GameRegistry.registerItem(EndHead, EndHead.getUnlocalizedName());
 
         GameRegistry.registerItem(IronBody, IronBody.getUnlocalizedName());
+        GameRegistry.registerItem(EnderiumBody, EnderiumBody.getUnlocalizedName());
+        GameRegistry.registerItem(ElectrumBody, ElectrumBody.getUnlocalizedName());
+        GameRegistry.registerItem(UltimateBody, UltimateBody.getUnlocalizedName());
+        GameRegistry.registerItem(EnergeticBody, EnergeticBody.getUnlocalizedName());
+        GameRegistry.registerItem(VibrantBody, VibrantBody.getUnlocalizedName());
+
         if(Loader.isModLoaded("ThermalFoundation")) {
-            GameRegistry.registerItem(EnderiumBody, EnderiumBody.getUnlocalizedName());
-            GameRegistry.registerItem(ElectrumBody, ElectrumBody.getUnlocalizedName());
-            GameRegistry.registerItem(UltimateBody, UltimateBody.getUnlocalizedName());
         }
+
         if (Loader.isModLoaded("EnderIO")) {
-            GameRegistry.registerItem(EnergeticBody, EnergeticBody.getUnlocalizedName());
-            GameRegistry.registerItem(VibrantBody, VibrantBody.getUnlocalizedName());
             GameRegistry.registerItem(ingotVibrantium, ingotVibrantium.getUnlocalizedName());
             GameRegistry.registerItem(gearIron, gearIron.getUnlocalizedName());
             GameRegistry.registerItem(gearEnergized, gearEnergized.getUnlocalizedName());
@@ -96,6 +99,7 @@ public class RedstonicItems {
 
         GameRegistry.registerItem(Energizer, Energizer.getUnlocalizedName());
         GameRegistry.registerItem(EnergizerFull, EnergizerFull.getUnlocalizedName());
+        GameRegistry.registerItem(capacitor, capacitor.getUnlocalizedName());
 
         GameRegistry.registerItem(basicBattery, basicBattery.getUnlocalizedName());
         GameRegistry.registerItem(energizedBattery, energizedBattery.getUnlocalizedName());

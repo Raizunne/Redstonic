@@ -2,6 +2,7 @@ package com.raizunne.redstonic.Item.Drill;
 
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.Util.Util;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -53,8 +54,12 @@ public class DrillBody extends Item{
             }
         }else{
             list.add(Util.ItemShiftInfo);
+            if((material==2 || material==3) && !Loader.isModLoaded("ThermalExpansion")){
+                list.add(Util.missingTE);
+            }else if((material==5 || material==6) && !Loader.isModLoaded("EnderIO")){
+                list.add(Util.missingEIO);
+            }
         }
-
     }
 
     @Override

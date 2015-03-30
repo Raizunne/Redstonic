@@ -3,6 +3,7 @@ package com.raizunne.redstonic.Item;
 import cofh.api.energy.IEnergyContainerItem;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.Util.Util;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,6 +81,9 @@ public class ItemBattery extends Item implements IEnergyContainerItem {
         }else{
             list.add("Tier " + getTier());
             list.add("Max Energy: " + (getMaxEnergy()==-1?EnumChatFormatting.OBFUSCATED + "9001":NumberFormat.getNumberInstance(Locale.US).format(getMaxEnergy())));
+            if(!Loader.isModLoaded("EnderIO") && type!=0){
+                list.add("Missing mod" + EnumChatFormatting.DARK_AQUA + " EnderIO");
+            }
         }
     }
 
