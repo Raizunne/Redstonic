@@ -1,1 +1,1 @@
-Fixed bug that crashed on startup. Update pls.
+Fixed crash when EnderIO is not installed.
