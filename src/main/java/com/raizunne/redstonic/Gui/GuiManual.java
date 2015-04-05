@@ -60,6 +60,16 @@ public class GuiManual extends GuiScreen {
         prevPage="index";
     }
 
+    public boolean entryBlacklist(String page){
+        String[] blacklist = {"index", "drills", "extras", "Contribute!", "machines"};
+        for(int i=0; i<blacklist.length; i++){
+            if(page==blacklist[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void drawScreen(int x, int y, float f) {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
@@ -67,7 +77,7 @@ public class GuiManual extends GuiScreen {
         GL11.glColor4f(1F, 1F, 1F, 1F);
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(posX, posY, 0, 0, xSizeofTexture, ySizeofTexture);
-        if(page=="index" || page=="drills" || page=="extras" || page=="Contribute!"){
+        if(entryBlacklist(page)){
             mc.renderEngine.bindTexture(misc);
             drawTexturedModalRect(posX+20, posY+20, 0, 0, 99, 94);
             drawTexturedModalRect(posX+18, posY+120, 0, 95, 102, 23);
@@ -131,6 +141,7 @@ public class GuiManual extends GuiScreen {
                 newEntry("Hotswap Augment", new String[]{Lang.translate("entries.HotswapAugment")});
                 drawCrafting(null, RedstonicItems.IronHead, null, null, RedstonicItems.HotswapAugment, null, null,null,null, augmenterino, 150, 45, x, y);
             }
+        }else if(page=="Driller"){
         }
         super.drawScreen(x, y, f);
     }
@@ -145,12 +156,14 @@ public class GuiManual extends GuiScreen {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
 
-        String[] indexTitles = {"Drills", "Extras", "Contribute!"};
+        String[] indexTitles = {"Drills", "Machines", "Extras", "Contribute!"};
         String[] drillsTitles = {"Getting Started", "Heads", "Bodies", "Energy", "Augments"};
+        String[] machinesTitles = {"Driller"};
         String[] extrasTitles = {"Report a Bug", "Website", "Patreon"};
 
         ButtonMenu[] index = new ButtonMenu[indexTitles.length];
         ButtonMenu[] drills = new ButtonMenu[drillsTitles.length];
+        ButtonMenu[] machines = new ButtonMenu[machinesTitles.length];
         ButtonMenu[] extras = new ButtonMenu[extrasTitles.length];
         ButtonDirectional right = new ButtonDirectional(-2, posX + 232, posY + 171, "right");
         ButtonDirectional left = new ButtonDirectional(-1, posX + 6, posY + 171, "left");
@@ -175,6 +188,11 @@ public class GuiManual extends GuiScreen {
                 extras[i] = new ButtonMenu(900 + i, posX + 140, posY + 15 + i * 12, 10 + (extrasTitles[i].length() * 5), extrasTitles[i], color1, color2, true);
                 buttonList.add(extras[i]);
             }
+        }else if(page=="machines"){
+            for(int i=0; i<machines.length; i++){
+                machines[i] = new ButtonMenu(200+i, posX+140, posY+15+i*12, 10+(machinesTitles[i].length()*5), machinesTitles[i], color1, color2, true);
+                buttonList.add(machines[i]);
+            }
         }
         if(page!="index"){
             if(maxPages>1 && subPage!=maxPages){
@@ -197,14 +215,17 @@ public class GuiManual extends GuiScreen {
             case -1: subPage-=1; break;
             case 10000: try {Desktop.getDesktop().browse(URI.create("http://raizunne.github.io/Mods/Redstonic/Changelog.html#" + ClientProxy.version)); } catch(Exception e) {e.printStackTrace();} break;
             case 0: page="drills"; prevPage="index"; break;
-            case 1: page="extras"; prevPage="index"; break;
-            case 2: page="Contribute!"; prevPage="index"; break;
+            case 1: page="machines"; prevPage="index"; break;
+            case 2: page="extras"; prevPage="index"; break;
+            case 3: page="Contribute!"; prevPage="index"; break;
 
             case 100: page="Getting Started"; prevPage="drills"; break;
             case 101: page="Heads"; prevPage="drills"; break;
             case 102: page="Bodies"; prevPage="drills"; break;
             case 103: page="Energy"; prevPage="drills"; break;
             case 104: page="Augments"; prevPage="drills"; maxPages=2; break;
+
+            case 200: page="Driller"; prevPage="machines"; break;
 
             case 900: try {Desktop.getDesktop().browse(URI.create("https://github.com/Raizunne/Redstonic/issues")); } catch(Exception e) {e.printStackTrace();} break;
             case 901: try {Desktop.getDesktop().browse(URI.create("http://raizunne.github.io")); } catch(Exception e) {e.printStackTrace();} break;

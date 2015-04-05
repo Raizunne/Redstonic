@@ -9,7 +9,10 @@ import com.raizunne.redstonic.Handler.ConfigHandler;
 import com.raizunne.redstonic.Handler.GUIHandler;
 import com.raizunne.redstonic.Handler.RedstonicEventHandler;
 import com.raizunne.redstonic.Network.PacketDrill;
+import com.raizunne.redstonic.Network.PacketDriller;
 import com.raizunne.redstonic.Proxy.CommonProxy;
+import com.raizunne.redstonic.TileEntity.TEDrillModifier;
+import com.raizunne.redstonic.TileEntity.TEDriller;
 import com.raizunne.redstonic.Util.EIOHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -18,6 +21,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -33,7 +37,7 @@ import net.minecraftforge.common.config.Configuration;
 public class Redstonic {
 
     public static final String MODID = "Redstonic";
-    public static final String VERSION = "1.2.1";
+    public static final String VERSION = "1.3";
 
     @Mod.Instance
     public static Redstonic instance;
@@ -51,6 +55,7 @@ public class Redstonic {
     public void preInit(FMLPreInitializationEvent e){
         network = NetworkRegistry.INSTANCE.newSimpleChannel("redstonic");
         Redstonic.network.registerMessage(PacketDrill.Handler.class, PacketDrill.class, 0, Side.SERVER);
+        Redstonic.network.registerMessage(PacketDriller.Handler.class, PacketDriller.class, 1, Side.SERVER);
 
         MinecraftForge.EVENT_BUS.register(new RedstonicEventHandler());
         MinecraftForge.EVENT_BUS.register(new ConfigHandler());
@@ -62,6 +67,9 @@ public class Redstonic {
         RedstonicBlocks.init();
         RedstonicRecipes.init();
         proxy.initRenderers();
+
+        GameRegistry.registerTileEntity(TEDrillModifier.class, "TEDrillModifier");
+        GameRegistry.registerTileEntity(TEDriller.class, "TEDriller");
 
         configFile = new Configuration(e.getSuggestedConfigurationFile());
         configFile.load();

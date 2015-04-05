@@ -39,7 +39,7 @@ import java.util.Locale;
  */
 public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem {
 
-    int head; int boderino; int maxEnergy;
+    int head; int boderino; int maxEnergy; int receive;
 
     public RedstonicDrill() {
         super(Item.ToolMaterial.EMERALD);
@@ -91,6 +91,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
             list.add(prefix + " " + sufix + EnumChatFormatting.WHITE + " Redstonic Drill");
             list.add(EnumChatFormatting.GREEN + "Energy: " + EnumChatFormatting.GRAY + (creative?EnumChatFormatting.OBFUSCATED + "Creative" +
                     EnumChatFormatting.RESET + EnumChatFormatting.GRAY: NumberFormat.getNumberInstance(Locale.US).format(tag.getInteger("energy"))) + "/" + (creative?"Creative":NumberFormat.getNumberInstance(Locale.US).format(tag.getInteger("maxEnergy"))) + " RF");
+//            if(receive!=0)list.add(EnumChatFormatting.RED + "Input: " + EnumChatFormatting.WHITE + this.receive);
             if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
                 list.add(EnumChatFormatting.GRAY + Lang.translate("drill.head") + ": " + EnumChatFormatting.DARK_GRAY + head);
                 list.add(EnumChatFormatting.GRAY + Lang.translate("drill.body") + ": " + EnumChatFormatting.DARK_GRAY + body);
@@ -451,7 +452,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
         heads[4] = i.registerIcon("redstonic:Drill/Heads/Render/Fortuitous");
         heads[5] = i.registerIcon("redstonic:Drill/Heads/Render/Silky");
         heads[6] = i.registerIcon("redstonic:Drill/Heads/Render/Blazer");
-        heads[7] = i.registerIcon("redstonic:Drill/Heads/Render/End");
+        heads[7] = i.registerIcon("redstonic:Drill/Heads/Render/Ultimate");
 
         body[0] = i.registerIcon("redstonic:Drill/Bodies/Render/Iron");
         body[1] = i.registerIcon("redstonic:Drill/Bodies/Render/Electrum");
@@ -586,21 +587,21 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
         if (container.stackTagCompound == null) {
             container.stackTagCompound = new NBTTagCompound();
         }
-        int energy = container.stackTagCompound.getInteger("energy");
         int maxEnergy = container.stackTagCompound.getInteger("maxEnergy");
-        if(container.stackTagCompound.getInteger("energy")>=container.stackTagCompound.getInteger("maxEnergy")){
-            energy += 0;
-        }else{
-            if(energy+getInput(container)>maxEnergy){
-                energy = maxEnergy;
-            }else{
-                energy += getInput(container);
-            }
+        int energy = container.stackTagCompound.getInteger("energy");
+        int energyReceived = Math.min(maxEnergy - energy, Math.min(getInput(container), maxReceive));
+        if(energy>=maxEnergy){
+            this.receive = 0;
         }
-        container.stackTagCompound.setInteger("energy", energy);
+
+        if (!simulate) {
+            energy += energyReceived;
+            this.receive = energyReceived;
+            container.stackTagCompound.setInteger("energy", energy);
+        }
         double modifier = (double)80/maxEnergy;
         container.setItemDamage((int)(80 - energy*modifier));
-        return getInput(container);
+        return energyReceived;
     }
 
     @Override

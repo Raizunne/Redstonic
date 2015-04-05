@@ -99,6 +99,11 @@ public class RedstonicRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.infiniteBattery),
                 "III", "III", "III", 'I', RedstonicItems.infiniteBattery));
 
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicBlocks.Driller),
+                "CEC",
+                "IBI",
+                "CCC", 'C', Blocks.cobblestone, 'E', RedstonicItems.EnergizerFull, 'I', Blocks.iron_block, 'B', "redstonicMidTierBody"));
+
         //TE RECIPES
         if(Loader.isModLoaded("ThermalExpansion")) {
             GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{

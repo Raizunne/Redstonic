@@ -110,9 +110,9 @@ public class ItemBattery extends Item implements IEnergyContainerItem {
 
     public int getMaxOutput(){
         switch(type){
-            case 0: return 800;
-            case 1: return 8000;
-            case 2: return 16000;
+            case 0: return 8000;
+            case 1: return 16000;
+            case 2: return 48000;
             case 3: return 64000000;
             default: return 0;
         }
@@ -120,9 +120,9 @@ public class ItemBattery extends Item implements IEnergyContainerItem {
 
     public int getMaxInput(){
         switch(type){
-            case 0: return 400;
-            case 1: return 4000;
-            case 2: return 16000;
+            case 0: return 8000;
+            case 1: return 16000;
+            case 2: return 48000;
             case 3: return 64000000;
             default: return 1;
         }
@@ -176,34 +176,35 @@ public class ItemBattery extends Item implements IEnergyContainerItem {
 
     @Override
     public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-        int Energy = container.stackTagCompound.getInteger("Energy");
-        int EnergyInputed = Math.min(getMaxEnergy() - Energy, getMaxInput());
-        if(!simulate){
-            if(Energy==-1){
-                return 0;
-            }
-            Energy +=EnergyInputed;
-            container.stackTagCompound.setInteger("Energy", Energy);
-            fixDamage(container);
-            return EnergyInputed;
+        if (container.stackTagCompound == null) {
+            container.stackTagCompound = new NBTTagCompound();
         }
-        return 0;
+        int energy = container.stackTagCompound.getInteger("Energy");
+        int maxEnergy = container.stackTagCompound.getInteger("maxEnergy");
+        int energyReceived = Math.min(maxEnergy - energy, Math.min(getMaxInput(), maxReceive));
+
+        if (!simulate) {
+            energy += energyReceived;
+            container.stackTagCompound.setInteger("Energy", energy);
+        }
+        fixDamage(container);
+        return energyReceived;
     }
 
     @Override
     public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-        int Energy = container.stackTagCompound.getInteger("Energy");
-        int EnergyExtracted = Math.min(Energy, Math.min(Energy, getMaxOutput()));
-        if(!simulate) {
-           if(Energy==-1){
-               return getMaxOutput();
-           }
-           Energy -= EnergyExtracted;
-           container.stackTagCompound.setInteger("Energy", Energy);
-           fixDamage(container);
-            return EnergyExtracted;
+        if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Energy")) {
+            return 0;
         }
-        return 0;
+        int energy = container.stackTagCompound.getInteger("Energy");
+        int energyExtracted = Math.min(energy, Math.min(getMaxEnergy(), maxExtract));
+
+        if (!simulate) {
+            energy -= energyExtracted;
+            container.stackTagCompound.setInteger("Energy", energy);
+        }
+        fixDamage(container);
+        return energyExtracted;
     }
 
     @Override

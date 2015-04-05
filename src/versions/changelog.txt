@@ -1,1 +1,1 @@
-Fixed crash when EnderIO is not installed.
+Added Driller, Block Miner with drill head properties!

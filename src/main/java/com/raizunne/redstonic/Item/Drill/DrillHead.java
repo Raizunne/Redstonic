@@ -85,7 +85,7 @@ public class DrillHead extends Item {
         heads[5] = i.registerIcon("redstonic:Drill/Heads/Icon/Fortuitous");
         heads[6] = i.registerIcon("redstonic:Drill/Heads/Icon/Silky");
         heads[7] = i.registerIcon("redstonic:Drill/Heads/Icon/Blazer");
-        heads[8] = i.registerIcon("redstonic:Drill/Heads/Icon/End");
+        heads[8] = i.registerIcon("redstonic:Drill/Heads/Icon/Ultimate");
     }
 
     @Override

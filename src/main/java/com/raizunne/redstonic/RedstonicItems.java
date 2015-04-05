@@ -73,6 +73,12 @@ public class RedstonicItems {
         GameRegistry.registerItem(EnergeticBody, EnergeticBody.getUnlocalizedName());
         GameRegistry.registerItem(VibrantBody, VibrantBody.getUnlocalizedName());
 
+        OreDictionary.registerOre("redstonicMidTierBody", ElectrumBody);
+        OreDictionary.registerOre("redstonicMidTierBody", EnergeticBody);
+
+        OreDictionary.registerOre("redstonicHighTierBody", EnderiumBody);
+        OreDictionary.registerOre("redstonicHighTierBody", VibrantBody);
+
         if(Loader.isModLoaded("ThermalFoundation")) {
         }
 

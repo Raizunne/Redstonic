@@ -1,10 +1,13 @@
 package com.raizunne.redstonic.Handler;
 
 import com.raizunne.redstonic.Gui.Container.ContainerDrillModifier;
+import com.raizunne.redstonic.Gui.Container.ContainerDriller;
 import com.raizunne.redstonic.Gui.GuiDrillModifier;
+import com.raizunne.redstonic.Gui.GuiDriller;
 import com.raizunne.redstonic.Gui.GuiManual;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
+import com.raizunne.redstonic.TileEntity.TEDriller;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +32,11 @@ public class GUIHandler implements IGuiHandler{
             }
             break;
             case 1: return null;
+            case 2: return null;
+            case 3: if(te!=null && te instanceof TEDriller){
+                return new ContainerDriller(player.inventory, (TEDriller)te);
+            }
+            break;
             default: return null;
 
         }
@@ -45,6 +53,11 @@ public class GUIHandler implements IGuiHandler{
             break;
             case 1: return new GuiManual(player, "index");
             case 2: return new GuiManual(player, "Getting Started");
+            case 3: if(te!=null && te instanceof TEDriller){
+                return new GuiDriller(player.inventory, (TEDriller)te);
+            }
+            break;
+            default: return null;
         }
         return null;
     }

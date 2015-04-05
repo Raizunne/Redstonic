@@ -4,10 +4,14 @@ import com.raizunne.redstonic.Item.RedstonicDrill;
 import com.raizunne.redstonic.Proxy.ClientProxy;
 import com.raizunne.redstonic.Redstonic;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiRepair;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -15,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -33,6 +38,20 @@ public class RedstonicEventHandler {
     @SubscribeEvent
     public void RenderGameOverlayEvent(RenderGameOverlayEvent event){
 //        HUDDisplay.init(event);
+    }
+
+    @SubscribeEvent
+    public void renderTick(TickEvent.RenderTickEvent event){
+        Minecraft mc = Minecraft.getMinecraft();
+        GuiScreen screen = mc.currentScreen;
+        if(mc.theWorld!=null){
+            WorldClient world = mc.theWorld;
+            if(event.phase == TickEvent.Phase.START){
+                if(screen instanceof GuiRepair){
+
+                }
+            }
+        }
     }
 
     @SubscribeEvent

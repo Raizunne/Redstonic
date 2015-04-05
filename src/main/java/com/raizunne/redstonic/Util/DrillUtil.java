@@ -269,4 +269,19 @@ public class DrillUtil {
             default: return drill;
         }
     }
+
+    public static int getCooldown(int head){
+        switch(head){
+            case 0: return 40;
+            case 1: return 10;
+            case 2: return 20;
+            case 3: return 50;
+            case 4: return 20;
+            case 5: return 30;
+            case 6: return 25;
+            case 7: return 1;
+            default: return 0;
+        }
+
+    }
 }
