@@ -1,1 +1,1 @@
-Fixed super bug and added Magnetization Augment!
+Fixed non craftable items! Sorry!

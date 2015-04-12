@@ -82,11 +82,6 @@ public class RedstonicRecipes {
                 " B ",
                 "I I", 'I', Items.iron_ingot, 'B', Blocks.stonebrick});
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.Energizer),
-                "LUL",
-                "UHU",
-                "LUL", 'L', "ingotLead", 'U', "ingotLumium", 'H', "blockGlassHardened", 'D', RedstonicItems.GoldHead));
-
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.capacitor),
                 " R ",
                 "RCR",
@@ -112,6 +107,10 @@ public class RedstonicRecipes {
 
         //TE RECIPES
         if(Loader.isModLoaded("ThermalExpansion")) {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.Energizer),
+                    "LUL",
+                    "UHU",
+                    "LUL", 'L', "ingotLead", 'U', "ingotLumium", 'H', "blockGlassHardened", 'D', RedstonicItems.GoldHead));
             GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
                     "III",
                     "IBI",
@@ -151,6 +150,10 @@ public class RedstonicRecipes {
             EIOHelper.addAlloySmelterRecipe("Energizer Filling", 32000, Util.toStack(Blocks.redstone_block, 20, 0), Util.toStack(RedstonicItems.Energizer), Util.toStack(Blocks.redstone_block, 20, 0), Util.toStack(RedstonicItems.EnergizerFull));
             EIOHelper.addAlloySmelterRecipe("Vibrantium", 16000, Util.sizedStack(EIOHelper.ingotVibrant, 8), Util.sizedStack(EIOHelper.etchingCrystal, 2), Util.sizedStack(EIOHelper.ingotSoularium, 32), Util.toStack(RedstonicItems.ingotVibrantium));
             EIOHelper.addAlloySmelterRecipe("Glowstone Infused Steel", 8000, Util.sizedStack(EIOHelper.ingotElectrical, 2), Util.sizedStack(Util.toStack(Items.glowstone_dust), 8), null, Util.toStack(RedstonicItems.ingotGlowSteel));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.Energizer),
+                    "LUL",
+                    "UHU",
+                    "LUL", 'L', "ingotConductiveIron", 'U', "ingotLumium", 'H', "blockGlassHardened", 'D', RedstonicItems.GoldHead));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.UltimateBody),
                     " G ",
                     "IWG",
