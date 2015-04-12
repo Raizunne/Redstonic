@@ -1,5 +1,6 @@
 package com.raizunne.redstonic;
 
+import com.raizunne.redstonic.Item.IRecipes.ContainerSet;
 import com.raizunne.redstonic.Item.IRecipes.HotswapSet;
 import com.raizunne.redstonic.Util.EIOHelper;
 import com.raizunne.redstonic.Util.TEHelper;
@@ -104,6 +105,11 @@ public class RedstonicRecipes {
                 "IBI",
                 "CCC", 'C', Blocks.cobblestone, 'E', RedstonicItems.EnergizerFull, 'I', Blocks.iron_block, 'B', "redstonicMidTierBody"));
 
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.MagnetAugment),
+                "III",
+                " LB",
+                "III", 'I', Items.iron_ingot, 'L', "ingotLumium", 'B', RedstonicItems.basicBattery));
+
         //TE RECIPES
         if(Loader.isModLoaded("ThermalExpansion")) {
             GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
@@ -180,11 +186,11 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.basicBattery),
                     " R ",
                     "SCS",
-                    "RAR", 'R', Blocks.redstone_block, 'S', "ingotElectricalSteel", 'C', "ingotCopper", 'A', EIOHelper.basicCapacitor));
+                    "RAR", 'R', Blocks.redstone_block, 'S', "ingotElectricalSteel", 'C', "ingotConductiveIron", 'A', EIOHelper.basicCapacitor));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.energizedBattery),
                     " R ",
                     "SCS",
-                    "RAR", 'R', Blocks.redstone_block, 'S', "ingotEnergeticAlloy", 'C', "ingotCopper", 'A', RedstonicItems.basicBattery));
+                    "RAR", 'R', Blocks.redstone_block, 'S', "ingotEnergeticAlloy", 'C', "blockPhasedIron", 'A', RedstonicItems.basicBattery));
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.greatBattery),
                     " R ",
@@ -200,10 +206,8 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicBlocks.Vibrantium),
                     "III", "III", "III", 'I', RedstonicItems.ingotVibrantium));
         }
-        IRecipe hotswap = new HotswapSet();
-        GameRegistry.addRecipe(hotswap);
-
-
+        GameRegistry.addRecipe(new HotswapSet());
+        GameRegistry.addRecipe(new ContainerSet());
     }
 
 }

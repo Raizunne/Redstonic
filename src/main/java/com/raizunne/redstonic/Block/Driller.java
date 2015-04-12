@@ -36,6 +36,7 @@ public class Driller extends BlockContainer {
         setBlockName("driller");
         setCreativeTab(Redstonic.redTab);
         setBlockTextureName("redstonic:Driller");
+        setHardness(2F);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class Driller extends BlockContainer {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemstack)	 {
         int direction = MathHelper.floor_double((double) (entityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, direction, 0);
-		System.out.println(world.getBlockMetadata(x, y, z));
+//		System.out.println(world.getBlockMetadata(x, y, z));
     }
 
     @Override
@@ -83,11 +84,6 @@ public class Driller extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-//        if(!world.isRemote){
-//            if(!player.isSneaking()){
-//                FMLNetworkHandler.openGui(player, Redstonic.instance, 3, world, x, y, z);
-//            }
-//        }
         TEDriller tile = (TEDriller)world.getTileEntity(x, y, z);
         if(player.getCurrentEquippedItem()!=null && player.getCurrentEquippedItem().getItem() instanceof DrillHead && tile.getHead()==999){
             tile.setHead(DrillUtil.getHeadNumber(player.getCurrentEquippedItem()));

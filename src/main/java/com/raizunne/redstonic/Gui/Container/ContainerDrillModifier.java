@@ -7,6 +7,7 @@ import com.raizunne.redstonic.Item.Drill.DrillHead;
 import com.raizunne.redstonic.Item.ItemBattery;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -82,10 +83,18 @@ public class ContainerDrillModifier extends Container {
                             return null;
                         }
                     }
-                }else if(itemstack1.isItemEqual(hardened) || itemstack1.isItemEqual(reinforced) || itemstack1.isItemEqual(resonant) || itemstack1.isItemEqual(creative) || itemstack1.getItem() instanceof ItemBattery) {
+                }else if(itemstack1.getItem() instanceof ItemBattery) {
                     if (!mergeItemStack(itemstack1, 39, 40, false)) {
                         if (!mergeItemStack(itemstack1, 9, 35, false)) {
                             return null;
+                        }
+                    }
+                }else if(Loader.isModLoaded("ThermalExpansion")){
+                    if(itemstack1.isItemEqual(hardened) || itemstack1.isItemEqual(reinforced) || itemstack1.isItemEqual(resonant) || itemstack1.isItemEqual(creative)){
+                        if (!mergeItemStack(itemstack1, 39, 40, false)) {
+                            if (!mergeItemStack(itemstack1, 9, 35, false)) {
+                                return null;
+                            }
                         }
                     }
                 }else if(itemstack1.getItem() instanceof DrillAugment){

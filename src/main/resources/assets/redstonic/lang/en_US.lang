@@ -21,9 +21,11 @@ item.SpeedAugment.name=Speed Drill Augment
 item.HotswapAugment.name=Hotswap Drill Augment
 item.TorchAugment.name=Torch Placing Drill Augment
 item.BlockAugment.name=Block Placer Drill Augment
+item.MagnetAugment.name=Magnet Drill Augment
 
 item.RedstonicDrill.name=§cRedstonic Drill
 item.Manual.name=§cRedstonic Manual
+item.RedstonicContainer.name=§cRedstonic Container
 
 item.EnergizerCapsule.name=Energizer Capsule (Empty)
 item.EnergizerCapsuleFULL.name=§cEnergizer Capsule
@@ -71,5 +73,6 @@ entries.Bodies=The Drill Bodies are the base of the drill. The drill body decide
 entries.Energy=The Drill Energy is taken from Flux Batteries or Capacitors from Thermal Expansion . The max energy of the capacitor is reduced due to the size of it not being able to be used in the drill.
 entries.Augments=The Drill Augments are what modifies the drill apart from the base needs to create it. Each one of them has a different use.
 entries.HotswapAugment=This Drill Augment is a special augment that allows to change your drill head RIGHT ON THE SPOT! To change it, sneak and then right click the Redstonic Drill. It will cost a total of 1500 RF per change.                         Check the next page for more info on crafting. To get your drill head back, simply hold right click with the augment on your hand and the drill head should come right off!
+entries.MagnetizationAugment=Mining block by lava? Fear no more! Magnetization Augment brings all of your dropped items right to your being! With a radius of 5 blocks, it will attract all Item entities to you! Sneak right click to disable. Will show when disabled with a different Icon. See below for more information on that.
 
 entries.Driller=The driller is basically a drill, but on block form! When you place the Driller, it will not have a drill head. You will need to right click it with a drill head from a Redstonic Drill to mine with it. The driller will take any properties from the drill head. This means you can use the Heavy Drill Head to mine a 3x3 with the Driller or use the Blazer Drill Head to furance mine!

@@ -74,28 +74,28 @@ public class TEDriller extends TileEntity implements IInventory, IEnergyReceiver
                 switch(meta){
                     case 0:
                         world.func_147480_a(x, y, z + 1, false);
-                        drops = block.getDrops(world, x, y, z+1, blockMetadata, 0);
+                        drops = block.getDrops(world, x, y, z+1, getBlockMetadata(), 0);
                         for(int i=0; i<drops.size();i++) {
                             putStack(drops.get(i));
                         }
                         break;
                     case 1:
                         world.func_147480_a(x - 1, y, z, false);
-                        drops = block.getDrops(world, x-1, y, z, blockMetadata, 0);
+                        drops = block.getDrops(world, x-1, y, z, getBlockMetadata(), 0);
                         for(int i=0; i<drops.size();i++) {
                             putStack(drops.get(i));
                         }
                         break;
                     case 2:
                         world.func_147480_a(x, y, z - 1, false);
-                        drops = block.getDrops(world, x, y, z-1, blockMetadata, 0);
+                        drops = block.getDrops(world, x, y, z-1, getBlockMetadata(), 0);
                         for(int i=0; i<drops.size();i++) {
                             putStack(drops.get(i));
                         }
                         break;
                     case 3:
                         world.func_147480_a(x+1, y, z, false);
-                        drops = block.getDrops(world, x+1, y, z, blockMetadata, 0);
+                        drops = block.getDrops(world, x+1, y, z, getBlockMetadata(), 0);
                         for(int i=0; i<drops.size();i++) {
                             putStack(drops.get(i));
                         }
@@ -269,6 +269,7 @@ public class TEDriller extends TileEntity implements IInventory, IEnergyReceiver
                         world.func_147480_a(x, y, z + 1, false);
                         drops = block.getDrops(world, x, y, z+1, getBlockMetadata(), 0);
                         for(int i=0; i<drops.size();i++) {
+                            System.out.println(drops.get(i) + "DROPS.GET");
                             if(FurnaceRecipes.smelting().getSmeltingResult(drops.get(i))!=null){
                                 putStack(FurnaceRecipes.smelting().getSmeltingResult(drops.get(i)));
                             }else{

@@ -11,10 +11,13 @@ import net.minecraftforge.common.config.Configuration;
  */
 public class ConfigHandler {
 
-
+    public static int containerMax = 256;
 
     public static void RedstonicConfig(Configuration config){
-
+        containerMax = config.getInt("Redstonic Container Max Capacity", "Redstonic Container", containerMax, 0, 2560, "Max number of items in the Redstonic Container");
+        if(config.hasChanged()){
+            config.save();
+        }
     }
 
     @SubscribeEvent

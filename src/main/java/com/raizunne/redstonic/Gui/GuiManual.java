@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -131,8 +132,9 @@ public class GuiManual extends GuiScreen {
             if(subPage==1){
                 drawStatsText("Speed Augment I", "x1.5 Dig Speed Mutli", 0x404040, 0x009933, 160, 20); drawStatsText("Energy Augment I", "x1.5 Max Energy Multi", 0x404040, 0x009933, 160, 40);
                 drawStatsText("Hotswap Augment", "See next page", 0x404040, 0x009933, 160, 60); drawStatsText("Block Placer Augment", "Place blocks", 0x404040, 0x009933, 160, 80);
+                drawStatsText("Magnetization Augment", "Attacts item entities.", 0x404040, 0x009933, 160, 100);
                 drawItem(RedstonicItems.SpeedAugment, 140, 20, x, y); drawItem(RedstonicItems.EnergyAugment, 140, 40, x, y);
-                drawItem(RedstonicItems.HotswapAugment, 140, 60, x, y); drawItem(RedstonicItems.BlockAugment, 140, 80, x, y);
+                drawItem(RedstonicItems.HotswapAugment, 140, 60, x, y); drawItem(RedstonicItems.BlockAugment, 140, 80, x, y); drawItem(RedstonicItems.MagnetAugment, 140, 100, x, y);
             }else if(subPage==2){
                 drawText("Replace the drill ontop with the drill of your choice.", 135, 140, 20);
                 ItemStack augmenterino = new ItemStack(RedstonicItems.HotswapAugment);
@@ -140,6 +142,22 @@ public class GuiManual extends GuiScreen {
                 augmenterino.stackTagCompound.setInteger("head", 0);
                 newEntry("Hotswap Augment", new String[]{Lang.translate("entries.HotswapAugment")});
                 drawCrafting(null, RedstonicItems.IronHead, null, null, RedstonicItems.HotswapAugment, null, null,null,null, augmenterino, 150, 45, x, y);
+            }else if(subPage==3){
+                newEntry("Magnetization Augment", new String[]{Lang.translate("entries.MagnetizationAugment")});
+                ItemStack drillOFF = new ItemStack(RedstonicItems.RedDrill);
+                ItemStack drillON = new ItemStack(RedstonicItems.RedDrill);
+                drillOFF.stackTagCompound = new NBTTagCompound();
+                NBTTagCompound nbt1 = drillOFF.stackTagCompound;
+                nbt1.setInteger("head", 1);
+                nbt1.setInteger("body", 5);
+                nbt1.setInteger("aug1", 5);
+                drillON = drillOFF.copy();
+                nbt1.setBoolean("aug1Deactivated", true);
+                drillON.stackTagCompound.setBoolean("aug1Deactivated", false);
+                drawStatsText("", "Deactivated", 0x404040, 0x990000, 20, 115);
+                drawStatsText("", "Activated", 0x404040, 0x009933, 75, 115);
+                drawItem(drillON, 85, 130, x, y);
+                drawItem(drillOFF, 30, 130, x, y);
             }
         }else if(page=="Driller"){
         }
@@ -223,7 +241,7 @@ public class GuiManual extends GuiScreen {
             case 101: page="Heads"; prevPage="drills"; break;
             case 102: page="Bodies"; prevPage="drills"; break;
             case 103: page="Energy"; prevPage="drills"; break;
-            case 104: page="Augments"; prevPage="drills"; maxPages=2; break;
+            case 104: page="Augments"; prevPage="drills"; maxPages=3; break;
 
             case 200: page="Driller"; prevPage="machines"; break;
 
@@ -248,7 +266,7 @@ public class GuiManual extends GuiScreen {
     protected void mouseClicked(int x, int y, int mouseId) {
         super.mouseClicked(x, y, mouseId);
         if(mouseId==1){
-            if(page=="drills" || page=="extras" && page!="index"){
+            if(page=="drills" || page=="extras" || page=="machines" && page!="index"){
                 page="index";
                 this.player.playSound(randomSound(), 1F, 1F);
                 maxPages=1;

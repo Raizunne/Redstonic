@@ -3,6 +3,7 @@ package com.raizunne.redstonic.Util;
 import com.raizunne.redstonic.Item.ItemBattery;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -76,6 +77,7 @@ public class DrillUtil {
                 aug.stackTagCompound.setInteger("hotswapHead", h);
                 return aug;
             case 4: return new ItemStack(RedstonicItems.BlockAugment);
+            case 5: return new ItemStack(RedstonicItems.MagnetAugment);
             default: return null;
         }
     }
@@ -131,6 +133,7 @@ public class DrillUtil {
             case 2: name = "x2.5 Energy Multiplier"; break;
             case 3: name = "Hotswap"; break;
             case 4: name = "Block Placer"; break;
+            case 5: name = "Magnerization Augment"; break;
             default: name = "Unknown"; break;
         }
         return name;
@@ -175,15 +178,18 @@ public class DrillUtil {
         ItemStack creative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
         Item[] batteries = new Item[]{RedstonicItems.basicBattery, RedstonicItems.energizedBattery, RedstonicItems.greatBattery};
         ItemStack[] capacitor = new ItemStack[]{hardened, reinforced, resonant};
-        if(stack.isItemEqual(creative)){
-            return -1;
-        }else if(stack.getItem()==RedstonicItems.infiniteBattery){
-            return -2;
-        }
-        for(int i=0; i<capacitor.length; i++){
-            if(capacitor[i].isItemEqual(stack)){
-                return i;
+        if(Loader.isModLoaded("ThermalExpansion")){
+            if(stack.isItemEqual(creative)){
+                return -1;
+            }else
+            for(int i=0; i<capacitor.length; i++){
+                if(capacitor[i].isItemEqual(stack)){
+                    return i;
+                }
             }
+        }
+        if(stack.getItem()==RedstonicItems.infiniteBattery){
+            return -2;
         }
         for(int i=0; i<batteries.length; i++){
             if(batteries[i]==stack.getItem()){
@@ -218,7 +224,7 @@ public class DrillUtil {
 
     public static int getAugNumber(ItemStack item){
         ItemStack[] augments = new ItemStack[]{Util.toStack(RedstonicItems.SpeedAugment), Util.toStack(RedstonicItems.EnergyAugment), Util.toStack(RedstonicItems.HotswapAugment),
-                Util.toStack(RedstonicItems.BlockAugment)};
+                Util.toStack(RedstonicItems.BlockAugment), Util.toStack(RedstonicItems.MagnetAugment)};
         for(int i=0; i<augments.length; i++){
             if(augments[i].isItemEqual(item)){
                 return i+1;
@@ -235,22 +241,25 @@ public class DrillUtil {
         int tier1 = 320000; int tier2 = 1280000; int tier3 = 3200000;
         float multiplier=1;
         if(drill.stackTagCompound.getInteger("body")==3){multiplier=3;}
-        if(i.isItemEqual(hardened)){
-            return (int)(tier1 * multiplier);
-        }else if(i.isItemEqual(reinforced)){
-            return (int)(tier2 * multiplier);
-        }else if(i.isItemEqual(resonant)) {
-            return (int)(tier3 * multiplier);
-        }else if(i.getItem()==RedstonicItems.basicBattery){
+        if(Loader.isModLoaded("ThermalExpansion")) {
+            if (i.isItemEqual(hardened)) {
+                return (int) (tier1 * multiplier);
+            } else if (i.isItemEqual(reinforced)) {
+                return (int) (tier2 * multiplier);
+            } else if (i.isItemEqual(resonant)) {
+                return (int) (tier3 * multiplier);
+            }else if(i.isItemEqual(creative)) {
+                return -1;
+            }
+        }
+        if(i.getItem()==RedstonicItems.basicBattery){
             return (int)(tier1 * multiplier);
         }else if(i.getItem()==RedstonicItems.energizedBattery){
             return (int)(tier2 * multiplier);
         }else if(i.getItem()==RedstonicItems.greatBattery){
             return (int)(tier3 * multiplier);
-        }else if(i.isItemEqual(creative)){
-            return -1;
         }else if(i.getItem()==RedstonicItems.infiniteBattery){
-            return -1;
+            return -2;
         }
         return 0;
     }
@@ -265,6 +274,7 @@ public class DrillUtil {
             case 2: drill.stackTagCompound.setFloat("energyMulti", 2.5F); return drill;
             case 3: drill.stackTagCompound.setInteger("hotswapHead", hotswapHead); return drill;
             case 4: return drill;
+            case 5: return drill;
             case 0: return drill;
             default: return drill;
         }

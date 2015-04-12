@@ -63,6 +63,7 @@ public class DrillAugment extends Item {
             case 1: return "EnergyAugment";
             case 2: return "HotswapAugment";
             case 3: return "BlockAugment";
+            case 4: return "MagnetAugment";
             default: return "UnknownAugment";
         }
     }
@@ -80,11 +81,12 @@ public class DrillAugment extends Item {
 
     @Override
     public void registerIcons(IIconRegister i) {
-        icons = new IIcon[4];
+        icons = new IIcon[5];
         icons[0] = i.registerIcon("redstonic:Drill/Augment/Icon/Speed");
         icons[1] = i.registerIcon("redstonic:Drill/Augment/Icon/Energy");
         icons[2] = i.registerIcon("redstonic:Drill/Augment/Icon/Hotswap");
         icons[3] = i.registerIcon("redstonic:Drill/Augment/Icon/Block");
+        icons[4] = i.registerIcon("redstonic:Drill/Augment/Icon/Magnet");
     }
 
     @Override

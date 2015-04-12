@@ -6,6 +6,7 @@ import com.raizunne.redstonic.Item.ItemBattery;
 import com.raizunne.redstonic.Item.RedstonicDrill;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.DrillUtil;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -155,11 +156,16 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     }
 
     public boolean checkCapacitor(int i){
-        ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
-        ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
-        ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
-        ItemStack creative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
-        return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant) || getStackInSlot(i).isItemEqual(creative) || getStackInSlot(i).getItem() instanceof ItemBattery;
+        if(Loader.isModLoaded("ThermalExpansion")) {
+            ItemStack hardened = GameRegistry.findItemStack("ThermalExpansion", "capacitorHardened", 1);
+            ItemStack reinforced = GameRegistry.findItemStack("ThermalExpansion", "capacitorReinforced", 1);
+            ItemStack resonant = GameRegistry.findItemStack("ThermalExpansion", "capacitorResonant", 1);
+            ItemStack creative = GameRegistry.findItemStack("ThermalExpansion", "capacitorCreative", 1);
+            return getStackInSlot(i).isItemEqual(hardened) || getStackInSlot(i).isItemEqual(reinforced) || getStackInSlot(i).isItemEqual(resonant) || getStackInSlot(i).isItemEqual(creative) || getStackInSlot(i).getItem() instanceof ItemBattery;
+        }
+        else{
+            return getStackInSlot(i).getItem() instanceof ItemBattery;
+        }
     }
 
     public boolean checkForAssemble(){

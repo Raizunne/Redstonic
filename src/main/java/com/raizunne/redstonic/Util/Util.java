@@ -65,6 +65,7 @@ public class Util {
             case 1: return new String[]{"x2.5 Drill Energy Multiplier", "x1.1 Energy Usage"};
             case 2: return new String[]{"Quick exchange of Drill Heads", "1500 RF per change.", EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head", EnumChatFormatting.GRAY + "Hold" + EnumChatFormatting.BLUE + " Right Click" + EnumChatFormatting.GRAY + " to empty."};
             case 3: return new String[]{"Place block with a right click"};
+            case 4: return new String[]{"Attract items to your being."};
             default: return null;
         }
     }
