@@ -1,1 +1,1 @@
-Fixed non craftable items! Sorry!
+Fixed chat spam!

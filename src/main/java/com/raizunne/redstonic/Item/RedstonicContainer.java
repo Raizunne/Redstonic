@@ -82,9 +82,7 @@ public class RedstonicContainer extends Item{
         int number = picked.stackSize;
         if(picked.getItem() instanceof ItemBlock){
             List<ItemStack> allContainers = getAllInPlayer(player, new ItemStack(RedstonicItems.RedContainer));
-            System.out.println(allContainers);
             Block blockerino = Block.getBlockFromItem(picked.getItem());
-            System.out.println(allContainers);
             for(int i=0; i<allContainers.size(); i++){
                 Block blockInContainer = Block.getBlockById(allContainers.get(i).stackTagCompound.getInteger("block"));
                 int quantity = allContainers.get(i).stackTagCompound.getInteger("number");
