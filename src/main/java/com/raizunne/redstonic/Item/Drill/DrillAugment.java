@@ -36,17 +36,11 @@ public class DrillAugment extends Item {
         if(stack.stackTagCompound!=null) {
             hotswapHead = DrillUtil.getDrillHeadName(stack.stackTagCompound.getInteger("hotswapHead"));
         }
-        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    list.add(info[i]);
-                }
+        if (info != null) {
+            for (int i = 0; i < info.length; i++) {
+                list.add(info[i]);
             }
-        }else{
-            if(type==2){list.add(EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head");}
-            list.add(Util.ItemShiftInfo);
         }
-
     }
 
     public DrillAugment(int type){
@@ -64,6 +58,7 @@ public class DrillAugment extends Item {
             case 2: return "HotswapAugment";
             case 3: return "BlockAugment";
             case 4: return "MagnetAugment";
+            case 5: return "SpeedIIAugment";
             default: return "UnknownAugment";
         }
     }
@@ -81,12 +76,13 @@ public class DrillAugment extends Item {
 
     @Override
     public void registerIcons(IIconRegister i) {
-        icons = new IIcon[5];
+        icons = new IIcon[6];
         icons[0] = i.registerIcon("redstonic:Drill/Augment/Icon/Speed");
         icons[1] = i.registerIcon("redstonic:Drill/Augment/Icon/Energy");
         icons[2] = i.registerIcon("redstonic:Drill/Augment/Icon/Hotswap");
         icons[3] = i.registerIcon("redstonic:Drill/Augment/Icon/Block");
         icons[4] = i.registerIcon("redstonic:Drill/Augment/Icon/Magnet");
+        icons[5] = i.registerIcon("redstonic:Drill/Augment/Icon/SpeedII");
     }
 
     @Override

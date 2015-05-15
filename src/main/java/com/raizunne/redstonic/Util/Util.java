@@ -4,8 +4,12 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModClassLoader;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSaddle;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -15,8 +19,9 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class Util {
 
-    public static final String ItemShiftInfo = Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.RED + " Shift " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreinfo");
-    public static final String ItemCtrlInfo = Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.YELLOW + " Ctrl " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreauginfo");
+    public static final String ItemShiftInfo = Lang.translate("drill.hold") + " " + EnumChatFormatting.ITALIC + EnumChatFormatting.RED + Lang.translate("util.Shift") + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + " " + Lang.translate("drill.formoreinfo");
+    public static final String ItemCtrlInfo = Lang.translate("drill.hold") + " " + EnumChatFormatting.ITALIC + EnumChatFormatting.YELLOW + Lang.translate("util.Control") + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + " " + Lang.translate("drill.formoreauginfo");
+    public static final String ItemAltInfo = Lang.translate("drill.hold") + " " + EnumChatFormatting.ITALIC + EnumChatFormatting.GREEN + Lang.translate("util.Alt") + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + " " + Lang.translate("drill.formorekillinfo");
     public static final String missingTE = "Missing mod" + EnumChatFormatting.DARK_AQUA + " Thermal Expansion";
     public static final String missingEIO = "Missing mod" + EnumChatFormatting.DARK_AQUA + " EnderIO";
 
@@ -24,7 +29,11 @@ public class Util {
         switch(i){
             case 0: return new String[]{"Crafting Material", "Requires " + EnumChatFormatting.RED + "64000" + EnumChatFormatting.GRAY + " Destabilized Redstone to fill.", "or 72 Redstone Blocks"};
             case 1: return new String[]{"Crafting Material", "Contains " + EnumChatFormatting.RED + "64000" + EnumChatFormatting.GRAY + " Destabilized Redstone."};
-            case 2: return new String[]{Loader.isModLoaded("EnderIO")?"":"Needs EnderIO"};
+            case 2: if(Loader.isModLoaded("EnderIO")){
+                return null;
+            }else{
+                return new String[]{"Needs EnderIO"};
+            }
             default: return null;
         }
     }
@@ -45,12 +54,12 @@ public class Util {
 
     public static String[] getBodyInfo(int i){
         switch(i){
-            case 1: return new String[]{"1 Augment Slot"};
-            case 2: return new String[]{"2 Augment Slot"};
-            case 3: return new String[]{"3 Augment Slot"};
-            case 4: return new String[]{"0 Augment Slot", "x3 Energy Storage Multiplier"};
-            case 5: return new String[]{"2 Augment Slot"};
-            case 6: return new String[]{"3 Augment Slot"};
+            case 1: return new String[]{"Max Augments: 1"};
+            case 2: return new String[]{"Max Augments: 2"};
+            case 3: return new String[]{"Max Augments: 3"};
+            case 4: return new String[]{"Max Augments: 0", "x3 Energy Storage Multiplier"};
+            case 5: return new String[]{"Max Augments: 2"};
+            case 6: return new String[]{"Max Augments: 3"};
             default: return null;
         }
     }
@@ -66,6 +75,16 @@ public class Util {
             case 2: return new String[]{"Quick exchange of Drill Heads", "1500 RF per change.", EnumChatFormatting.YELLOW + "Head: " + EnumChatFormatting.RED + hotswapHead + EnumChatFormatting.GRAY + " Head", EnumChatFormatting.GRAY + "Hold" + EnumChatFormatting.BLUE + " Right Click" + EnumChatFormatting.GRAY + " to empty."};
             case 3: return new String[]{"Place block with a right click"};
             case 4: return new String[]{"Attract items to your being."};
+            default: return null;
+        }
+    }
+
+    public static String[] getSwordAugmentInfo(int i, ItemStack stack){
+        switch(i){
+            case 1: return new String[]{"Fire Enchantment"};
+            case 2: return new String[]{"Looting Enchantment"};
+            case 3: return new String[]{"+2 Heart Damage"};
+            case 4: return new String[]{"+3 Heart Damage", "Can stack with other levels."};
             default: return null;
         }
     }
@@ -110,6 +129,34 @@ public class Util {
         ItemStack stackerino = stack.copy();
         stackerino.stackSize = stacksize;
         return stackerino;
+    }
+
+    public static boolean hasEnchantment(ItemStack stack, Enchantment enchantment){
+        if(stack.stackTagCompound.getTag("ench")!=null) {
+            NBTTagList enchants = (NBTTagList)stack.stackTagCompound.getTag("ench");
+            for(int i=0; i<enchants.tagCount(); i++){
+                NBTTagCompound enchant = ((NBTTagList)enchants).getCompoundTagAt(i);
+                if(enchant.getInteger("id")==enchantment.effectId){
+                    return true;
+                }
+            }
+        }else{
+            return false;
+        }
+        return false;
+    }
+
+    public static void removeEnchantment(ItemStack stack, Enchantment enchantment){
+        if(stack.stackTagCompound.getTag("ench")!=null) {
+            NBTTagList enchants = (NBTTagList) stack.stackTagCompound.getTag("ench");
+            for (int i = 0; i < enchants.tagCount(); i++) {
+                NBTTagCompound enchant = ((NBTTagList) enchants).getCompoundTagAt(i);
+                if (enchant.getInteger("id") == enchantment.effectId) {
+                    enchants.removeTag(i);
+                    return;
+                }
+            }
+        }
     }
 
 }

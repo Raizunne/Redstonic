@@ -33,14 +33,9 @@ public class DrillHead extends Item {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer p_77624_2_, List list, boolean p_77624_4_) {
         String[] info = Util.getHeadInfo(material);
-        if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-            list.add(Util.ItemShiftInfo);
-        }
         if(info!=null){
-            if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-                for(int i=0; i<info.length; i++){
-                    list.add(info[i]);
-                }
+            for(int i=0; i<info.length; i++){
+                list.add(info[i]);
             }
         }
         if(stack.stackTagCompound!=null) {

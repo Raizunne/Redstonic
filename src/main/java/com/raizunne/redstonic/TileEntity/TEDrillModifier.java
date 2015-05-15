@@ -4,14 +4,18 @@ import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
 import com.raizunne.redstonic.Item.ItemBattery;
 import com.raizunne.redstonic.Item.RedstonicDrill;
+import com.raizunne.redstonic.Item.RedstonicSword;
+import com.raizunne.redstonic.Item.Sword.SwordBlade;
+import com.raizunne.redstonic.Item.Sword.SwordHandle;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.DrillUtil;
+import com.raizunne.redstonic.Util.SwordUtil;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -40,18 +44,103 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     public void updateEntity() {
         super.updateEntity();
         if(getStackInSlot(0)!=null){
-//            System.out.println(getStackInSlot(0).stackTagCompound);
+            System.out.println(getStackInSlot(0).stackTagCompound);
         }
-        if(checkForAssemble() && checkUltimate() && mode==1){
-            assemble();
-        }else if(checkForDisassemble() && mode==2){
-            disassemble();
+
+        if(mode==2) /** ASSEMBLE **/{
+            if(isDrill()){
+                if(checkForAssembleDrill() && checkUltimateDrill()) {
+                    assembleDrill();
+                }
+            }else if(isSword()){
+                if(checkForAssembleSword()){
+                    assembleSword();
+                }
+            }
+        }else if(mode==1) /** DISSASSEMBLE **/{
+            if(checkForDisassemble()){
+                disassembleDrill();
+            }else if(checkForDisassembleSword()){
+                disassembleSword();
+            }
         }
     }
 
-    public void assemble(){
+    public boolean isDrill(){
+        return getStackInSlot(1)!=null && getStackInSlot(2)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2).getItem() instanceof DrillBody;
+    }
+
+    public boolean isSword(){
+        return getStackInSlot(1)!=null && getStackInSlot(2)!=null && getStackInSlot(1).getItem() instanceof SwordBlade && getStackInSlot(2).getItem() instanceof SwordHandle && getStackInSlot(3)!=null && checkCapacitor(3);
+    }
+
+    public boolean checkForDisassembleSword(){
+        return getStackInSlot(0)!=null && getStackInSlot(1)==null && getStackInSlot(2)==null && getStackInSlot(3)==null && getStackInSlot(4)==null && getStackInSlot(5)==null && getStackInSlot(6)==null && getStackInSlot(0).getItem() instanceof RedstonicSword;
+    }
+
+    public void assembleSword(){
+        ItemStack newSword = new ItemStack(RedstonicItems.RedSword);
+        setInventorySlotContents(0, newSword);
+        this.augments =0;
+        aug1=0; aug2=0; aug3=0;
+        ItemStack sword = getStackInSlot(0);
+        sword.stackTagCompound = new NBTTagCompound();
+        NBTTagCompound nbt = sword.stackTagCompound;
+        nbt.setInteger("blade", SwordUtil.getBladeNumber(getStackInSlot(1)));
+        nbt.setInteger("handle", SwordUtil.getHandleNumber(getStackInSlot(2)));
+        nbt.setInteger("MaxEnergy", DrillUtil.getEnergyAmount(getStackInSlot(3), sword));
+        nbt.setInteger("battery", DrillUtil.getBatteryNumber(getStackInSlot(3)));
+        nbt.setInteger("damage", SwordUtil.getDamage(getStackInSlot(1)));
+        if(getStackInSlot(1).stackTagCompound!=null)nbt.setInteger("totalKills", getStackInSlot(1).stackTagCompound.getInteger("totalKills"));
+
+        this.augments = SwordUtil.getMaxAugments(getStackInSlot(2));
+        int maxAug = this.augments;
+
+        if(getSwordAug1()!=0 && maxAug!=0){
+            maxAug-=1;
+            getStackInSlot(0).stackTagCompound.setInteger("aug1", getSwordAug1());
+            setInventorySlotContents(5, null);
+        }
+
+        if(getSwordAug2()!=0 && maxAug!=0){
+            maxAug-=1;
+            getStackInSlot(0).stackTagCompound.setInteger("aug2", getSwordAug2());
+            setInventorySlotContents(6, null);
+        }
+
+        if(getSwordAug3()!=0 && maxAug!=0){
+            getStackInSlot(0).stackTagCompound.setInteger("aug3", getSwordAug3());
+            setInventorySlotContents(7, null);
+        }
+
+        int energy = 0;
+        if(getStackInSlot(3).stackTagCompound!=null) {
+            energy = getStackInSlot(3).stackTagCompound.getInteger("Energy");
+        }
+        int maxEnergy = getStackInSlot(0).stackTagCompound.getInteger("MaxEnergy");
+
+        if(getStackInSlot(0).stackTagCompound.getFloat("energyMulti")!=0){
+            maxEnergy = (int)(maxEnergy*getStackInSlot(0).stackTagCompound.getFloat("energyMulti"));
+        }
+
+        if(energy>maxEnergy){
+            energy = maxEnergy;
+        }
+
+        getStackInSlot(0).stackTagCompound.setInteger("MaxEnergy", maxEnergy);
+        getStackInSlot(0).stackTagCompound.setInteger("Energy", energy);
+        double modifier = (double)80/maxEnergy;
+        getStackInSlot(0).setItemDamage((int)(80 - energy*modifier));
+
+        setInventorySlotContents(1, null);
+        setInventorySlotContents(2, null);
+        setInventorySlotContents(3, null);
+    }
+
+    public void assembleDrill(){
         ItemStack newDrill = new ItemStack(RedstonicItems.RedDrill);
         setInventorySlotContents(0, newDrill);
+        this.augments = 0;
         aug1=0; aug2=0; aug3=0;
         ItemStack drill = getStackInSlot(0);
         drill.stackTagCompound = new NBTTagCompound();
@@ -125,7 +214,31 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         setInventorySlotContents(3, null);
     }
 
-    public void disassemble(){
+    public void disassembleSword() {
+        int blade = getStackInSlot(0).stackTagCompound.getInteger("blade");
+        int handle = getStackInSlot(0).stackTagCompound.getInteger("handle");
+        int battery = getStackInSlot(0).stackTagCompound.getInteger("battery");
+        int totalKills = getStackInSlot(0).stackTagCompound.getInteger("totalKills");
+
+        setInventorySlotContents(1, SwordUtil.getBlade(blade));
+        setInventorySlotContents(2, SwordUtil.getHandle(handle));
+        setInventorySlotContents(3, DrillUtil.getDrillBattery(battery, getStackInSlot(0)));
+
+        if(getStackInSlot(1).stackTagCompound==null) {
+            getStackInSlot(1).stackTagCompound = new NBTTagCompound();
+            getStackInSlot(1).stackTagCompound.setInteger("totalKills", totalKills);
+        }
+
+        if(getStackInSlot(3).getItem() instanceof ItemBattery && getStackInSlot(3).getItem()!=RedstonicItems.infiniteBattery){
+            double modifier = (double)80/getStackInSlot(3).stackTagCompound.getInteger("maxEnergy");
+            getStackInSlot(3).setItemDamage((int)(80 - getStackInSlot(3).stackTagCompound.getInteger("Energy")*modifier));
+        }
+
+        setSwordAug(getStackInSlot(0));
+        setInventorySlotContents(0, null);
+    }
+
+    public void disassembleDrill(){
         int head = getStackInSlot(0).stackTagCompound.getInteger("head");
         int body = getStackInSlot(0).stackTagCompound.getInteger("body");
         int blocks = getStackInSlot(0).stackTagCompound.getInteger("blocks");
@@ -151,7 +264,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         setInventorySlotContents(0, null);
     }
 
-    public boolean checkParts(){
+    public boolean checkPartsDrill(){
         return getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2).getItem() instanceof DrillBody && checkCapacitor(3);
     }
 
@@ -168,12 +281,17 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
     }
 
-    public boolean checkForAssemble(){
+    public boolean checkForAssembleDrill(){
         return getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof DrillHead && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof DrillBody &&
-                getStackInSlot(3)!=null && checkCapacitor(3) && checkParts() && inspectAugments();
+                getStackInSlot(3)!=null && checkCapacitor(3) && checkPartsDrill() && inspectAugments();
     }
 
-    public boolean checkUltimate(){
+    public boolean checkForAssembleSword(){
+        return getStackInSlot(0)==null && getStackInSlot(1)!=null && getStackInSlot(1).getItem() instanceof SwordBlade && getStackInSlot(2)!=null && getStackInSlot(2).getItem() instanceof SwordHandle &&
+                getStackInSlot(3)!=null && checkCapacitor(3) && inspectSwordAugments();
+    }
+
+    public boolean checkUltimateDrill(){
         if(getStackInSlot(1).getItem()==RedstonicItems.EndHead){
             if(getStackInSlot(2).getItem()!= RedstonicItems.UltimateBody){
                 return false;
@@ -200,6 +318,15 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
     }
 
+    public void setSwordAug(ItemStack stack){
+        NBTTagCompound tag = stack.stackTagCompound;
+        for(int i=1; i<4; i++){
+            if(tag.getInteger("aug" + i)!=0){
+                setInventorySlotContents(4+i, SwordUtil.getAugments(tag.getInteger("aug" + i)));
+            }
+        }
+    }
+
     public boolean inspectAugments(){
         boolean check1 = true, check2 = true, check3 = true;
         if(getAug1()!=0 && getAug2()!=0) {
@@ -210,6 +337,21 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
         if(getAug2()!=0 && getAug3()!=0){
             check3=getAug2() !=getAug3();
+        }
+
+        return check1 && check2 && check3;
+    }
+
+    public boolean inspectSwordAugments(){
+        boolean check1 = true, check2 = true, check3 = true;
+        if(getSwordAug1()!=0 && getSwordAug2()!=0) {
+            check1 = getSwordAug1() != getSwordAug2();
+        }
+        if(getSwordAug1()!=0 && getSwordAug3()!=0){
+            check2=getSwordAug1()!=getSwordAug3();
+        }
+        if(getSwordAug2()!=0 && getSwordAug3()!=0){
+            check3=getSwordAug2() !=getSwordAug3();
         }
 
         return check1 && check2 && check3;
@@ -239,6 +381,32 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
         return aug3;
     }
+
+    public int getSwordAug1() {
+        if(getStackInSlot(5)!=null){
+            ItemStack item = getStackInSlot(5);
+            aug1 = SwordUtil.getAugNumber(item);
+        }
+        return aug1;
+    }
+
+    public int getSwordAug2() {
+        if(getStackInSlot(6)!=null){
+            ItemStack item = getStackInSlot(6);
+            aug2 = SwordUtil.getAugNumber(item);
+//            System.out.println(aug2);
+        }
+        return aug2;
+    }
+
+    public int getSwordAug3() {
+        if(getStackInSlot(7)!=null){
+            ItemStack item = getStackInSlot(7);
+            aug3 = SwordUtil.getAugNumber(item);
+        }
+        return aug3;
+    }
+
     public void toggleMode(){
         if(this.mode==1){
             this.mode=2;

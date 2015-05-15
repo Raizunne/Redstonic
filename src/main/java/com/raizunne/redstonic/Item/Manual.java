@@ -36,6 +36,7 @@ public class Manual extends Item {
                 player.openGui(Redstonic.instance, 1, world, (int) player.posX, (int) player.posY, (int) player.posZ);
             }
         }else{
+            player.playSound(randomSound(), 1, 1);
             player.openGui(Redstonic.instance, 1, world, (int)player.posX, (int)player.posY, (int)player.posZ);
         }
         return stack;

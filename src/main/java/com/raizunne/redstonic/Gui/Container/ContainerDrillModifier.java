@@ -5,6 +5,11 @@ import com.raizunne.redstonic.Item.Drill.DrillAugment;
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
 import com.raizunne.redstonic.Item.ItemBattery;
+import com.raizunne.redstonic.Item.RedstonicDrill;
+import com.raizunne.redstonic.Item.RedstonicSword;
+import com.raizunne.redstonic.Item.Sword.SwordAugment;
+import com.raizunne.redstonic.Item.Sword.SwordBlade;
+import com.raizunne.redstonic.Item.Sword.SwordHandle;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import cpw.mods.fml.common.Loader;
@@ -65,19 +70,19 @@ public class ContainerDrillModifier extends Container {
             itemstack = itemstack1.copy();
 
             if(par2 < 35){
-                if(itemstack1.isItemEqual(new ItemStack(RedstonicItems.RedDrill))){
+                if(itemstack1.getItem() instanceof RedstonicDrill || itemstack1.getItem() instanceof RedstonicSword){
                     if(!mergeItemStack(itemstack1, 36, 37, false)){
                         if(!mergeItemStack(itemstack1, 9, 35, false)){
                             return null;
                         }
                     }
-                }else if(itemstack1.getItem() instanceof DrillHead){
+                }else if(itemstack1.getItem() instanceof DrillHead || itemstack1.getItem() instanceof SwordBlade){
                     if(!mergeItemStack(itemstack1, 37, 38, false)){
                         if(!mergeItemStack(itemstack1, 9, 35, false)){
                             return null;
                         }
                     }
-                }else if(itemstack1.getItem() instanceof DrillBody){
+                }else if(itemstack1.getItem() instanceof DrillBody || itemstack1.getItem() instanceof SwordHandle){
                     if(!mergeItemStack(itemstack1, 38, 39, false)){
                         if(!mergeItemStack(itemstack1, 9, 35, false)){
                             return null;
@@ -97,7 +102,7 @@ public class ContainerDrillModifier extends Container {
                             }
                         }
                     }
-                }else if(itemstack1.getItem() instanceof DrillAugment){
+                }else if(itemstack1.getItem() instanceof DrillAugment || itemstack1.getItem() instanceof SwordAugment){
                     if (!mergeItemStack(itemstack1, 40, 43, false)) {
                         if (!mergeItemStack(itemstack1, 9, 35, false)) {
                             return null;

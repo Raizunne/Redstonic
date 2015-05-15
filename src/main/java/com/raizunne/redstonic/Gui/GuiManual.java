@@ -62,7 +62,7 @@ public class GuiManual extends GuiScreen {
     }
 
     public boolean entryBlacklist(String page){
-        String[] blacklist = {"index", "drills", "extras", "Contribute!", "machines"};
+        String[] blacklist = {"index", "drills", "extras", "Contribute!", "machines", "swords"};
         for(int i=0; i<blacklist.length; i++){
             if(page==blacklist[i]){
                 return true;
@@ -160,6 +160,24 @@ public class GuiManual extends GuiScreen {
                 drawItem(drillOFF, 30, 130, x, y);
             }
         }else if(page=="Driller"){
+        }else if(page=="Blades"){
+            drawStatsText("Iron Blade", "4 Heart damage", 0x404040, 0x009933, 160, 15); drawStatsText("Diamond Blade", "6 Heart damage", 0x404040, 0x009933, 160, 35);
+            drawStatsText("Electrum Blade", "9 Heart damage", 0x404040, 0x009933, 160, 55); drawStatsText("Enderium Blade", "11 Heart damage", 0x404040, 0x009933, 160, 75);
+            drawStatsText("Energetic Blade", "9 Heart damage", 0x404040, 0x009933, 160, 95); drawStatsText("Vibrant Blade", "11 Heart damage", 0x404040, 0x009933, 160, 115);
+            drawItem(RedstonicItems.IronBlade, 140, 15, x, y); drawItem(RedstonicItems.DiamondBlade, 140, 35, x, y); drawItem(RedstonicItems.ElectrumBlade, 140, 55, x, y);
+            drawItem(RedstonicItems.EnderiumBlade, 140, 75, x, y); drawItem(RedstonicItems.EnergizedBlade, 140, 95, x, y); drawItem(RedstonicItems.VibrantBlade, 140, 115, x, y);
+        }else if(page=="Handles"){
+            drawStatsText("Wood Handle", "0 Augment Slots", 0x404040, 0x009933, 160, 15); drawStatsText("Iron Handle", "1 Augment Slot", 0x404040, 0x009933, 160, 35);
+            drawStatsText("Electrum Handle", "2 Augment Slots", 0x404040, 0x009933, 160, 55); drawStatsText("Enderium Handle", "3 Augment Slots", 0x404040, 0x009933, 160, 75);
+            drawStatsText("Energetic Handle", "2 Augment Slots", 0x404040, 0x009933, 160, 95); drawStatsText("Vibrant Handle", "3 Augment Slots", 0x404040, 0x009933, 160, 115);
+            drawItem(RedstonicItems.WoodHandle, 140, 15, x, y); drawItem(RedstonicItems.IronHandle, 140, 35, x, y); drawItem(RedstonicItems.ElectrumHandle, 140, 55, x, y);
+            drawItem(RedstonicItems.EnderiumHandle, 140, 75, x, y); drawItem(RedstonicItems.EnergizedHandle, 140, 95, x, y); drawItem(RedstonicItems.VibrantHandle, 140, 115, x, y);
+        }else if(page=="Sword Augments") {
+            drawStatsText("Berserk II Augment", "+2 Heart Damage", 0x404040, 0x009933, 155, 20); drawStatsText("Berserk II Augment", "+3 Heart Damage", 0x404040, 0x009933, 155, 40);
+            drawStatsText("Blazer Augment", "Fire Aspect II", 0x404040, 0x009933, 155, 60); drawStatsText("Fortuitous Augment", "Looting", 0x404040, 0x009933, 155, 80);
+            drawStatsText("Magnetization Augment", "Attacts item entities.", 0x404040, 0x009933, 155, 100);
+            drawItem(RedstonicItems.SpeedAugment, 135, 20, x, y); drawItem(RedstonicItems.EnergyAugment, 135, 40, x, y);
+            drawItem(RedstonicItems.HotswapAugment, 135, 60, x, y); drawItem(RedstonicItems.BlockAugment, 135, 80, x, y); drawItem(RedstonicItems.MagnetAugment, 135, 100, x, y);
         }
         super.drawScreen(x, y, f);
     }
@@ -174,13 +192,15 @@ public class GuiManual extends GuiScreen {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
 
-        String[] indexTitles = {"Drills", "Machines", "Extras", "Contribute!"};
+        String[] indexTitles = {"Drills", "Swords", "Machines", "Extras", "Contribute!"};
         String[] drillsTitles = {"Getting Started", "Heads", "Bodies", "Energy", "Augments"};
+        String[] swordsTitles = {"Sword Blades", "Sword Handles", "Energy", "Augments"};
         String[] machinesTitles = {"Driller"};
         String[] extrasTitles = {"Report a Bug", "Website", "Patreon"};
 
         ButtonMenu[] index = new ButtonMenu[indexTitles.length];
         ButtonMenu[] drills = new ButtonMenu[drillsTitles.length];
+        ButtonMenu[] swords = new ButtonMenu[swordsTitles.length];
         ButtonMenu[] machines = new ButtonMenu[machinesTitles.length];
         ButtonMenu[] extras = new ButtonMenu[extrasTitles.length];
         ButtonDirectional right = new ButtonDirectional(-2, posX + 232, posY + 171, "right");
@@ -196,10 +216,15 @@ public class GuiManual extends GuiScreen {
             if(!ClientProxy.version.equals(Redstonic.VERSION)) {
                 buttonList.add(changelog);
             }
-        }else if(page=="drills" || page=="Getting Started"){
+        }else if(page=="drills" || page=="Getting Started") {
             for (int i = 0; i < drills.length; i++) {
-                drills[i] = new ButtonMenu(100+i, posX + 140, posY + 15 + i * 12, 10+(drillsTitles[i].length()*5), drillsTitles[i], color1, color2, true);
+                drills[i] = new ButtonMenu(100 + i, posX + 140, posY + 15 + i * 12, 10 + (drillsTitles[i].length() * 5), drillsTitles[i], color1, color2, true);
                 buttonList.add(drills[i]);
+            }
+        }else if(page=="swords"){
+            for (int i = 0; i < swords.length; i++) {
+                swords[i] = new ButtonMenu(300 + i, posX + 140, posY + 15 + i * 12, 10 + (swordsTitles[i].length() * 5), swordsTitles[i], color1, color2, true);
+                buttonList.add(swords[i]);
             }
         }else if(page=="extras") {
             for (int i = 0; i < extras.length; i++) {
@@ -233,9 +258,10 @@ public class GuiManual extends GuiScreen {
             case -1: subPage-=1; break;
             case 10000: try {Desktop.getDesktop().browse(URI.create("http://raizunne.github.io/Mods/Redstonic/Changelog.html#" + ClientProxy.version)); } catch(Exception e) {e.printStackTrace();} break;
             case 0: page="drills"; prevPage="index"; break;
-            case 1: page="machines"; prevPage="index"; break;
-            case 2: page="extras"; prevPage="index"; break;
-            case 3: page="Contribute!"; prevPage="index"; break;
+            case 1: page="swords"; prevPage="index"; break;
+            case 2: page="machines"; prevPage="index"; break;
+            case 3: page="extras"; prevPage="index"; break;
+            case 4: page="Contribute!"; prevPage="index"; break;
 
             case 100: page="Getting Started"; prevPage="drills"; break;
             case 101: page="Heads"; prevPage="drills"; break;
@@ -244,6 +270,11 @@ public class GuiManual extends GuiScreen {
             case 104: page="Augments"; prevPage="drills"; maxPages=3; break;
 
             case 200: page="Driller"; prevPage="machines"; break;
+
+            case 300: page="Blades"; prevPage="swords"; break;
+            case 301: page="Handles"; prevPage="swords"; break;
+            case 302: page="Energy"; prevPage="swords"; break;
+            case 303: page="Sword Augments"; prevPage="swords"; break;
 
             case 900: try {Desktop.getDesktop().browse(URI.create("https://github.com/Raizunne/Redstonic/issues")); } catch(Exception e) {e.printStackTrace();} break;
             case 901: try {Desktop.getDesktop().browse(URI.create("http://raizunne.github.io")); } catch(Exception e) {e.printStackTrace();} break;
@@ -266,7 +297,7 @@ public class GuiManual extends GuiScreen {
     protected void mouseClicked(int x, int y, int mouseId) {
         super.mouseClicked(x, y, mouseId);
         if(mouseId==1){
-            if(page=="drills" || page=="extras" || page=="machines" && page!="index"){
+            if(page=="drills" || page=="swords" || page=="extras" || page=="machines" && page!="index"){
                 page="index";
                 this.player.playSound(randomSound(), 1F, 1F);
                 maxPages=1;

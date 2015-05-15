@@ -53,14 +53,13 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean yowtf) {
         if (stack.stackTagCompound == null) {
-            list.add("Will not work.");
             list.add("Crafted in the" + EnumChatFormatting.YELLOW + " Drill Modifier");
             if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
                 list.add("Needed to craft: " + EnumChatFormatting.YELLOW + "Drill Head, ");
                 list.add(EnumChatFormatting.YELLOW + "Drill Body, Battery");
                 list.add(EnumChatFormatting.YELLOW + "(Flux Capacitor or Battery)");
             } else {
-                list.add(Lang.translate("drill.hold") + EnumChatFormatting.ITALIC + EnumChatFormatting.RED + " Shift " + EnumChatFormatting.RESET + EnumChatFormatting.GRAY + Lang.translate("drill.formoreinfo"));
+                list.add(Lang.translate("drill.hold") + " " + EnumChatFormatting.RED + Lang.translate("util.Shift") + EnumChatFormatting.RESET + " " + EnumChatFormatting.GRAY + Lang.translate("drill.formoreinfo"));
             }
         } else {
             NBTTagCompound tag = stack.stackTagCompound;
@@ -75,9 +74,9 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
                 multi=3;
             }
 
-            float multiplier = tag.getFloat("speedMulti");
-            if (multiplier == 0) {
-                multiplier = 1;
+            float multiplier = 1;
+            if (hasAugment(2, stack)) {
+                multiplier += 1.5;
             }
             if(tag.getInteger("maxEnergy")==-1 || tag.getInteger("maxEnergy")==-2){
                 creative = true;
@@ -150,14 +149,14 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
                 gratzMessage(player, nbt.getInteger("milestone"), stack);
                 nbt.setInteger("milestone", nbt.getInteger("milestone")+500);
             }
-            if (nbt.getInteger("head") == 4 && !stack.isItemEnchanted()) {
-                stack.addEnchantment(Enchantment.fortune, 4);
+
+//            stack.stackTagCompound.removeTag("ench");
+
+            if (nbt.getInteger("head") == 4 && !Util.hasEnchantment(stack, Enchantment.fortune)) {
+                stack.addEnchantment(Enchantment.fortune, 5);
             }
-            if (nbt.getInteger("head") == 5 && !stack.isItemEnchanted()) {
+            if (nbt.getInteger("head") == 5 && !Util.hasEnchantment(stack, Enchantment.silkTouch)) {
                 stack.addEnchantment(Enchantment.silkTouch, 1);
-            }
-            if (nbt.getInteger("head") != 4 && nbt.getInteger("head") != 5) {
-                stack.stackTagCompound.removeTag("ench");
             }
         }
     }
@@ -187,6 +186,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
                 nbt.setInteger("placeBlockMeta", world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ));
             }
             if(hasAugment(5, stack)){
+                System.out.println(getAugNumber(5, stack));
                 if(stack.stackTagCompound.getBoolean("aug" + getAugNumber(5, stack) + "Deactivated")){
                     stack.stackTagCompound.setBoolean("aug" + getAugNumber(5, stack) + "Deactivated", false);
                     player.playSound("note.harp", 1F, 1F);
@@ -377,7 +377,7 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
 
     public static int getAugNumber(int i, ItemStack drill){
         int[] augments = {drill.stackTagCompound.getInteger("aug1"), drill.stackTagCompound.getInteger("aug2"), drill.stackTagCompound.getInteger("aug3")};
-        for(int interino=0; interino<augments.length; i++){
+        for(int interino=0; interino<augments.length; interino++){
             if(augments[interino]==i){
                 return interino+1;
             }
@@ -420,8 +420,12 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
     public float getDigSpeed(ItemStack stack, Block block, int meta) {
         NBTTagCompound tag = stack.stackTagCompound;
         float multiplier = 1;
-        if(tag.getInteger("aug1")==1 || tag.getInteger("aug2")==1 || tag.getInteger("aug3")==1){
-            multiplier = multiplier + 0.5F;
+        if(hasAugment(1, stack)){
+            multiplier += 0.5F;
+        }
+
+        if(hasAugment(6, stack)){
+            multiplier += 0.8F;
         }
 
         if(!checkEnergy(stack, calcEnergy(stack))){
@@ -487,8 +491,8 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
         super.registerIcons(i);
         heads = new IIcon[8];
         body = new IIcon[6];
-        augments = new IIcon[6];
-        augmentsALT = new IIcon[6];
+        augments = new IIcon[7];
+        augmentsALT = new IIcon[7];
 
         heads[0] = i.registerIcon("redstonic:Drill/Heads/Render/Iron");
         heads[1] = i.registerIcon("redstonic:Drill/Heads/Render/Gold");
@@ -512,9 +516,15 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
         augments[3] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
         augments[4] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
         augments[5] = i.registerIcon("redstonic:Drill/Augment/Render/MagnetON");
+        augments[6] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
 
         augmentsALT[0] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
+        augmentsALT[1] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
+        augmentsALT[2] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
+        augmentsALT[3] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
+        augmentsALT[4] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
         augmentsALT[5] = i.registerIcon("redstonic:Drill/Augment/Render/MagnetOFF");
+        augmentsALT[6] = i.registerIcon("redstonic:Drill/Augment/Render/Null");
     }
 
     @Override
@@ -531,12 +541,15 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
             }
             if(pass==2){
                 return !nbt.getBoolean("aug1Deactivated")?augments[nbt.getInteger("aug1")] : augmentsALT[nbt.getInteger("aug1")];
+//                return augments[nbt.getInteger("aug1")];
             }
             if(pass==3){
-                return !nbt.getBoolean("aug2Deactivated")?augments[nbt.getInteger("aug3")] : augmentsALT[nbt.getInteger("aug3")];
+                return !nbt.getBoolean("aug2Deactivated")?augments[nbt.getInteger("aug2")] : augmentsALT[nbt.getInteger("aug2")];
+//                return augments[nbt.getInteger("aug2")];
             }
             if(pass==4){
                 return !nbt.getBoolean("aug3Deactivated")?augments[nbt.getInteger("aug3")] : augmentsALT[nbt.getInteger("aug3")];
+//                return augments[nbt.getInteger("aug3")];
             }
         }else if(nbt==null){
             if(pass==0){
@@ -594,22 +607,22 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
     public int calcEnergy(ItemStack stack){
         NBTTagCompound tag = stack.stackTagCompound;
         float multiplier = 1;
-        if(tag.getInteger("aug1")==1 || tag.getInteger("aug2")==1 || tag.getInteger("aug3")==1){
+        if(hasAugment(1, stack)){
             multiplier = multiplier + 0.2F;
         }
-        if(tag.getInteger("aug1")==2 || tag.getInteger("aug2")==2 || tag.getInteger("aug3")==2){
+        if(hasAugment(2, stack)){
             multiplier = multiplier + 0.2F;
         }
         int head = tag.getInteger("head");
         switch(head){
-            case 0:	return (int)(200 * multiplier);
-            case 1: return (int)(400 * multiplier);
-            case 2: return (int)(300 * multiplier);
-            case 3: return (int)(1500 * multiplier);
-            case 4: return (int)(800 * multiplier);
-            case 5: return (int)(500 * multiplier);
-            case 6: return (int)(800 * multiplier);
-            case 7: return (int)(2000 * multiplier);
+            case 0:	return (int)(400 * multiplier);
+            case 1: return (int)(600 * multiplier);
+            case 2: return (int)(500 * multiplier);
+            case 3: return (int)(1800 * multiplier);
+            case 4: return (int)(1000 * multiplier);
+            case 5: return (int)(700 * multiplier);
+            case 6: return (int)(100 * multiplier);
+            case 7: return (int)(3500 * multiplier);
             default: return 0;
         }
     }
@@ -659,11 +672,6 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
     }
 
     @Override
-    public boolean hasEffect(ItemStack par1ItemStack, int pass) {
-        return false;
-    }
-
-    @Override
     public int getEnergyStored(ItemStack container) {
         return container.stackTagCompound.getInteger("energy");
     }
@@ -671,5 +679,10 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         return container.stackTagCompound.getInteger("maxEnergy");
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package com.raizunne.redstonic.Gui.Slot;
 
 import com.raizunne.redstonic.Item.Drill.DrillAugment;
+import com.raizunne.redstonic.Item.Sword.SwordAugment;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,6 @@ public class SlotAugment extends Slot{
 
     @Override
     public boolean isItemValid(ItemStack itemstack) {
-        return itemstack.getItem() instanceof DrillAugment;
+        return itemstack.getItem() instanceof DrillAugment || itemstack.getItem() instanceof SwordAugment;
     }
 }

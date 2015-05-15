@@ -22,6 +22,8 @@ public class EIOHelper {
     public static ItemStack doubleCapacitor = null;
     public static ItemStack octadicCapacitor = null;
     public static ItemStack basicGear = null;
+    public static ItemStack blockEnergetic = null;
+    public static ItemStack blockVibrantium = null;
 
     public static void init(){
         ingotVibrant = OreDictionary.getOres("ingotPhasedGold").get(0);
@@ -33,6 +35,9 @@ public class EIOHelper {
         doubleCapacitor = new ItemStack(GameRegistry.findItem("EnderIO", "itemBasicCapacitor"), 1, 1);
         octadicCapacitor = new ItemStack(GameRegistry.findItem("EnderIO", "itemBasicCapacitor"), 1, 2);
         basicGear = new ItemStack(GameRegistry.findItem("EnderIO", "itemMachinePart"), 1, 1);
+        blockEnergetic = OreDictionary.getOres("blockEnergeticAlloy").get(0);
+        blockVibrantium = OreDictionary.getOres("blockPhasedGold").get(0);
+
     }
 
     public static void addAlloySmelterRecipe(String name, int energy, ItemStack slot1, ItemStack slot2, ItemStack slot3, ItemStack output) {

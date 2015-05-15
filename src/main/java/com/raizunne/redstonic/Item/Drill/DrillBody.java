@@ -45,20 +45,16 @@ public class DrillBody extends Item{
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer p_77624_2_, List list, boolean p_77624_4_) {
-        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-            String[] info = Util.getBodyInfo(material);
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    list.add(info[i]);
-                }
+        String[] info = Util.getBodyInfo(material);
+        if (info != null) {
+            for (int i = 0; i < info.length; i++) {
+                list.add(info[i]);
             }
-        }else{
-            list.add(Util.ItemShiftInfo);
-            if((material==2 || material==3) && !Loader.isModLoaded("ThermalExpansion")){
-                list.add(Util.missingTE);
-            }else if((material==5 || material==6) && !Loader.isModLoaded("EnderIO")){
-                list.add(Util.missingEIO);
-            }
+        }
+        if((material==2 || material==3) && !Loader.isModLoaded("ThermalExpansion")){
+            list.add(Util.missingTE);
+        }else if((material==5 || material==6) && !Loader.isModLoaded("EnderIO")){
+            list.add(Util.missingEIO);
         }
     }
 

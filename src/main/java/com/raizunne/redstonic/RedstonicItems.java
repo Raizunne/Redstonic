@@ -4,6 +4,9 @@ import com.raizunne.redstonic.Item.*;
 import com.raizunne.redstonic.Item.Drill.DrillAugment;
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
+import com.raizunne.redstonic.Item.Sword.SwordAugment;
+import com.raizunne.redstonic.Item.Sword.SwordBlade;
+import com.raizunne.redstonic.Item.Sword.SwordHandle;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
@@ -31,13 +34,34 @@ public class RedstonicItems {
     public static Item EnergeticBody = new DrillBody(5);
     public static Item VibrantBody = new DrillBody(6);
 
+    public static Item IronBlade = new SwordBlade(0);
+    public static Item DiamondBlade = new SwordBlade(1);
+    public static Item ElectrumBlade = new SwordBlade(2);
+    public static Item EnderiumBlade = new SwordBlade(3);
+    public static Item EnergizedBlade = new SwordBlade(4);
+    public static Item VibrantBlade = new SwordBlade(5);
+
+    public static Item WoodHandle = new SwordHandle(0);
+    public static Item IronHandle = new SwordHandle(1);
+    public static Item ElectrumHandle = new SwordHandle(2);
+    public static Item EnderiumHandle = new SwordHandle(3);
+    public static Item EnergizedHandle = new SwordHandle(4);
+    public static Item VibrantHandle = new SwordHandle(5);
+
     public static Item SpeedAugment = new DrillAugment(0);
     public static Item EnergyAugment = new DrillAugment(1);
     public static Item HotswapAugment = new DrillAugment(2);
     public static Item BlockAugment = new DrillAugment(3);
     public static Item MagnetAugment = new DrillAugment(4);
+    public static Item SpeedIIAugment = new DrillAugment(5);
+
+    public static Item BlazerSwordAugment = new SwordAugment(1);
+    public static Item FortuitousSwordAugment = new SwordAugment(2);
+    public static Item BerserkSwordAugment = new SwordAugment(3);
+    public static Item BerserkIISwordAugment = new SwordAugment(4);
 
     public static Item RedDrill = new RedstonicDrill();
+    public static Item RedSword = new RedstonicSword();
     public static Item ManualBook = new Manual();
     public static Item RedContainer = new RedstonicContainer();
 
@@ -49,6 +73,7 @@ public class RedstonicItems {
     public static Item gearVibrant = new ItemMaterial(5);
     public static Item ingotGlowSteel = new ItemMaterial(6);
     public static Item capacitor = new ItemMaterial(7);
+    public static Item redstoneStick = new ItemMaterial(8);
 
     public static Item basicBattery = new ItemBattery(0);
     public static Item energizedBattery = new ItemBattery(1);
@@ -56,6 +81,13 @@ public class RedstonicItems {
     public static Item infiniteBattery = new ItemBattery(3);
 
     public static void init() {
+        //ITEMS
+        GameRegistry.registerItem(RedDrill, RedDrill.getUnlocalizedName());
+        GameRegistry.registerItem(RedSword, RedSword.getUnlocalizedName());
+        GameRegistry.registerItem(ManualBook, ManualBook.getUnlocalizedName());
+//        GameRegistry.registerItem(RedContainer, RedContainer.getUnlocalizedName());
+
+        //DRILL HEADS
         GameRegistry.registerItem(IronHead, IronHead.getUnlocalizedName());
         GameRegistry.registerItem(GoldHead, GoldHead.getUnlocalizedName());
         GameRegistry.registerItem(DiamondHead, DiamondHead.getUnlocalizedName());
@@ -65,6 +97,7 @@ public class RedstonicItems {
         GameRegistry.registerItem(BlazerHead, BlazerHead.getUnlocalizedName());
         GameRegistry.registerItem(EndHead, EndHead.getUnlocalizedName());
 
+        //DRILL BODIES
         GameRegistry.registerItem(IronBody, IronBody.getUnlocalizedName());
         GameRegistry.registerItem(EnderiumBody, EnderiumBody.getUnlocalizedName());
         GameRegistry.registerItem(ElectrumBody, ElectrumBody.getUnlocalizedName());
@@ -72,11 +105,44 @@ public class RedstonicItems {
         GameRegistry.registerItem(EnergeticBody, EnergeticBody.getUnlocalizedName());
         GameRegistry.registerItem(VibrantBody, VibrantBody.getUnlocalizedName());
 
+        //SWORD BLADES
+        GameRegistry.registerItem(IronBlade, IronBlade.getUnlocalizedName());
+        GameRegistry.registerItem(DiamondBlade, DiamondBlade.getUnlocalizedName());
+        GameRegistry.registerItem(ElectrumBlade, ElectrumBlade.getUnlocalizedName());
+        GameRegistry.registerItem(EnderiumBlade, EnderiumBlade.getUnlocalizedName());
+        GameRegistry.registerItem(EnergizedBlade, EnergizedBlade.getUnlocalizedName());
+        GameRegistry.registerItem(VibrantBlade, VibrantBlade.getUnlocalizedName());
+
+        //SWORD HANDLES
+        GameRegistry.registerItem(IronHandle, IronHandle.getUnlocalizedName());
+        GameRegistry.registerItem(WoodHandle, WoodHandle.getUnlocalizedName());
+        GameRegistry.registerItem(ElectrumHandle, ElectrumHandle.getUnlocalizedName());
+        GameRegistry.registerItem(EnderiumHandle, EnderiumHandle.getUnlocalizedName());
+        GameRegistry.registerItem(EnergizedHandle, EnergizedHandle.getUnlocalizedName());
+        GameRegistry.registerItem(VibrantHandle, VibrantHandle.getUnlocalizedName());
+
+        //SWORD AUGMENTS
+        GameRegistry.registerItem(BlazerSwordAugment, BlazerSwordAugment.getUnlocalizedName());
+        GameRegistry.registerItem(FortuitousSwordAugment, FortuitousSwordAugment.getUnlocalizedName());
+        GameRegistry.registerItem(BerserkSwordAugment, BerserkSwordAugment.getUnlocalizedName());
+        GameRegistry.registerItem(BerserkIISwordAugment, BerserkIISwordAugment.getUnlocalizedName());
+
+        //ORE DICTIONARY
         OreDictionary.registerOre("redstonicMidTierBody", ElectrumBody);
         OreDictionary.registerOre("redstonicMidTierBody", EnergeticBody);
-
         OreDictionary.registerOre("redstonicHighTierBody", EnderiumBody);
         OreDictionary.registerOre("redstonicHighTierBody", VibrantBody);
+
+        OreDictionary.registerOre("redstonicMidTierBlade", ElectrumBlade);
+        OreDictionary.registerOre("redstonicMidTierBlade", EnergizedBlade);
+        OreDictionary.registerOre("redstonicHighTierBlade", EnderiumBlade);
+        OreDictionary.registerOre("redstonicHighTierBlade", VibrantBlade);
+
+        OreDictionary.registerOre("redstonicMidTierHandle", ElectrumHandle);
+        OreDictionary.registerOre("redstonicMidTierHandle", EnergizedHandle);
+        OreDictionary.registerOre("redstonicHighTierHandle", EnderiumHandle);
+        OreDictionary.registerOre("redstonicHighTierHandle", VibrantHandle);
+
 
         if(Loader.isModLoaded("ThermalFoundation")) {
         }
@@ -94,20 +160,21 @@ public class RedstonicItems {
             OreDictionary.registerOre("ingotLumium", ingotGlowSteel);
         }
 
+        //DRILL AUGMENTS
         GameRegistry.registerItem(SpeedAugment, SpeedAugment.getUnlocalizedName());
         GameRegistry.registerItem(EnergyAugment, EnergyAugment.getUnlocalizedName());
         GameRegistry.registerItem(HotswapAugment, HotswapAugment.getUnlocalizedName());
         GameRegistry.registerItem(BlockAugment, BlockAugment.getUnlocalizedName());
         GameRegistry.registerItem(MagnetAugment, MagnetAugment.getUnlocalizedName());
+        GameRegistry.registerItem(SpeedIIAugment, SpeedIIAugment.getUnlocalizedName());
 
-        GameRegistry.registerItem(RedDrill, RedDrill.getUnlocalizedName());
-        GameRegistry.registerItem(ManualBook, ManualBook.getUnlocalizedName());
-//        GameRegistry.registerItem(RedContainer, RedContainer.getUnlocalizedName());
-
+        //MATERIAL
         GameRegistry.registerItem(Energizer, Energizer.getUnlocalizedName());
         GameRegistry.registerItem(EnergizerFull, EnergizerFull.getUnlocalizedName());
         GameRegistry.registerItem(capacitor, capacitor.getUnlocalizedName());
+        GameRegistry.registerItem(redstoneStick, redstoneStick.getUnlocalizedName());
 
+        //BATTERY
         GameRegistry.registerItem(basicBattery, basicBattery.getUnlocalizedName());
         GameRegistry.registerItem(energizedBattery, energizedBattery.getUnlocalizedName());
         GameRegistry.registerItem(greatBattery, greatBattery.getUnlocalizedName());

@@ -60,7 +60,10 @@ public class DrillUtil {
         if(temp.stackTagCompound==null){
             temp.stackTagCompound = new NBTTagCompound();
         }
-        temp.stackTagCompound.setInteger("Energy", drill.stackTagCompound.getInteger("energy"));
+
+        int energyerino = drill.stackTagCompound.hasKey("Energy") ? drill.stackTagCompound.getInteger("Energy") : drill.stackTagCompound.getInteger("energy");
+
+        temp.stackTagCompound.setInteger("Energy", energyerino);
         if(temp.getItem() instanceof ItemBattery){
             temp.stackTagCompound.setInteger("maxEnergy", getMaxBatteryEnergy(battery));
         }
@@ -78,6 +81,7 @@ public class DrillUtil {
                 return aug;
             case 4: return new ItemStack(RedstonicItems.BlockAugment);
             case 5: return new ItemStack(RedstonicItems.MagnetAugment);
+            case 6: return new ItemStack(RedstonicItems.SpeedIIAugment);
             default: return null;
         }
     }
@@ -115,6 +119,8 @@ public class DrillUtil {
 
     public static String getBatteryName(int i){
         switch(i){
+            case -2: return "Infinite Battery";
+            case -1: return "Creative Capacitor";
             case 0: return "Hardened Capacitor";
             case 1: return "Redstone Capacitor";
             case 2: return "Resonant Capacitor";
@@ -134,6 +140,7 @@ public class DrillUtil {
             case 3: name = "Hotswap"; break;
             case 4: name = "Block Placer"; break;
             case 5: name = "Magnerization Augment"; break;
+            case 6: name = "x2.0 Dig Speed Multiplier"; break;
             default: name = "Unknown"; break;
         }
         return name;
@@ -224,7 +231,7 @@ public class DrillUtil {
 
     public static int getAugNumber(ItemStack item){
         ItemStack[] augments = new ItemStack[]{Util.toStack(RedstonicItems.SpeedAugment), Util.toStack(RedstonicItems.EnergyAugment), Util.toStack(RedstonicItems.HotswapAugment),
-                Util.toStack(RedstonicItems.BlockAugment), Util.toStack(RedstonicItems.MagnetAugment)};
+                Util.toStack(RedstonicItems.BlockAugment), Util.toStack(RedstonicItems.MagnetAugment), Util.toStack(RedstonicItems.SpeedIIAugment)};
         for(int i=0; i<augments.length; i++){
             if(augments[i].isItemEqual(item)){
                 return i+1;

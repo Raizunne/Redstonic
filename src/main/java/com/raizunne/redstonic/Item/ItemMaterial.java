@@ -28,7 +28,7 @@ public class ItemMaterial extends Item {
 
     @Override
     public void registerIcons(IIconRegister i) {
-        icon = new IIcon[8];
+        icon = new IIcon[9];
         icon[0] = i.registerIcon("redstonic:Material/EnergizerCapsuleEMPTY");
         icon[1] = i.registerIcon("redstonic:Material/EnergizerCapsuleFULL");
         icon[2] = i.registerIcon("redstonic:Material/ingotVibrantium");
@@ -37,6 +37,7 @@ public class ItemMaterial extends Item {
         icon[5] = i.registerIcon("redstonic:Material/gearVibrant");
         icon[6] = i.registerIcon("redstonic:Material/ingotGlowSteel");
         icon[7] = i.registerIcon("redstonic:Material/capacitor");
+        icon[8] = i.registerIcon("redstonic:Material/Redstone Stick");
     }
 
     @Override
@@ -80,6 +81,7 @@ public class ItemMaterial extends Item {
             case 5: return "gearVibrant";
             case 6: return "ingotGlowSteel";
             case 7: return "capacitor";
+            case 8: return "redstoneStick";
             default: return "RedstonicUnknownItem";
         }
     }

@@ -53,7 +53,7 @@ public class GuiDrillModifier extends GuiContainer{
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         int posX = (width - 176) / 2;
         int posY = (height - 166) / 2;
-        fontRendererObj.drawString("Drill Modifier", 60, 6, 0x404040);
+        fontRendererObj.drawString("Redstonic Modifier", 45, 6, 0x404040);
         fontRendererObj.drawString("Mode:", 90, 62, 0x00000);
         fontRendererObj.drawString(this.buttonText, 90, 72, 0x00000);
         fontRendererObj.drawString("Augments:", 90, 40, 0x00000);

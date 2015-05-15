@@ -35,6 +35,8 @@ public class TEHelper {
     public static ItemStack ingotElectrum = OreDictionary.getOres("ingotElectrum").get(0);
     public static ItemStack ingotEnderium = OreDictionary.getOres("ingotEnderium").get(0);
     public static ItemStack ingotLumium = OreDictionary.getOres("ingotLumium").get(0);
+    public static ItemStack blockEnderium = OreDictionary.getOres("blockEnderium").get(0);
+    public static ItemStack blockElectrum = OreDictionary.getOres("blockElectrum").get(0);
 
 	/* Furnace */
     public static void addFurnaceRecipe(int energy, ItemStack input, ItemStack output) {
