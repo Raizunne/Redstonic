@@ -1,29 +1,54 @@
 itemGroup.Redstonic=Redstonic
 
-item.IronDrillHead.name=Головка железной дрели
-item.GoldDrillHead.name=Головка золотой дрели
-item.DiamondDrillHead.name=Головка алмазной дрели
-item.HeavyDrillHead.name=Головка тяжелой дрели
-item.FortuitousDrillHead.name=Головка удачливой дрели
-item.SilkyDrillHead.name=Головка шелковистой дрели
-item.BlazerDrillHead.name=Головка блейзерской дрели
-item.EndDrillHead.name=Головка конечной дрели
+item.IronDrillHead.name=Железная головка дрели
+item.GoldDrillHead.name=Золотая головка дрели
+item.DiamondDrillHead.name=Алмазная головка дрели
+item.HeavyDrillHead.name=Тяжелая головка дрели
+item.FortuitousDrillHead.name=Удачливая головка дрели
+item.SilkyDrillHead.name=Шелковистая головка дрели
+item.BlazerDrillHead.name=Ифритовая головка дрели
+item.EndDrillHead.name=Эндер-головка дрели
 
-item.IronDrillBody.name=Основа Железной дрели
-item.ElectrumDrillBody.name=Основа электрической дрели
-item.EnderiumDrillBody.name=Основа эндермической дрели
-item.UltimateDrillBody.name=Основа максимальной дрели
-item.EnergeticDrillBody.name=Основа энергетической дрели
-item.VibrantDrillBody.name=Основа резонирующей дрели
+item.IronBlade.name=Железный редстоун-клинок
+item.DiamondBlade.name=Алмазный редстоун-клинок
+item.ElectrumBlade.name=Электрический редстоун-клинок
+item.EnderiumBlade.name=Эндермический редстоун-клинок
+item.EnergizedBlade.name=Энерджайзерный редстоун-клинок
+item.VibrantBlade.name=Резонирующий редстоун-клинок
+item.EndBlade.name=Эндер редстоун-клинок
 
-item.EnergyAugment.name=Усиление дрели: Энергия
-item.SpeedAugment.name=Усиление дрели: Скорость
-item.HotswapAugment.name=Усиление дрели: Горячая замена
-item.TorchAugment.name=Усиление дрели: Размещение факелов
-item.BlockAugment.name=Усиление дрели: Размещение блоков
+item.IronHandle.name=Алмазная редстоун-рукоять
+item.WoodHandle.name=Деревянная редстоун-рукоять
+item.ElectrumHandle.name=Электрическая редстоун-рукоять
+item.EnderiumHandle.name=Эндермическая редстоун-рукоять
+item.EnergizedHandle.name=Энерджайзерная редстоун-рукоять
+item.VibrantHandle.name=Резонирующая редстоун-рукоять
+item.EndHandle.nam=Эндер редстоун-рукоять
 
-item.RedstonicDrill.name=§cRedstonic дрели
-item.Manual.name=§cRedstonic Руководство
+item.IronDrillBody.name=Железная основа дрели
+item.ElectrumDrillBody.name=Электрическая основа дрели
+item.EnderiumDrillBody.name=Эндермическая основа дрели
+item.UltimateDrillBody.name=Конечная основа дрели
+item.EnergeticDrillBody.name=Энергетическая основа дрели
+item.VibrantDrillBody.name=Резонирующая основа дрели
+
+item.EnergyAugment.name=Улучшение для дрели: Энергия
+item.SpeedAugment.name=Улучшение для дрели: Скорость
+item.HotswapAugment.name=Улучшение для дрели: Горячая замена
+item.TorchAugment.name=Улучшение для дрели: Размещение факелов
+item.BlockAugment.name=Улучшение для дрели: Размещение блоков
+item.MagnetAugment.name=Улучшение для дрели: Магнит
+item.SpeedIIAugment.name=Улучшение для дрели: Скорость II
+
+item.BlazerSwordAugment.name=Улучшение для меча: Ифритность
+item.FortuitousSwordAugment.name=Улучшение для меча: Удачность
+item.BerserkSwordAugment.name=Улучшение для меча: Берсерк
+item.BerserkIISwordAugment.name=Улучшение для меча: Берсерк II
+
+item.RedstonicDrill.name=§cРедстоун-дрель
+item.Manual.name=§cРедстоун-руководство
+item.RedstonicContainer.name=§cРедстоун-контейнер
+item.RedstonicSword.name=§6Редстоун-меч
 
 item.EnergizerCapsule.name=Энерджайзерная капсула (Пустая)
 item.EnergizerCapsuleFULL.name=§cЭнерджайзерная капсула
@@ -33,41 +58,58 @@ item.gearEnergized.name=Шестерня из энергетического с�
 item.gearVibrant.name=Шестерня из резонирующего сплава
 item.ingotGlowSteel.name=Светящаяся заряженная сталь
 item.capacitor.name=Конденсатор
+item.redstoneStick.name=Заряженная редстоун-палка
 
 item.basicBattery.name=Основная потоковая батарейка
 item.energizedBattery.name=Заряженная потоковая батарейка
 item.greatBattery.name=Великая потоковая батарейка
 item.infiniteBattery.name=Бесконечная потоковая батарейка
 
-tile.DrillModifier.name=Модификатор дрели
+tile.DrillModifier.name=Редстоун-модификатор
 tile.driller.name=Бурильщик
 tile.blockVibrantium.name=Резонирующий блок
 tile.blockGlowSteel.name=Светящийся заряженный стальной блок
 
 drill.head=Головка
 drill.body=Основа
-drill.battery=Батарея
+drill.battery=Батарейка
 drill.digspeed=Скорость копания
 drill.energyusage=Использование энергия
-drill.hold=Удерживайте§e
+drill.hold=Удерживайте
 drill.formoreinfo=для деталей.
 drill.formoreauginfo=для деталей усилений.
+drill.formorekillinfo=для деталей StatTrack™.
 
-drill.iron=Железной
-drill.gold=Золотой
-drill.diamond=Алмазной
-drill.heavy=Тяжелой
-drill.fortuitous=Удачливой
-drill.silky=Шелковистой
-drill.blazer=Блейзерской
-drill.electrum=Электрической
-drill.enderium=Эндермической
+sword.Blade=Клинок
+sword.Handle=Рукоять
+sword.Damage=Урон
+
+drill.iron=Железная
+drill.gold=Золотая
+drill.diamond=Алмазная
+drill.heavy=Тяжелая
+drill.fortuitous=Удачливая
+drill.silky=Шелковистая
+drill.blazer=Ифритовая
+drill.electrum=Электрическая
+drill.enderium=Эндермическая
 drill.unknown=Неизвестная
-drill.augment=Усиление
+drill.augment=Улучшение
+
+util.Shift=§nShift
+util.Control=§nCtrl
+util.Alt=§nAlt
+util.StatTrack=StatTrack™
 
 entries.GettingStarted=Welcome to the world of Redstonic Drills! In this page I will show you how Redstonic Drills are made!                                  Redstonic Drills are made up from three basic components: Drill Head, Drill Body, and Energy Capacitor. Each of them have an entry in this manual. For more information in each one of them you can go to the previous menu.
 entries.Heads=The Drill Heads are what mines the block. It is what goes on top of the drill and determines the speed at which the drill mines or how fast the block breaks.                                  On the next page you can see the different drill head speeds.                                                    The End Drill Head is the End Game Drill Head, it can mine blocks instantly. To use this, you will need a Ultimate Drill Body. No other Drill Body will work.
 entries.Bodies=The Drill Bodies are the base of the drill. The drill body decides how many augments you can put in a drill, with a max of 3.                                       Other than that, all drill bodies are the same.                                       The Ultimate Body is the End Game Drill Body, although it has no augments, it can triple the amount of energy that the drill is capable of storing. This is the only body that can equip a End Drill Head.
-entries.Energy=The Drill Energy is taken from Capacitors from Thermal Expansion. The max energy of the capacitor is reduced due to the size of it not being able to be used in the drill.
+entries.Energy=The Drill Energy is taken from Flux Batteries or Capacitors from Thermal Expansion . The max energy of the capacitor is reduced due to the size of it not being able to be used in the drill.
 entries.Augments=The Drill Augments are what modifies the drill apart from the base needs to create it. Each one of them has a different use.
 entries.HotswapAugment=This Drill Augment is a special augment that allows to change your drill head RIGHT ON THE SPOT! To change it, sneak and then right click the Redstonic Drill. It will cost a total of 1500 RF per change.                         Check the next page for more info on crafting. To get your drill head back, simply hold right click with the augment on your hand and the drill head should come right off!
+entries.MagnetizationAugment=Mining block by lava? Fear no more! Magnetization Augment brings all of your dropped items right to your being! With a radius of 5 blocks, it will attract all Item entities to you! Sneak right click to disable. Will show when disabled with a different Icon. See below for more information on that.
+entries.Blades=The Redstonic Sword Blades are what hit the enemy, so this is really important! The Sword Blade is what decides what damage the sword has. You can see the damage chart in the next page.
+entries.Handles=Handles are an essential part of the Sword. You will have your hand here so make sure its comfortable! The Redstonic Sword Handle determines how many augments you can have in your sword. These are important, since they help a lot to increase your swords damage!
+entries.SwordAugments=Sword Augments are essential for damage grown with your sword. Most of the augments are designed to bring more killing into your life!
+
+entries.Driller=The driller is basically a drill, but on block form! When you place the Driller, it will not have a drill head. You will need to right click it with a drill head from a Redstonic Drill to mine with it. The driller will take any properties from the drill head. This means you can use the Heavy Drill Head to mine a 3x3 with the Driller or use the Blazer Drill Head to furance mine!
