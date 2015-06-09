@@ -3,6 +3,7 @@ package com.raizunne.redstonic.Util;
 import com.raizunne.redstonic.RedstonicItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Created by Raizunne as a part of Redstonic
@@ -67,6 +68,23 @@ public class SwordUtil {
         return 1;
     }
 
+    public static int getAbsoluteDamage(ItemStack i){
+        int blade = i.stackTagCompound.getInteger("blade");
+        int damage = 0;
+        int multi = 0;
+        switch(blade){
+            case 0: damage=8; break;
+            case 1: damage=12; break;
+            case 2: damage=18; break;
+            case 3: damage=22; break;
+            case 4: damage=18; break;
+            case 5: damage=22; break;
+        }
+        if(Util.hasAugment(3, i))multi+=4;
+        if(Util.hasAugment(4, i))multi+=6;
+        return damage+multi;
+    }
+
     public static ItemStack getBlade(int i){
         switch (i) {
             case 0: return new ItemStack(RedstonicItems.IronBlade);
@@ -92,6 +110,7 @@ public class SwordUtil {
     }
 
     public static int getAugNumber(ItemStack stack){
+        if(stack==null)return 0;
         Item[] augs = new Item[]{RedstonicItems.BlazerSwordAugment, RedstonicItems.FortuitousSwordAugment, RedstonicItems.BerserkSwordAugment, RedstonicItems.BerserkIISwordAugment};
         for(int i=0; i<augs.length; i++){
             if(new ItemStack(augs[i]).isItemEqual(stack)){
@@ -134,6 +153,18 @@ public class SwordUtil {
             case 5: return 3;
             default: return 0;
         }
+    }
+
+    public static ItemStack getPlaceholderSword(int blade, int handle, int aug1, int aug2, int aug3){
+        ItemStack placeSword = new ItemStack(RedstonicItems.RedSword);
+        placeSword.stackTagCompound = new NBTTagCompound();
+        NBTTagCompound tag = placeSword.stackTagCompound;
+        tag.setInteger("blade", blade);
+        tag.setInteger("handle", handle);
+        tag.setInteger("aug1", aug1);
+        tag.setInteger("aug2", aug2);
+        tag.setInteger("aug3", aug3);
+        return placeSword;
     }
 
 }

@@ -14,7 +14,9 @@ import com.raizunne.redstonic.Network.PacketDriller;
 import com.raizunne.redstonic.Proxy.CommonProxy;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDriller;
+import com.raizunne.redstonic.TileEntity.TEHyperSmelter;
 import com.raizunne.redstonic.Util.EIOHelper;
+import com.raizunne.redstonic.Util.XML;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -38,7 +40,7 @@ import net.minecraftforge.common.config.Configuration;
 public class Redstonic {
 
     public static final String MODID = "Redstonic";
-    public static final String VERSION = "1.4";
+    public static final String VERSION = "1.4.5";
 
     @Mod.Instance
     public static Redstonic instance;
@@ -54,6 +56,7 @@ public class Redstonic {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e){
+
         network = NetworkRegistry.INSTANCE.newSimpleChannel("redstonic");
         Redstonic.network.registerMessage(PacketDrill.Handler.class, PacketDrill.class, 0, Side.SERVER);
         Redstonic.network.registerMessage(PacketDriller.Handler.class, PacketDriller.class, 1, Side.SERVER);
@@ -73,6 +76,7 @@ public class Redstonic {
 
         GameRegistry.registerTileEntity(TEDrillModifier.class, "TEDrillModifier");
         GameRegistry.registerTileEntity(TEDriller.class, "TEDriller");
+        GameRegistry.registerTileEntity(TEHyperSmelter.class, "TEHyperSmelter");
 
         configFile = new Configuration(e.getSuggestedConfigurationFile());
         configFile.load();

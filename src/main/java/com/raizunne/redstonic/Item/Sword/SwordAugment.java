@@ -22,6 +22,7 @@ public class SwordAugment extends Item {
         this.type = type;
         setMaxStackSize(1);
         setUnlocalizedName(getUnlocalizedName());
+        setTextureName("redstonic:AugmentTemplate");
     }
 
     @Override

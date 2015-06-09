@@ -2,12 +2,15 @@ package com.raizunne.redstonic.Handler;
 
 import com.raizunne.redstonic.Gui.Container.ContainerDrillModifier;
 import com.raizunne.redstonic.Gui.Container.ContainerDriller;
+import com.raizunne.redstonic.Gui.Container.ContainerHyperSmelter;
 import com.raizunne.redstonic.Gui.GuiDrillModifier;
 import com.raizunne.redstonic.Gui.GuiDriller;
+import com.raizunne.redstonic.Gui.GuiHyperSmelter;
 import com.raizunne.redstonic.Gui.GuiManual;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDriller;
+import com.raizunne.redstonic.TileEntity.TEHyperSmelter;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,6 +40,9 @@ public class GUIHandler implements IGuiHandler{
                 return new ContainerDriller(player.inventory, (TEDriller)te);
             }
             break;
+            case 4: if(te!=null && te instanceof TEHyperSmelter){
+                return new ContainerHyperSmelter(player.inventory, (TEHyperSmelter)te);
+            }
             default: return null;
 
         }
@@ -57,6 +63,9 @@ public class GUIHandler implements IGuiHandler{
                 return new GuiDriller(player.inventory, (TEDriller)te);
             }
             break;
+            case 4: if(te!=null && te instanceof TEHyperSmelter){
+                return new GuiHyperSmelter(player.inventory, (TEHyperSmelter)te);
+            }
             default: return null;
         }
         return null;

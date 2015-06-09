@@ -12,9 +12,15 @@ import net.minecraftforge.common.config.Configuration;
 public class ConfigHandler {
 
     public static int containerMax = 256;
+    public static boolean redstonicSword = true;
+    public static boolean redstonicDrill = true;
+    public static boolean redstonicContainer = true;
 
     public static void RedstonicConfig(Configuration config){
-        containerMax = config.getInt("Redstonic Container Max Capacity", "Redstonic Container", containerMax, 0, 2560, "Max number of items in the Redstonic Container");
+        redstonicDrill = config.get("redstonic", "Enable Redstonic Drill", redstonicDrill).getBoolean(redstonicDrill);
+        redstonicSword = config.get("redstonic", "Enable Redstonic Sword", redstonicSword).getBoolean(redstonicSword);
+        redstonicContainer = config.get("redstonic", "Enable Redstonic Container", redstonicContainer).getBoolean(redstonicContainer);
+        containerMax = config.getInt("Max Capacity", "container", containerMax, 0, 2560, "Max number of items in the Redstonic Container");
         if(config.hasChanged()){
             config.save();
         }

@@ -1,8 +1,6 @@
 package com.raizunne.redstonic.Item;
 
 import cofh.api.energy.IEnergyContainerItem;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.Util.DrillUtil;
 import com.raizunne.redstonic.Util.Lang;
@@ -13,15 +11,11 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
@@ -29,8 +23,6 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.event.KeyEvent;
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,19 +40,21 @@ public class RedstonicSword extends Item implements IEnergyContainerItem {
         setCreativeTab(Redstonic.redTab);
         setMaxStackSize(1);
         setMaxDamage(80);
+        setTextureName("redstonic:Sword/Placeholder");
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         if(stack.stackTagCompound!=null){
             NBTTagCompound nbt = stack.stackTagCompound;
-            int damage = nbt.getInteger("damage")/2;
-            damage += hasAugment(stack, 3) ? 2 : 0;
-            damage += hasAugment(stack ,4) ? 3 : 0;
+//            int damage = nbt.getInteger("damage")/2;
+//            damage += hasAugment(stack, 3) ? 2 : 0;
+//            damage += hasAugment(stack ,4) ? 3 : 0;
+            int damage = SwordUtil.getAbsoluteDamage(stack)/2;
 
-            String Energy = NumberFormat.getNumberInstance(Locale.US).format(nbt.getInteger("Energy")) + "";
-            String MaxEnergy = NumberFormat.getNumberInstance(Locale.US).format(nbt.getInteger("MaxEnergy")) + "";
-            if(stack.stackTagCompound.getInteger("MaxEnergy")==-1 || stack.stackTagCompound.getInteger("MaxEnergy")==-2){
+            String Energy = Lang.addComas(nbt.getInteger("Energy")) + "";
+            String MaxEnergy = Lang.addComas(nbt.getInteger("MaxEnergy")) + "";
+            if(stack.stackTagCompound.getInteger("MaxEnergy")==-1 || stack.stackTagCompound.getInteger("MaxEnergy")==-2 || stack.stackTagCompound.getInteger("MaxEnergy")==-5){
                 Energy = EnumChatFormatting.OBFUSCATED + "CREATIVE" + EnumChatFormatting.RESET + EnumChatFormatting.GRAY;
                 MaxEnergy = "Creative";
             }
@@ -74,7 +68,7 @@ public class RedstonicSword extends Item implements IEnergyContainerItem {
                 list.add(Lang.translate("sword.Blade") + EnumChatFormatting.RESET + EnumChatFormatting.DARK_GRAY + ": " + blade);
                 list.add(Lang.translate("sword.Handle") + EnumChatFormatting.RESET + EnumChatFormatting.DARK_GRAY + ": " + handle);
                 list.add(Lang.translate("drill.battery") + EnumChatFormatting.RESET + EnumChatFormatting.DARK_GRAY + ": " + battery);
-                list.add(Lang.translate("drill.energyusage") + EnumChatFormatting.RESET + EnumChatFormatting.DARK_GRAY + ": " + EnumChatFormatting.GREEN + NumberFormat.getNumberInstance(Locale.US).format(calcEnergy(stack)));
+                list.add(Lang.translate("drill.energyusage") + EnumChatFormatting.RESET + EnumChatFormatting.DARK_GRAY + ": " + EnumChatFormatting.GREEN + Lang.addComas(calcEnergy(stack)));
                 list.add(Lang.translate("sword.Damage") + EnumChatFormatting.RESET + EnumChatFormatting.DARK_GRAY + ": " + damage + " Hearts");
             }else if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) && !hasNOAugment(stack)){
                 if(nbt.getInteger("aug1")!=0){ list.add(EnumChatFormatting.YELLOW + Lang.translate("drill.augment") + ": " + EnumChatFormatting.DARK_GRAY + SwordUtil.getAugName(nbt.getInteger("aug1"))); }
@@ -216,6 +210,11 @@ public class RedstonicSword extends Item implements IEnergyContainerItem {
     }
 
     @Override
+    public IIcon getIconIndex(ItemStack stack) {
+        return getIconFromDamage(0);
+    }
+
+    @Override
     public boolean requiresMultipleRenderPasses() {
         return true;
     }
@@ -282,11 +281,12 @@ public class RedstonicSword extends Item implements IEnergyContainerItem {
     public boolean hitEntity(ItemStack stack, EntityLivingBase entityLivingTo, EntityLivingBase entityLivingFrom) {
         DamageSource source = DamageSource.causePlayerDamage((EntityPlayer)entityLivingFrom);
 
-        boolean canHit = (stack.stackTagCompound.getInteger("Energy")>=calcEnergy(stack) || (stack.stackTagCompound.getInteger("MaxEnergy")==-2 || stack.stackTagCompound.getInteger("MaxEnergy")==-1));
+        boolean canHit = (stack.stackTagCompound.getInteger("Energy")>=calcEnergy(stack) || (stack.stackTagCompound.getInteger("MaxEnergy")==-2 || stack.stackTagCompound.getInteger("MaxEnergy")==-1 || stack.stackTagCompound.getInteger("MaxEnergy")==-5));
 
-        int damage = canHit ? stack.stackTagCompound.getInteger("damage") : 0;
-        if(canHit)damage += hasAugment(stack, 3) ? 4 : 0;
-        if(canHit)damage += hasAugment(stack, 4) ? 6 : 0;
+//        int damage = canHit ? stack.stackTagCompound.getInteger("damage") : 0;
+//        if(canHit)damage += hasAugment(stack, 3) ? 4 : 0;
+//        if(canHit)damage += hasAugment(stack, 4) ? 6 : 0;
+        int damage = SwordUtil.getAbsoluteDamage(stack);
         entityLivingTo.attackEntityFrom(source, (float)(damage));
 
         if(canHit){

@@ -1,6 +1,8 @@
 package com.raizunne.redstonic.Network;
 
+import com.raizunne.redstonic.Gui.GuiDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -17,15 +19,17 @@ public class PacketDrill implements IMessage {
     private int y;
     private int z;
     private int mode;
+    private String rename;
 
     public PacketDrill(){
     }
 
-    public PacketDrill(TEDrillModifier te){
+    public PacketDrill(TEDrillModifier te, GuiDrillModifier gui){
         x = te.xCoord;
         y = te.yCoord;
         z = te.zCoord;
         mode = te.getMode();
+        rename = gui.getName();
     }
 
     @Override
@@ -34,6 +38,7 @@ public class PacketDrill implements IMessage {
         y = buf.readInt();
         z = buf.readInt();
         mode = buf.readInt();
+        rename = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override
@@ -42,6 +47,7 @@ public class PacketDrill implements IMessage {
         buf.writeInt(y);
         buf.writeInt(z);
         buf.writeInt(mode);
+        ByteBufUtils.writeUTF8String(buf, rename);
     }
 
     public static class Handler implements IMessageHandler<PacketDrill, IMessage> {
@@ -51,7 +57,7 @@ public class PacketDrill implements IMessage {
             TileEntity tile = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
             if(tile instanceof TEDrillModifier){
                 TEDrillModifier modifier =  (TEDrillModifier)tile;
-                modifier.setMode(message.mode);
+                modifier.setMode(message.mode, message.rename);
                 ctx.getServerHandler().playerEntity.worldObj.markBlockForUpdate(message.x, message.y, message.z);
             }
             return null;

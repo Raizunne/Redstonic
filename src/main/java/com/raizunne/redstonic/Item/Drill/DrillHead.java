@@ -28,6 +28,7 @@ public class DrillHead extends Item {
         setCreativeTab(Redstonic.redTab);
         setMaxStackSize(1);
         setUnlocalizedName(getUnlocalizedName());
+        setTextureName("redstonic:Drill/Heads/renderTemplate");
     }
 
     @Override

@@ -150,7 +150,7 @@ public class ItemContainer implements IItemRenderer {
             GL11.glPushMatrix();
             GL11.glScalef(0.8F, 0.8F, 0.8F);
             GL11.glTranslatef(2F, 2F, 2F);
-            String dis = stack.stackTagCompound.getBoolean("disabled")?"§m" : "";
+            String dis = stack.stackTagCompound.getBoolean("disabled")?""+EnumChatFormatting.STRIKETHROUGH : "";
             itemRender.renderItemOverlayIntoGUI(fontRenderer, textureManager, blockerino, 0, 0, dis  + number);
             GL11.glPopMatrix();
         }

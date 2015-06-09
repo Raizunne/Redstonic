@@ -47,9 +47,9 @@ public class ContainerDrillModifier extends Container {
         addSlotToContainer(new Slot(te, 2, 67, 42));
         addSlotToContainer(new Slot(te, 3, 67, 65));
 
-        addSlotToContainer(new SlotAugment(te, 5, 91, 19));
-        addSlotToContainer(new SlotAugment(te, 6, 109, 19));
-        addSlotToContainer(new SlotAugment(te, 7, 127, 19));
+        addSlotToContainer(new SlotAugment(te, 5, 91, 32));
+        addSlotToContainer(new SlotAugment(te, 6, 109, 32));
+        addSlotToContainer(new SlotAugment(te, 7, 127, 32));
     }
 
     @Override

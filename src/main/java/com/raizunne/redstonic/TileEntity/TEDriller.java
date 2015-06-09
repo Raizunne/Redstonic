@@ -269,7 +269,7 @@ public class TEDriller extends TileEntity implements IInventory, IEnergyReceiver
                         world.func_147480_a(x, y, z + 1, false);
                         drops = block.getDrops(world, x, y, z+1, getBlockMetadata(), 0);
                         for(int i=0; i<drops.size();i++) {
-                            System.out.println(drops.get(i) + "DROPS.GET");
+//                            System.out.println(drops.get(i) + "DROPS.GET");
                             if(FurnaceRecipes.smelting().getSmeltingResult(drops.get(i))!=null){
                                 putStack(FurnaceRecipes.smelting().getSmeltingResult(drops.get(i)));
                             }else{

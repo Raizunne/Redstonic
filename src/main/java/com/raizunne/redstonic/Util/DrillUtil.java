@@ -230,6 +230,7 @@ public class DrillUtil {
     }
 
     public static int getAugNumber(ItemStack item){
+        if(item==null)return 0;
         ItemStack[] augments = new ItemStack[]{Util.toStack(RedstonicItems.SpeedAugment), Util.toStack(RedstonicItems.EnergyAugment), Util.toStack(RedstonicItems.HotswapAugment),
                 Util.toStack(RedstonicItems.BlockAugment), Util.toStack(RedstonicItems.MagnetAugment), Util.toStack(RedstonicItems.SpeedIIAugment)};
         for(int i=0; i<augments.length; i++){
@@ -299,6 +300,17 @@ public class DrillUtil {
             case 7: return 1;
             default: return 0;
         }
+    }
 
+    public static ItemStack getPlaceholderDrill(int head, int body, int aug1, int aug2, int aug3){
+        ItemStack placeDrill = new ItemStack(RedstonicItems.RedDrill);
+        placeDrill.stackTagCompound = new NBTTagCompound();
+        NBTTagCompound tag = placeDrill.stackTagCompound;
+        tag.setInteger("head", head);
+        tag.setInteger("body", body);
+        tag.setInteger("aug1", aug1);
+        tag.setInteger("aug2", aug2);
+        tag.setInteger("aug3", aug3);
+        return placeDrill;
     }
 }

@@ -123,12 +123,12 @@ public class RedstonicRecipes {
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronBlade),
                 "  I",
-                " I ",
+                " B ",
                 "B  ", 'I', Items.iron_ingot, 'B', Blocks.iron_block));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.DiamondBlade),
                 "  I",
-                " I ",
+                " B ",
                 "B  ", 'I', Items.diamond, 'B', Blocks.diamond_block));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.BerserkSwordAugment),
@@ -199,7 +199,7 @@ public class RedstonicRecipes {
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.ElectrumBlade),
                     "  I",
-                    " I ",
+                    " B ",
                     "B  ", 'I', TEHelper.ingotElectrum, 'B', TEHelper.blockElectrum));
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnderiumBlade),
@@ -207,9 +207,16 @@ public class RedstonicRecipes {
                     " I ",
                     "B  ", 'I', TEHelper.ingotEnderium, 'B', TEHelper.blockEnderium));
 
-            TEHelper.addTransposerFill(32000, new ItemStack(RedstonicItems.Energizer), new ItemStack(RedstonicItems.EnergizerFull), new FluidStack(FluidRegistry.getFluid("redstone"), 32000), false);
-            TEHelper.addTransposerFill(1600, new ItemStack(Items.stick), new ItemStack(RedstonicItems.redstoneStick), new FluidStack(FluidRegistry.getFluid("redstone"), 2000), false);
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.MagnetAugment),
+                    "III",
+                    " LB",
+                    "III", 'I', Items.iron_ingot, 'L', "ingotLumium", 'B', TEHelper.capacitorHardened));
 
+            TEHelper.addSmelterRecipe(32000, new ItemStack(RedstonicItems.Energizer), new ItemStack(Blocks.redstone_block, 40), new ItemStack(RedstonicItems.EnergizerFull));
+            TEHelper.addSmelterRecipe(1600, new ItemStack(Items.stick), new ItemStack(Items.redstone, 20), new ItemStack(RedstonicItems.redstoneStick));
+
+//            TEHelper.addTransposerFill(32000, new ItemStack(RedstonicItems.Energizer), new ItemStack(RedstonicItems.EnergizerFull), new FluidStack(FluidRegistry.getFluid("redstone"), 32000), false);
+//            TEHelper.addTransposerFill(1600, new ItemStack(Items.stick), new ItemStack(RedstonicItems.redstoneStick), new FluidStack(FluidRegistry.getFluid("redstone"), 2000), false);
         }
 
         //ENDER IO RECIPES
@@ -272,12 +279,12 @@ public class RedstonicRecipes {
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnergizedBlade),
                     "  I",
-                    " I ",
+                    " B ",
                     "B  ", 'I', EIOHelper.ingotEnergized, 'B', EIOHelper.blockEnergetic));
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.VibrantBlade),
                     "  I",
-                    " I ",
+                    " B ",
                     "B  ", 'I', EIOHelper.ingotVibrant, 'B', EIOHelper.blockVibrantium));
 
             ItemStack basicBattery = new ItemStack(RedstonicItems.basicBattery);
@@ -288,7 +295,7 @@ public class RedstonicRecipes {
                     "SCS",
                     "RAR", 'R', Blocks.redstone_block, 'S', "ingotEnergeticAlloy", 'C', "blockPhasedIron", 'A', basicBattery));
 
-            ItemStack energizedBattery = new ItemStack(RedstonicItems.basicBattery);
+            ItemStack energizedBattery = new ItemStack(RedstonicItems.energizedBattery);
             energizedBattery.setItemDamage(OreDictionary.WILDCARD_VALUE);
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.greatBattery),
@@ -305,6 +312,9 @@ public class RedstonicRecipes {
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicBlocks.Vibrantium),
                     "III", "III", "III", 'I', RedstonicItems.ingotVibrantium));
+
+            GameRegistry.addShapelessRecipe(new ItemStack(RedstonicItems.ingotGlowSteel, 9), new ItemStack(RedstonicBlocks.GlowSteel));
+            GameRegistry.addShapelessRecipe(new ItemStack(RedstonicItems.ingotVibrantium, 9), new ItemStack(RedstonicBlocks.Vibrantium));
         }
         GameRegistry.addRecipe(new HotswapSet());
         GameRegistry.addRecipe(new ContainerSet());

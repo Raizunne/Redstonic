@@ -48,6 +48,7 @@ public class DrillAugment extends Item {
         setCreativeTab(Redstonic.redTab);
         setMaxStackSize(1);
         setUnlocalizedName(getUnlocalizedName());
+        setTextureName("redstonic:AugmentTemplate");
     }
 
     @Override

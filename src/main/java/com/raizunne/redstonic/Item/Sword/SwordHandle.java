@@ -22,6 +22,7 @@ public class SwordHandle extends Item {
         setCreativeTab(Redstonic.redTab);
         setUnlocalizedName(getUnlocalizedName());
         setMaxStackSize(1);
+        setTextureName("redstonic:Sword/Handles/Iron");
     }
 
     @Override

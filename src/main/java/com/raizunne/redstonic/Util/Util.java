@@ -159,4 +159,9 @@ public class Util {
         }
     }
 
+    public static boolean hasAugment(int i, ItemStack stack){
+        NBTTagCompound nbt = stack.stackTagCompound;
+        return nbt.getInteger("aug1") == i || nbt.getInteger("aug2") == i || nbt.getInteger("aug3") == i;
+    }
+
 }

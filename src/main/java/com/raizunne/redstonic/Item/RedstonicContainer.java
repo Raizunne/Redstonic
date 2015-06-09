@@ -147,7 +147,11 @@ public class RedstonicContainer extends Item{
             if(nbt.getBoolean("disabled"))list.add(EnumChatFormatting.BLUE + "Disabled ");
             list.add(EnumChatFormatting.YELLOW + "Contains: " + EnumChatFormatting.GRAY + name);
             list.add(EnumChatFormatting.YELLOW + "Quantity: " + EnumChatFormatting.GRAY + nbt.getInteger("number") + "/" + ConfigHandler.containerMax);
-            list.add("Will void extra items when full.");
+            list.add(EnumChatFormatting.DARK_GRAY + "Will void extra items when full.");
+            if(nbt.getInteger("block")==-1){
+                list.add("Set contents by placing it in a");
+                list.add("crafting table with the desired block to store.");
+            }
             if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
                 if(nbt.getBoolean("disabled")){
                     list.add(EnumChatFormatting.GRAY + "Disabled: " + EnumChatFormatting.DARK_GRAY + "Will not suck items.");

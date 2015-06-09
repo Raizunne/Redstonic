@@ -7,6 +7,7 @@ import com.raizunne.redstonic.Proxy.ClientProxy;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.Lang;
+import com.raizunne.redstonic.Util.XML;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -84,7 +85,7 @@ public class GuiManual extends GuiScreen {
             drawTexturedModalRect(posX+18, posY+120, 0, 95, 102, 23);
         }else{
             if(subPage==1) {
-                newEntry(this.page, new String[]{Lang.translate("entries." + this.page.replaceAll(" ", ""))});
+                newEntry(this.page, XML.getEntry(this.page.replaceAll(" ", "")));
             }
         }
         if(page=="index"){
@@ -140,10 +141,10 @@ public class GuiManual extends GuiScreen {
                 ItemStack augmenterino = new ItemStack(RedstonicItems.HotswapAugment);
                 augmenterino.stackTagCompound = new NBTTagCompound();
                 augmenterino.stackTagCompound.setInteger("head", 0);
-                newEntry("Hotswap Augment", new String[]{Lang.translate("entries.HotswapAugment")});
+                newEntry("Hotswap Augment", Lang.translate("entries.HotswapAugment"));
                 drawCrafting(null, RedstonicItems.IronHead, null, null, RedstonicItems.HotswapAugment, null, null,null,null, augmenterino, 150, 45, x, y);
             }else if(subPage==3){
-                newEntry("Magnetization Augment", new String[]{Lang.translate("entries.MagnetizationAugment")});
+                newEntry("Magnetization Augment", Lang.translate("entries.MagnetizationAugment"));
                 ItemStack drillOFF = new ItemStack(RedstonicItems.RedDrill);
                 ItemStack drillON = new ItemStack(RedstonicItems.RedDrill);
                 drillOFF.stackTagCompound = new NBTTagCompound();
@@ -182,8 +183,6 @@ public class GuiManual extends GuiScreen {
         super.drawScreen(x, y, f);
     }
 
-
-
     @Override
     public void initGui() {
         buttonList = new ArrayList();
@@ -192,11 +191,11 @@ public class GuiManual extends GuiScreen {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
 
-        String[] indexTitles = {"Drills", "Swords", "Machines", "Extras", "Contribute!"};
-        String[] drillsTitles = {"Getting Started", "Heads", "Bodies", "Energy", "Augments"};
-        String[] swordsTitles = {"Sword Blades", "Sword Handles", "Energy", "Augments"};
-        String[] machinesTitles = {"Driller"};
-        String[] extrasTitles = {"Report a Bug", "Website", "Patreon"};
+        String[] indexTitles = XML.getTable("indexTitles");
+        String[] drillsTitles = XML.getTable("drillsTitles");
+        String[] swordsTitles = XML.getTable("swordsTitles");
+        String[] machinesTitles = XML.getTable("machinesTitles");
+        String[] extrasTitles = XML.getTable("extrasTitles");
 
         ButtonMenu[] index = new ButtonMenu[indexTitles.length];
         ButtonMenu[] drills = new ButtonMenu[drillsTitles.length];
@@ -282,13 +281,13 @@ public class GuiManual extends GuiScreen {
         }
     }
 
-    public void newEntry(String title, String[] translate){
+    public void newEntry(String title, String translate){
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
         GL11.glPushMatrix();
         this.fontRendererObj.drawString(title, posX+18, posY+12, 0x990000, false);
         GL11.glScalef(0.8F, 0.8F, 0.8F);
-        this.fontRendererObj.drawSplitString(translate[0], (int)((posX+18)/0.8), (int)((posY+25)/0.8), 135, 0);
+        this.fontRendererObj.drawSplitString(translate, (int)((posX+18)/0.8), (int)((posY+25)/0.8), 135, 0);
         GL11.glScalef(1F, 1F, 1F);
         GL11.glPopMatrix();
     }

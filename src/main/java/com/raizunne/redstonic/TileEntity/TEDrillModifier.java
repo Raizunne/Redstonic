@@ -9,6 +9,7 @@ import com.raizunne.redstonic.Item.Sword.SwordBlade;
 import com.raizunne.redstonic.Item.Sword.SwordHandle;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.DrillUtil;
+import com.raizunne.redstonic.Util.Lang;
 import com.raizunne.redstonic.Util.SwordUtil;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -23,6 +24,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 
 /**
  * Created by Raizunne as a part of Redstonic
@@ -33,35 +35,60 @@ public class TEDrillModifier extends TileEntity implements IInventory {
     ItemStack[] items;
     private int augments;
     private int aug1, aug2, aug3, hotswapHead;
+    private String rename;
+    String dissName;
     int mode;
 
     public TEDrillModifier(){
         items = new ItemStack[8];
-        this.mode=1;
+        this.mode=0;
+        this.dissName="";
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
+        aug1=0; aug2=0; aug3=0;
         if(getStackInSlot(0)!=null){
-            System.out.println(getStackInSlot(0).stackTagCompound);
+//            System.out.println(getStackInSlot(0).stackTagCompound);
+        }
+        if(getStackInSlot(2)!=null){
+            if(getStackInSlot(2).getItem() instanceof SwordHandle){
+                this.augments = SwordUtil.getMaxAugments(getStackInSlot(2));
+            }else if(getStackInSlot(2).getItem() instanceof DrillBody){
+                this.augments = DrillUtil.checkMaxAugments(getStackInSlot(2));
+            }else{
+                this.augments=0;
+            }
+        }else {
+            this.augments=0;
         }
 
         if(mode==2) /** ASSEMBLE **/{
-            if(isDrill()){
-                if(checkForAssembleDrill() && checkUltimateDrill()) {
-                    assembleDrill();
-                }
-            }else if(isSword()){
-                if(checkForAssembleSword()){
-                    assembleSword();
-                }
-            }
+            assemble();
+            mode =0;
         }else if(mode==1) /** DISSASSEMBLE **/{
-            if(checkForDisassemble()){
-                disassembleDrill();
-            }else if(checkForDisassembleSword()){
-                disassembleSword();
+            disassemble();
+            mode = 0;
+        }
+    }
+
+    public void disassemble(){
+        if(checkForDisassemble()){
+            disassembleDrill();
+        }else if(checkForDisassembleSword()){
+            disassembleSword();
+        }
+    }
+
+    public void assemble(){
+        if(isDrill()){
+            if(checkForAssembleDrill() && checkUltimateDrill()) {
+                assembleDrill();
+            }
+        }else if(isSword()){
+            if(checkForAssembleSword()){
+                assembleSword();
             }
         }
     }
@@ -127,6 +154,8 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             energy = maxEnergy;
         }
 
+        if(rename!="")getStackInSlot(0).setStackDisplayName("" + EnumChatFormatting.RESET + EnumChatFormatting.GOLD + rename);
+
         getStackInSlot(0).stackTagCompound.setInteger("MaxEnergy", maxEnergy);
         getStackInSlot(0).stackTagCompound.setInteger("Energy", energy);
         double modifier = (double)80/maxEnergy;
@@ -135,6 +164,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         setInventorySlotContents(1, null);
         setInventorySlotContents(2, null);
         setInventorySlotContents(3, null);
+        this.rename="";
     }
 
     public void assembleDrill(){
@@ -205,6 +235,8 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             energy = maxEnergy;
         }
 
+        if(rename!="")getStackInSlot(0).setStackDisplayName("" + EnumChatFormatting.RESET + EnumChatFormatting.RED + rename);
+
         getStackInSlot(0).stackTagCompound.setInteger("maxEnergy", maxEnergy);
         getStackInSlot(0).stackTagCompound.setInteger("energy", energy);
         double modifier = (double)80/maxEnergy;
@@ -212,6 +244,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         setInventorySlotContents(1, null);
         setInventorySlotContents(2, null);
         setInventorySlotContents(3, null);
+        this.rename="";
     }
 
     public void disassembleSword() {
@@ -233,7 +266,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             double modifier = (double)80/getStackInSlot(3).stackTagCompound.getInteger("maxEnergy");
             getStackInSlot(3).setItemDamage((int)(80 - getStackInSlot(3).stackTagCompound.getInteger("Energy")*modifier));
         }
-
+        dissName=!getStackInSlot(0).getDisplayName().equals("§6Redstonic Sword") ? getStackInSlot(0).getDisplayName().replace("§6", "") : "";
         setSwordAug(getStackInSlot(0));
         setInventorySlotContents(0, null);
     }
@@ -260,6 +293,8 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             double modifier = (double)80/getStackInSlot(3).stackTagCompound.getInteger("maxEnergy");
             getStackInSlot(3).setItemDamage((int)(80 - getStackInSlot(3).stackTagCompound.getInteger("Energy")*modifier));
         }
+
+        dissName=!getStackInSlot(0).getDisplayName().equals("§cRedstonic Drill") ? getStackInSlot(0).getDisplayName().replace("§c", "") : "";
         setAug(getStackInSlot(0));
         setInventorySlotContents(0, null);
     }
@@ -415,6 +450,19 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
     }
 
+    public String getDisName(){
+        return dissName;
+    }
+
+    public void setMode(int i, String rename){
+        this.mode = i;
+        this.rename = rename;
+    }
+
+    public void reset(){
+        dissName="";
+    }
+
     public void setMode(int i){
         this.mode = i;
     }
@@ -482,6 +530,14 @@ public class TEDrillModifier extends TileEntity implements IInventory {
             }
         }
         return itemstack;
+    }
+
+    public void setState(String state){
+        if(state=="Assemble"){
+            state = "assemble";
+        }else if(state=="Dissassemble"){
+            state = "dissassemble";
+        }
     }
 
     @Override
