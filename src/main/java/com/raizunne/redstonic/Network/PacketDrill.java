@@ -1,6 +1,5 @@
 package com.raizunne.redstonic.Network;
 
-import com.raizunne.redstonic.Gui.GuiDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -24,12 +23,12 @@ public class PacketDrill implements IMessage {
     public PacketDrill(){
     }
 
-    public PacketDrill(TEDrillModifier te, GuiDrillModifier gui){
+    public PacketDrill(TEDrillModifier te, String name){
         x = te.xCoord;
         y = te.yCoord;
         z = te.zCoord;
         mode = te.getMode();
-        rename = gui.getName();
+        rename = name;
     }
 
     @Override

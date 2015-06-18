@@ -191,19 +191,19 @@ public class GuiDrillModifier extends GuiContainer{
                         this.buttonText = "Assemble";
                     }
                 }
-                Redstonic.network.sendToServer(new PacketDrill(this.te, this));
+                Redstonic.network.sendToServer(new PacketDrill(this.te, this.getName()));
             break;
             case 1:
                 te.setMode(2, renameText);
                 this.buttonText="Assemble";
-                Redstonic.network.sendToServer(new PacketDrill(this.te, this));
+                Redstonic.network.sendToServer(new PacketDrill(this.te, this.getName()));
                 this.rename.setText("");
                 this.renameText="";
                 break;
             case 2:
                 te.setMode(1, renameText);
                 this.buttonText="Disassemble";
-                Redstonic.network.sendToServer(new PacketDrill(this.te, this));
+                Redstonic.network.sendToServer(new PacketDrill(this.te, this.getName()));
                 this.rename.setText("");
                 this.renameText="";
                 break;
