@@ -26,6 +26,7 @@ public class ClientProxy extends CommonProxy {
 
     public static String version = "0.0";
     public static String newChangelog = "0.0";
+    public static String downloadLink = "http://minecraft.curseforge.com/mc-mods/227716-redstonic";
 
     public void initRenderers(){
         //MODIFIER
@@ -64,6 +65,18 @@ public class ClientProxy extends CommonProxy {
         @SuppressWarnings("resource")
         Scanner scannerino = new Scanner(text.getInputStream());
         newChangelog = scannerino.nextLine();
+    }
+
+    public static void checkLink() throws Exception{
+        int timeout = 10000;
+        URL url = new URL("https://raw.githubusercontent.com/Raizunne/Redstonic/master/src/versions/link.txt");
+        URLConnection text = url.openConnection();
+        text.setConnectTimeout(timeout);
+        text.setReadTimeout(timeout);
+
+        @SuppressWarnings("resource")
+        Scanner scannerino = new Scanner(text.getInputStream());
+        downloadLink = scannerino.nextLine();
     }
 
 }

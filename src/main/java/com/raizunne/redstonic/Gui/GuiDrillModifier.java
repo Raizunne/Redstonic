@@ -30,6 +30,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +152,7 @@ public class GuiDrillModifier extends GuiContainer{
     protected void keyTyped(char c, int i) {
         this.rename.textboxKeyTyped(c, i);
         this.renameText = this.rename.getText();
-        if(!( (i== Keyboard.KEY_P || i==Keyboard.KEY_0 || i==Keyboard.KEY_X || i==Keyboard.KEY_F)  &&  this.rename.isFocused())) super.keyTyped(c, i);
+        if(!( (i== Keyboard.KEY_P || i==Keyboard.KEY_0 || i==Keyboard.KEY_X || i==Keyboard.KEY_F || i==Keyboard.KEY_E)  &&  this.rename.isFocused())) super.keyTyped(c, i);
     }
 
     @Override

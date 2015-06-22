@@ -1,1 +1,1 @@
-You can now rename tools! Complete Redstonic Modifier Revamped! (also fixed lots of bugs!).
+Fixed a crash on critical multiplayer. Thanks smbarbour! Please update!

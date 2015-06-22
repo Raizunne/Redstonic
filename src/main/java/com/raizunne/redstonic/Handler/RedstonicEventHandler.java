@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -79,12 +80,15 @@ public class RedstonicEventHandler {
             try {
                 ClientProxy.checkVersion();
                 ClientProxy.newVersionChangelog();
+                ClientProxy.checkLink();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             if (ClientProxy.version!="" && !ClientProxy.version.equals(Redstonic.VERSION) && ClientProxy.version!="0.0") {
                 if(Minecraft.getMinecraft().theWorld.isRemote) {
-                    Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Redstonic " + EnumChatFormatting.WHITE + "Outdated! New version is " + EnumChatFormatting.YELLOW + ClientProxy.version));
+                    String beg = EnumChatFormatting.RED + "Redstonic " + EnumChatFormatting.WHITE + "Outdated! New version is " + EnumChatFormatting.YELLOW + ClientProxy.version + EnumChatFormatting.WHITE;
+                    IChatComponent component = IChatComponent.Serializer.func_150699_a("[\"\",{\"text\":\"Redstonic \",\"color\":\"red\",\"bold\":\"true\"},{\"text\":\"outdated! New version is " + ClientProxy.version + "." + "\",\"color\":\"none\",\"bold\":\"false\"},{\"text\":\" [Download]\",\"color\":\"gold\",\"bold\":\"true\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + ClientProxy.downloadLink + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Open CurseForge page.\"}]}}}]");
+                    Minecraft.getMinecraft().thePlayer.addChatComponentMessage(component);
                     Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Changes: " + EnumChatFormatting.WHITE + ClientProxy.newChangelog));
                 }
             }else {
