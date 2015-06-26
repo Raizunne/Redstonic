@@ -289,7 +289,7 @@ public class TEDrillModifier extends TileEntity implements IInventory {
         }
         setInventorySlotContents(2, DrillUtil.getDrillBody(body));
         setInventorySlotContents(3, DrillUtil.getDrillBattery(battery, getStackInSlot(0)));
-        if(getStackInSlot(3).getItem() instanceof ItemBattery && getStackInSlot(3).getItem()!=RedstonicItems.infiniteBattery){
+        if(getStackInSlot(3)!=null && getStackInSlot(3).getItem() instanceof ItemBattery && getStackInSlot(3).getItem()!=RedstonicItems.infiniteBattery){
             double modifier = (double)80/getStackInSlot(3).stackTagCompound.getInteger("maxEnergy");
             getStackInSlot(3).setItemDamage((int)(80 - getStackInSlot(3).stackTagCompound.getInteger("Energy")*modifier));
         }

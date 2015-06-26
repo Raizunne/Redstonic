@@ -22,6 +22,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.util.RenderDistanceSorter;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -130,7 +131,7 @@ public class GuiDrillModifier extends GuiContainer{
             if(te.getStackInSlot(2)!=null && te.getStackInSlot(2).getItem() instanceof DrillBody){
                 ItemStack placeDrill = DrillUtil.getPlaceholderDrill(DrillUtil.getHeadNumber(te.getStackInSlot(1)), DrillUtil.getBodyNumber(te.getStackInSlot(2)), DrillUtil.getAugNumber(te.getStackInSlot(5)), DrillUtil.getAugNumber(te.getStackInSlot(6)), DrillUtil.getAugNumber(te.getStackInSlot(7)));
                 assemble.changeItem(placeDrill);
-                secondLine="Dig Speed: " + RedstonicDrill.getBaseDigSpeed(placeDrill);
+                secondLine="Dig Speed: " + RedstonicDrill.getBaseDigSpeed(placeDrill, Blocks.stone);
             }else if(te.getStackInSlot(2)!=null && te.getStackInSlot(2).getItem() instanceof SwordHandle){
                 ItemStack placeSword = SwordUtil.getPlaceholderSword(SwordUtil.getBladeNumber(te.getStackInSlot(1)), SwordUtil.getHandleNumber(te.getStackInSlot(2)), SwordUtil.getAugNumber(te.getStackInSlot(5)), SwordUtil.getAugNumber(te.getStackInSlot(6)), SwordUtil.getAugNumber(te.getStackInSlot(7)));
                 assemble.changeItem(placeSword);

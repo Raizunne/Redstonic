@@ -57,6 +57,9 @@ public class DrillUtil {
             case -1: temp = creative; return temp;
             case -2: temp = Util.toStack(RedstonicItems.infiniteBattery); return temp;
         }
+        if(temp==null){
+            return null;
+        }
         if(temp.stackTagCompound==null){
             temp.stackTagCompound = new NBTTagCompound();
         }
@@ -274,7 +277,17 @@ public class DrillUtil {
 
     public static int id(Item item){return Item.getIdFromItem(item);}
 
+    public static int getHead(ItemStack stack){
+        return stack.stackTagCompound.getInteger("head");
+    }
 
+    public static int getBody(ItemStack stack){
+        return stack.stackTagCompound.getInteger("body");
+    }
+
+    public static int getBattery(ItemStack stack){
+        return stack.stackTagCompound.getInteger("battery");
+    }
 
     public static ItemStack applyAug(int aug, ItemStack drill, int hotswapHead){
         switch(aug){

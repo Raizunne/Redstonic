@@ -1,1 +1,1 @@
-Fixed a crash on critical multiplayer. Thanks smbarbour! Please update!
+Fixed replacing blocks with torches on right click, added new Low Power Mode for End Drill.
