@@ -8,15 +8,17 @@ package com.raizunne.redstonic;
 import com.raizunne.redstonic.Handler.ConfigHandler;
 import com.raizunne.redstonic.Handler.GUIHandler;
 import com.raizunne.redstonic.Handler.RedstonicEventHandler;
+import com.raizunne.redstonic.Handler.RedstonicWorldData;
 import com.raizunne.redstonic.Item.RedstonicContainer;
 import com.raizunne.redstonic.Network.PacketDrill;
 import com.raizunne.redstonic.Network.PacketDriller;
 import com.raizunne.redstonic.Proxy.CommonProxy;
+import com.raizunne.redstonic.TileEntity.TEArmorModifier;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDriller;
 import com.raizunne.redstonic.TileEntity.TEHyperSmelter;
 import com.raizunne.redstonic.Util.EIOHelper;
-import com.raizunne.redstonic.Util.XML;
+import com.raizunne.redstonic.Util.KeyBinds;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -27,20 +29,17 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.EnumHelper;
 
 @Mod(modid = Redstonic.MODID, version = Redstonic.VERSION, dependencies = "after:ThermalExpansion;after:EnderIO")
 public class Redstonic {
 
     public static final String MODID = "Redstonic";
-    public static final String VERSION = "1.4.7";
+    public static final String VERSION = "1.4.8";
 
     @Mod.Instance
     public static Redstonic instance;
@@ -48,6 +47,7 @@ public class Redstonic {
     public static CommonProxy proxy;
     public static SimpleNetworkWrapper network;
     public static Configuration configFile;
+    public static ItemArmor.ArmorMaterial RedstonicMaterial = EnumHelper.addArmorMaterial("RedstonicArmorMaterial", 33, new int[]{1,1,1,1}, 0);
 
     public static CreativeTabs redTab = new CreativeTabs("Redstonic"){
         @Override
@@ -64,6 +64,7 @@ public class Redstonic {
         MinecraftForge.EVENT_BUS.register(new RedstonicEventHandler());
         MinecraftForge.EVENT_BUS.register(new ConfigHandler());
         MinecraftForge.EVENT_BUS.register(new RedstonicContainer());
+        MinecraftForge.EVENT_BUS.register(new KeyBinds());
 
         if(Loader.isModLoaded("EnderIO")){
             EIOHelper.init();
@@ -72,11 +73,13 @@ public class Redstonic {
         RedstonicItems.init();
         RedstonicBlocks.init();
         RedstonicRecipes.init();
+//        KeyBinds.init();
         proxy.initRenderers();
 
         GameRegistry.registerTileEntity(TEDrillModifier.class, "TEDrillModifier");
         GameRegistry.registerTileEntity(TEDriller.class, "TEDriller");
         GameRegistry.registerTileEntity(TEHyperSmelter.class, "TEHyperSmelter");
+        GameRegistry.registerTileEntity(TEArmorModifier.class, "TEArmorModifier");
 
         configFile = new Configuration(e.getSuggestedConfigurationFile());
         configFile.load();
@@ -90,7 +93,6 @@ public class Redstonic {
 
     public void load(FMLInitializationEvent event){
         new GUIHandler();
-
     }
 
 }

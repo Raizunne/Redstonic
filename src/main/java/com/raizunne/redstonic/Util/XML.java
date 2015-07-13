@@ -17,16 +17,17 @@ import java.net.URL;
  */
 public class XML {
 
-    public static String[] getTable(String name){
+    public static String[] getTable(String name, String root){
         DocumentBuilderFactory bFactory = DocumentBuilderFactory.newInstance();
         try{
             DocumentBuilder dBuilder = bFactory.newDocumentBuilder();
-            if(XML.class.getResourceAsStream("BookEntries.xml")==null){
+            if(XML.class.getResourceAsStream("Entries.xml")==null){
                 return new String[]{"ERROR", "SOMETHING", "GOT", "SCREWED"};
             }
-            Document document = dBuilder.parse(XML.class.getResourceAsStream("BookEntries.xml"));
+            Document document = dBuilder.parse(XML.class.getResourceAsStream("Entries.xml"));
             document.normalize();
-            Element listElement = (Element)document.getElementsByTagName("bookentries").item(0);
+            Element temp = (Element)document.getElementsByTagName("entries").item(0);
+            Element listElement = (Element)temp.getElementsByTagName(root).item(0);
             NodeList nodeList = listElement.getElementsByTagName(name);
             String titlesRAW = nodeList.item(0).getTextContent();
             return titlesRAW.split(",");
@@ -37,19 +38,20 @@ public class XML {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new String[]{"COULD NOT FIND TABLE"};
+        return new String[]{"ERROR", "SOMETHING", "GOT", "SCREWED"};
     }
 
-    public static String getEntry(String name) {
+    public static String getEntry(String name, String root) {
         DocumentBuilderFactory bFactory = DocumentBuilderFactory.newInstance();
         try{
             DocumentBuilder dBuilder = bFactory.newDocumentBuilder();
-            if(XML.class.getResourceAsStream("BookEntries.xml")==null){
+            if(XML.class.getResourceAsStream("Entries.xml")==null){
                 return "COULD NOT FIND ENTRY";
             }
-            Document document = dBuilder.parse(XML.class.getResourceAsStream("BookEntries.xml"));
+            Document document = dBuilder.parse(XML.class.getResourceAsStream("Entries.xml"));
             document.normalize();
-            Element listElement = (Element)document.getElementsByTagName("bookentries").item(0);
+            Element temp = (Element)document.getElementsByTagName("entries").item(0);
+            Element listElement = (Element)temp.getElementsByTagName(root).item(0);
             NodeList nodeList = listElement.getElementsByTagName("entry");
             for(int i=0; i<nodeList.getLength(); i++){
                 Element entryRAW = (Element)nodeList.item(i);

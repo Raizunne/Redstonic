@@ -85,7 +85,7 @@ public class GuiManual extends GuiScreen {
             drawTexturedModalRect(posX+18, posY+120, 0, 95, 102, 23);
         }else{
             if(subPage==1) {
-                newEntry(this.page, XML.getEntry(this.page.replaceAll(" ", "")));
+                newEntry(this.page, XML.getEntry(this.page.replaceAll(" ", ""), "bookentries"));
             }
         }
         if(page=="index"){
@@ -141,10 +141,10 @@ public class GuiManual extends GuiScreen {
                 ItemStack augmenterino = new ItemStack(RedstonicItems.HotswapAugment);
                 augmenterino.stackTagCompound = new NBTTagCompound();
                 augmenterino.stackTagCompound.setInteger("head", 0);
-                newEntry("Hotswap Augment", Lang.translate("entries.HotswapAugment"));
+                newEntry("Hotswap Augment", XML.getEntry("HotswapAugment", "bookentries"));
                 drawCrafting(null, RedstonicItems.IronHead, null, null, RedstonicItems.HotswapAugment, null, null,null,null, augmenterino, 150, 45, x, y);
             }else if(subPage==3){
-                newEntry("Magnetization Augment", Lang.translate("entries.MagnetizationAugment"));
+                newEntry("Hotswap Augment", XML.getEntry("MagnetizationAugment", "bookentries"));
                 ItemStack drillOFF = new ItemStack(RedstonicItems.RedDrill);
                 ItemStack drillON = new ItemStack(RedstonicItems.RedDrill);
                 drillOFF.stackTagCompound = new NBTTagCompound();
@@ -191,25 +191,25 @@ public class GuiManual extends GuiScreen {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
 
-        String[] indexTitles = XML.getTable("indexTitles");
-        String[] drillsTitles = XML.getTable("drillsTitles");
-        String[] swordsTitles = XML.getTable("swordsTitles");
-        String[] machinesTitles = XML.getTable("machinesTitles");
-        String[] extrasTitles = XML.getTable("extrasTitles");
+        String[] indexTitles = XML.getTable("indexTitles", "bookentries");
+        String[] drillsTitles = XML.getTable("drillsTitles", "bookentries");
+        String[] swordsTitles = XML.getTable("swordsTitles", "bookentries");
+        String[] machinesTitles = XML.getTable("machinesTitles", "bookentries");
+        String[] extrasTitles = XML.getTable("extrasTitles", "bookentries");
 
         ButtonMenu[] index = new ButtonMenu[indexTitles.length];
         ButtonMenu[] drills = new ButtonMenu[drillsTitles.length];
         ButtonMenu[] swords = new ButtonMenu[swordsTitles.length];
         ButtonMenu[] machines = new ButtonMenu[machinesTitles.length];
         ButtonMenu[] extras = new ButtonMenu[extrasTitles.length];
-        ButtonDirectional right = new ButtonDirectional(-2, posX + 232, posY + 171, "right");
-        ButtonDirectional left = new ButtonDirectional(-1, posX + 6, posY + 171, "left");
+        ButtonDirectional right = new ButtonDirectional(-2, posX + 232, posY + 171, ButtonDirectional.Type.RIGHT_CURVED);
+        ButtonDirectional left = new ButtonDirectional(-1, posX + 6, posY + 171, ButtonDirectional.Type.LEFT_CURVED);
         ButtonPage ret = new ButtonPage(-3, posX + 95, posY + 171, 100, 14, "Return");
-        ButtonMenu changelog = new ButtonMenu(10000, posX + 160, posY + 145, 30, "Changelog", 0x3366FF, 0x2447B2, true);
+        ButtonMenu changelog = new ButtonMenu(10000, posX + 160, posY + 145, "Changelog", 0x3366FF, 0x2447B2, true);
 
         if(page=="index") {
             for (int i = 0; i < index.length; i++) {
-                index[i] = new ButtonMenu(i, posX + 140, posY + 15 + i * 12, 10+(indexTitles[i].length()*5), indexTitles[i], color1, color2, true);
+                index[i] = new ButtonMenu(i, posX + 140, posY + 15 + i * 12, indexTitles[i], color1, color2, true);
                 buttonList.add(index[i]);
             }
             if(!ClientProxy.version.equals(Redstonic.VERSION)) {
@@ -217,22 +217,22 @@ public class GuiManual extends GuiScreen {
             }
         }else if(page=="drills" || page=="Getting Started") {
             for (int i = 0; i < drills.length; i++) {
-                drills[i] = new ButtonMenu(100 + i, posX + 140, posY + 15 + i * 12, 10 + (drillsTitles[i].length() * 5), drillsTitles[i], color1, color2, true);
+                drills[i] = new ButtonMenu(100 + i, posX + 140, posY + 15 + i * 12, drillsTitles[i], color1, color2, true);
                 buttonList.add(drills[i]);
             }
         }else if(page=="swords"){
             for (int i = 0; i < swords.length; i++) {
-                swords[i] = new ButtonMenu(300 + i, posX + 140, posY + 15 + i * 12, 10 + (swordsTitles[i].length() * 5), swordsTitles[i], color1, color2, true);
+                swords[i] = new ButtonMenu(300 + i, posX + 140, posY + 15 + i * 12, swordsTitles[i], color1, color2, true);
                 buttonList.add(swords[i]);
             }
         }else if(page=="extras") {
             for (int i = 0; i < extras.length; i++) {
-                extras[i] = new ButtonMenu(900 + i, posX + 140, posY + 15 + i * 12, 10 + (extrasTitles[i].length() * 5), extrasTitles[i], color1, color2, true);
+                extras[i] = new ButtonMenu(900 + i, posX + 140, posY + 15 + i * 12, extrasTitles[i], color1, color2, true);
                 buttonList.add(extras[i]);
             }
         }else if(page=="machines"){
             for(int i=0; i<machines.length; i++){
-                machines[i] = new ButtonMenu(200+i, posX+140, posY+15+i*12, 10+(machinesTitles[i].length()*5), machinesTitles[i], color1, color2, true);
+                machines[i] = new ButtonMenu(200+i, posX+140, posY+15+i*12, machinesTitles[i], color1, color2, true);
                 buttonList.add(machines[i]);
             }
         }

@@ -28,7 +28,7 @@ public class TEHyperSmelter extends TileEntity implements IInventory, ISidedInve
 
     public TEHyperSmelter(){
         items = new ItemStack[7];
-        storage = new EnergyStorage(256000);
+        storage = new EnergyStorage(25600);
         maxTimer = 6;
     }
 
@@ -124,8 +124,6 @@ public class TEHyperSmelter extends TileEntity implements IInventory, ISidedInve
         }
         return false;
     }
-
-
 
     public boolean checkFits(int count, ItemStack stack){
         return getStackInSlot(2)==null || getStackInSlot(3)==null || (getStackInSlot(2).isItemEqual(stack) && getStackInSlot(2).stackSize+count<=64) || (getStackInSlot(3).isItemEqual(stack) && getStackInSlot(3).stackSize+count<=64);

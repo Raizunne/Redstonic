@@ -143,10 +143,10 @@ public class ItemBattery extends Item implements IEnergyContainerItem {
     @Override
     public void registerIcons(IIconRegister i) {
         icons = new IIcon[4];
-        icons[0] = i.registerIcon("redstonic:Material/basicBattery");
-        icons[1] = i.registerIcon("redstonic:Material/energizedBattery");
-        icons[2] = i.registerIcon("redstonic:Material/greatBattery");
-        icons[3] = i.registerIcon("redstonic:Material/infiniteBattery");
+        icons[0] = i.registerIcon("redstonic:Material/Battery/BasicBattery");
+        icons[1] = i.registerIcon("redstonic:Material/Battery/EnergizedBattery");
+        icons[2] = i.registerIcon("redstonic:Material/Battery/GreatBattery");
+        icons[3] = i.registerIcon("redstonic:Material/Battery/InfiniteBattery");
     }
 
     @Override

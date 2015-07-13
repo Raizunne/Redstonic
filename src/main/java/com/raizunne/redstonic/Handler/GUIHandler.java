@@ -1,11 +1,11 @@
 package com.raizunne.redstonic.Handler;
 
 import com.raizunne.redstonic.Gui.*;
-import com.raizunne.redstonic.Gui.Container.ContainerDrillModifier;
-import com.raizunne.redstonic.Gui.Container.ContainerDriller;
-import com.raizunne.redstonic.Gui.Container.ContainerHyperSmelter;
+import com.raizunne.redstonic.Gui.Container.*;
+import com.raizunne.redstonic.Item.RedstonicMessanger;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
+import com.raizunne.redstonic.TileEntity.TEArmorModifier;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDriller;
 import com.raizunne.redstonic.TileEntity.TEHyperSmelter;
@@ -43,6 +43,14 @@ public class GUIHandler implements IGuiHandler{
                 return new ContainerHyperSmelter(player.inventory, (TEHyperSmelter)te);
             }
             break;
+            case 6: if(te!=null && te instanceof TEArmorModifier){
+                return new ContainerArmorModifier(player, player.inventory, (TEArmorModifier)te);
+            }
+            break;
+            case 7: if(player.inventory.getCurrentItem().getItem() instanceof RedstonicMessanger){
+                return new ContainerMessenger(player.inventory, player.inventory.getCurrentItem());
+            }
+            break;
             default: return null;
 
         }
@@ -70,6 +78,15 @@ public class GUIHandler implements IGuiHandler{
             case 5: if(player.getCurrentEquippedItem().getItem().equals(RedstonicItems.RedDrill)){
                 return new GuiEndDrill(player);
             }
+            break;
+            case 6: if(te!=null && te instanceof TEArmorModifier){
+                return new GuiArmorModifier(player, player.inventory, (TEArmorModifier)te);
+            }
+            break;
+            case 7: if(player.inventory.getCurrentItem().getItem() instanceof RedstonicMessanger) {
+                return new GuiMessanger(player, world);
+            }
+            break;
             default: return null;
         }
         return null;

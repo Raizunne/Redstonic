@@ -1,5 +1,6 @@
 package com.raizunne.redstonic.Proxy;
 
+import com.google.gson.Gson;
 import com.raizunne.redstonic.Client.Render.RenderDrillModifier;
 import com.raizunne.redstonic.Client.Render.RenderDriller;
 import com.raizunne.redstonic.Client.RenderItem.ItemContainer;
@@ -78,5 +79,4 @@ public class ClientProxy extends CommonProxy {
         Scanner scannerino = new Scanner(text.getInputStream());
         downloadLink = scannerino.nextLine();
     }
-
 }

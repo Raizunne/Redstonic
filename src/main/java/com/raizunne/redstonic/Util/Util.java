@@ -1,10 +1,13 @@
 package com.raizunne.redstonic.Util;
 
+import com.raizunne.redstonic.Item.RedstonicCrate;
+import com.raizunne.redstonic.RedstonicItems;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModClassLoader;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSaddle;
 import net.minecraft.item.ItemStack;
@@ -12,6 +15,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Raizunne as a part of Redstonic
@@ -162,6 +169,22 @@ public class Util {
     public static boolean hasAugment(int i, ItemStack stack){
         NBTTagCompound nbt = stack.stackTagCompound;
         return nbt.getInteger("aug1") == i || nbt.getInteger("aug2") == i || nbt.getInteger("aug3") == i;
+    }
+
+    public static List<String> quickLore(String... lore){
+        List<String> loreirnonino = new ArrayList<String>();
+        for(String loreino : lore){
+            loreirnonino.add(loreino);
+        }
+        return loreirnonino;
+    }
+
+    public static ItemStack newCrate(ItemStack[] contents, String sender){
+        ItemStack crate = new ItemStack(RedstonicItems.RedCrate);
+        RedstonicCrate.setContents(crate, contents);
+        RedstonicCrate.setSender(crate, sender);
+        RedstonicCrate.setUUID(crate, UUID.randomUUID().toString());
+        return crate;
     }
 
 }

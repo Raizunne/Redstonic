@@ -1,9 +1,6 @@
 package com.raizunne.redstonic;
 
-import com.raizunne.redstonic.Block.BlockCompressed;
-import com.raizunne.redstonic.Block.DrillModifier;
-import com.raizunne.redstonic.Block.Driller;
-import com.raizunne.redstonic.Block.HyperSmelter;
+import com.raizunne.redstonic.Block.*;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDriller;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -17,6 +14,8 @@ import net.minecraft.block.material.Material;
 public class RedstonicBlocks {
 
     public static Block Modifier = new DrillModifier(Material.ground);
+    public static Block ArmorMod = new ArmorModifier();
+
     public static Block GlowSteel = new BlockCompressed(0);
     public static Block Vibrantium = new BlockCompressed(1);
     public static Block HyperSmelter = new HyperSmelter();
@@ -28,8 +27,9 @@ public class RedstonicBlocks {
         GameRegistry.registerBlock(Vibrantium, Vibrantium.getUnlocalizedName());
         GameRegistry.registerBlock(GlowSteel, GlowSteel.getUnlocalizedName());
 
-        GameRegistry.registerBlock(HyperSmelter, HyperSmelter.getUnlocalizedName());
         GameRegistry.registerBlock(Driller, Driller.getUnlocalizedName());
+//        GameRegistry.registerBlock(HyperSmelter, HyperSmelter.getUnlocalizedName());
+//        GameRegistry.registerBlock(ArmorMod, ArmorMod.getUnlocalizedName());
     }
 
 }

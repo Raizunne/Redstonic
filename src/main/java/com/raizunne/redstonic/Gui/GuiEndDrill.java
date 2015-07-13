@@ -1,9 +1,11 @@
 package com.raizunne.redstonic.Gui;
 
+import com.raizunne.redstonic.Gui.Button.ScrollBar;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.DrillUtil;
 import cpw.mods.fml.client.config.GuiSlider;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptionSlider;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
@@ -45,6 +47,9 @@ public class GuiEndDrill extends GuiScreen {
         int posX = (width - xSizeofTexture) / 2;
         int posY = (height - ySizeofTexture) / 2;
         GuiSlider slider = new GuiSlider(0, posX+18, posY + 30, 140, 20, "Speed ", "%", 0, 100, speed, true, true);
+        ScrollBar bar = new ScrollBar(1, 20, 40, 74, 10, 20, "FUCK");
+
+        buttonList.add(bar);
         buttonList.add(slider);
         super.initGui();
     }
@@ -56,11 +61,6 @@ public class GuiEndDrill extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-        if(player.getHeldItem().getItem().equals(RedstonicItems.RedDrill) && DrillUtil.getHead(player.getHeldItem())==7) {
-            speed = ((GuiSlider) buttonList.get(0)).getValue();
-            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.RED + "Drill speed set to: " + Math.floor(speed) + "%"));
-            player.getCurrentEquippedItem().stackTagCompound.setInteger("multiplier", (int)speed);
-            System.out.println(player.getCurrentEquippedItem().stackTagCompound.getInteger("multiplier"));
-        }
+
     }
 }

@@ -3,7 +3,9 @@ package com.raizunne.redstonic.Item;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicBlocks;
 import com.raizunne.redstonic.Util.XML;
+import cpw.mods.fml.client.GuiScrollingList;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,7 +29,6 @@ public class Manual extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        XML.getTable("indexTitles");
         MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, true);
         if(mop!=null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
             Block block = world.getBlock(mop.blockX, mop.blockY, mop.blockZ);

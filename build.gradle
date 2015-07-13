@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "v1.4.7"
+version = "v1.5-TEST-1"
 group= "com.raizunne.redstonic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Redstonic"
 

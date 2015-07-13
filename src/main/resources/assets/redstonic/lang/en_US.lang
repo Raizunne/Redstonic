@@ -50,6 +50,13 @@ item.Manual.name=§cRedstonic Manual
 item.RedstonicContainer.name=§cRedstonic Container
 item.RedstonicSword.name=§6Redstonic Sword
 
+item.RedstonicCrate.name=§2Redstonic Crate
+
+item.RedstonicHelmet.name=§cRedstonic Helmet
+item.RedstonicChestplate.name=§cRedstonic Chestplate
+item.RedstonicLeggings.name=§cRedstonic Leggings
+item.RedstonicBoots.name=§cRedstonic Boots
+
 item.EnergizerCapsule.name=Energizer Capsule (Empty)
 item.EnergizerCapsuleFULL.name=§cEnergizer Capsule
 item.Vibrantium.name=Vibrantium Ingot

@@ -20,8 +20,8 @@ public class ButtonMenu extends GuiButton {
     int color; int color2;
     boolean page;
 
-    public ButtonMenu(int id, int x, int y, int w, String text, int color, int color2, boolean page){
-        super(id, x, y, w, 12, text);
+    public ButtonMenu(int id, int x, int y, String text, int color, int color2, boolean page){
+        super(id, x, y, Minecraft.getMinecraft().fontRenderer.getStringWidth(text), 12, text);
         this.id = id;
         this.x = x;
         this.y = y;
@@ -29,7 +29,7 @@ public class ButtonMenu extends GuiButton {
         this.color = color;
         this.color2 = color2;
         this.page = page;
-        this.width = w;
+        this.width = Minecraft.getMinecraft().fontRenderer.getStringWidth(text);
         this.height = 12;
     }
 
@@ -59,6 +59,10 @@ public class ButtonMenu extends GuiButton {
         String[] pages = {"pageflip1", "pageflip2", "pageflip3", "pageflip4"};
         Random random = new Random();
         int i = random.nextInt(pages.length);
-        p_146113_1_.playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("redstonic:" + pages[i]), 1.0F));
+        if(page) {
+            p_146113_1_.playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("redstonic:" + pages[i]), 1.0F));
+            return;
+        }
+        p_146113_1_.playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
     }
 }

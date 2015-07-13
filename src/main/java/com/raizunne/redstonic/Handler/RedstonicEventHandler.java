@@ -3,6 +3,7 @@ package com.raizunne.redstonic.Handler;
 import com.raizunne.redstonic.Item.RedstonicDrill;
 import com.raizunne.redstonic.Proxy.ClientProxy;
 import com.raizunne.redstonic.Redstonic;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -43,17 +44,10 @@ public class RedstonicEventHandler {
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event){
-        Minecraft mc = Minecraft.getMinecraft();
-        GuiScreen screen = mc.currentScreen;
-        if(mc.theWorld!=null){
-            WorldClient world = mc.theWorld;
-            if(event.phase == TickEvent.Phase.START){
-                if(screen instanceof GuiRepair){
 
-                }
-            }
-        }
     }
+
+
 
     @SubscribeEvent
     public void BlazerBlaze(BlockEvent.HarvestDropsEvent event){
@@ -84,7 +78,7 @@ public class RedstonicEventHandler {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (ClientProxy.version!="" && !ClientProxy.version.equals(Redstonic.VERSION) && ClientProxy.version!="0.0") {
+            if (!ClientProxy.version.equals("") && !ClientProxy.version.equals(Redstonic.VERSION) && !ClientProxy.version.equals("0.0")) {
                 if(Minecraft.getMinecraft().theWorld.isRemote) {
                     String beg = EnumChatFormatting.RED + "Redstonic " + EnumChatFormatting.WHITE + "Outdated! New version is " + EnumChatFormatting.YELLOW + ClientProxy.version + EnumChatFormatting.WHITE;
                     IChatComponent component = IChatComponent.Serializer.func_150699_a("[\"\",{\"text\":\"Redstonic \",\"color\":\"red\",\"bold\":\"true\"},{\"text\":\"outdated! New version is " + ClientProxy.version + "." + "\",\"color\":\"none\",\"bold\":\"false\"},{\"text\":\" [Download]\",\"color\":\"gold\",\"bold\":\"true\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + ClientProxy.downloadLink + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Open CurseForge page.\"}]}}}]");
@@ -92,7 +86,17 @@ public class RedstonicEventHandler {
                     Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Changes: " + EnumChatFormatting.WHITE + ClientProxy.newChangelog));
                 }
             }else {
-                System.out.println("[REDSTONIC] Using latest version.");
+                FMLLog.info("[REDSTONIC]: Using latest version.");
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void JoinWorld(EntityJoinWorldEvent event){
+        if(event.entity instanceof EntityPlayer){
+            EntityPlayer player = (EntityPlayer)event.entity;
+            if(!player.getEntityData().hasKey("RedstonicIdentifier") || !player.getEntityData().getString("RedstonicIdentifier").equals(player.getDisplayName())){
+                player.getEntityData().setString("RedstonicIdentifier", player.getDisplayName());
             }
         }
     }

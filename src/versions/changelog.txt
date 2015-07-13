@@ -1,1 +1,1 @@
-Fixed replacing blocks with torches on right click, added new Low Power Mode for End Drill.
+Fixed critical bug when building a drill.

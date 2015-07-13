@@ -2,6 +2,10 @@ package com.raizunne.redstonic;
 
 import com.raizunne.redstonic.Handler.ConfigHandler;
 import com.raizunne.redstonic.Item.*;
+import com.raizunne.redstonic.Item.Armor.RedstonicBoots;
+import com.raizunne.redstonic.Item.Armor.RedstonicChestplate;
+import com.raizunne.redstonic.Item.Armor.RedstonicHelmet;
+import com.raizunne.redstonic.Item.Armor.RedstonicLeggings;
 import com.raizunne.redstonic.Item.Drill.DrillAugment;
 import com.raizunne.redstonic.Item.Drill.DrillBody;
 import com.raizunne.redstonic.Item.Drill.DrillHead;
@@ -81,12 +85,29 @@ public class RedstonicItems {
     public static Item greatBattery = new ItemBattery(2);
     public static Item infiniteBattery = new ItemBattery(3);
 
+    public static Item RedHelmet = new RedstonicHelmet();
+    public static Item RedChestplate = new RedstonicChestplate();
+    public static Item RedLeggings = new RedstonicLeggings();
+    public static Item RedBoots = new RedstonicBoots();
+
+    public static Item RedCrate = new RedstonicCrate();
+    public static Item RedMessanger = new RedstonicMessanger();
+
     public static void init() {
         //ITEMS
         GameRegistry.registerItem(ManualBook, ManualBook.getUnlocalizedName());
         if(ConfigHandler.redstonicDrill)GameRegistry.registerItem(RedDrill, RedDrill.getUnlocalizedName());
         if(ConfigHandler.redstonicSword)GameRegistry.registerItem(RedSword, RedSword.getUnlocalizedName());
 //        if(ConfigHandler.redstonicContainer)GameRegistry.registerItem(RedContainer, RedContainer.getUnlocalizedName());
+
+        GameRegistry.registerItem(RedCrate, RedCrate.getUnlocalizedName());
+        GameRegistry.registerItem(RedMessanger, RedMessanger.getUnlocalizedName());
+
+        //ARMOR
+//        GameRegistry.registerItem(RedHelmet, RedHelmet.getUnlocalizedName());
+//        GameRegistry.registerItem(RedChestplate, RedChestplate.getUnlocalizedName());
+//        GameRegistry.registerItem(RedLeggings, RedLeggings.getUnlocalizedName());
+//        GameRegistry.registerItem(RedBoots, RedBoots.getUnlocalizedName());
 
         //DRILL HEADS
         if(ConfigHandler.redstonicDrill) {

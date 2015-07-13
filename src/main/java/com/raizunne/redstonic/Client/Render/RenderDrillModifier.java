@@ -3,13 +3,19 @@ package com.raizunne.redstonic.Client.Render;
 import com.raizunne.redstonic.Client.Model.ModelDrillModifier;
 import com.raizunne.redstonic.TileEntity.TEDrillModifier;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -40,7 +46,6 @@ public class RenderDrillModifier extends TileEntitySpecialRenderer {
         TEDrillModifier drill = (TEDrillModifier)tileentity;
         ItemStack stack1 = drill.getStackInSlot(0);
         if(stack1!=null){
-
             GL11.glPushMatrix();
             EntityItem entItem = new EntityItem(Minecraft.getMinecraft().thePlayer.getEntityWorld(), 0D, 0D, 0D, stack1);
             entItem.hoverStart = 0.0F;
