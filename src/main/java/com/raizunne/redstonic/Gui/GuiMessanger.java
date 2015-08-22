@@ -21,6 +21,7 @@ import net.minecraft.item.ItemSaddle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
@@ -68,14 +69,19 @@ public class GuiMessanger extends GuiContainer {
         drawTexturedModalRect(posX, posY, 0, 0, xSizeofTexture, ySizeofTexture);
         fontRendererObj.drawString("Redstonic Messenger", posX+((xSizeofTexture/2)-(fontRendererObj.getStringWidth("Redstonic Messenger"))/2), posY+10, 0x990000, false);
         if(page==SEND_PACKAGE){
-            fontRendererObj.drawString("Send To:", posX+20, posY+28, 0x990000, false);
+            fontRendererObj.drawString("Send To:", posX+20, posY+22, 0x990000, false);
             mc.renderEngine.bindTexture(texture);
-            drawTexturedModalRect(posX+11, posY+46, 0, 191, 56, 56);
+            drawTexturedModalRect(posX+11, posY+40, 176, 0, 56, 56);
             this.receiver.drawTextBox();
         }else if(page==PACKAGES) {
             this.search.drawTextBox();
         }
         drawHover(x,y);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+        super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
     }
 
     @Override
@@ -121,7 +127,6 @@ public class GuiMessanger extends GuiContainer {
             player.inventory.getCurrentItem().stackTagCompound = new NBTTagCompound();
         }
         player.inventory.getCurrentItem().stackTagCompound.setString("page", shit.toString());
-        System.out.println(player.inventory.getCurrentItem().stackTagCompound);
     }
 
     @Override
@@ -135,8 +140,8 @@ public class GuiMessanger extends GuiContainer {
         String[] menusT = XML.getTable("menu", "messenger");
         ButtonMenu[] menus = new ButtonMenu[menusT.length];
 
-        receiver = new GuiTextField(fontRendererObj, posX+65, posY+25, 80, 12);
-        search = new GuiTextField(fontRendererObj, posX+50, posY+25, 80, 12);
+        receiver = new GuiTextField(fontRendererObj, posX+65, posY+19, 80, 12);
+        search = new GuiTextField(fontRendererObj, posX+50, posY+19, 80, 12);
         if(page!=MENU){
             ButtonDirectional dir = new ButtonDirectional(-3, posX+16, posY+9, ButtonDirectional.Type.LEFT_STRAIGHT);
             buttonList.add(dir);
@@ -151,18 +156,24 @@ public class GuiMessanger extends GuiContainer {
         }else if(page==SEND_PACKAGE){
 
         }else if(page==PACKAGES){
-            List<ItemStack> contents = RedstonicMessanger.getCratesFromPlayer(player, world);
+            List<ItemStack> contents = RedstonicMessanger.getCratesFromPlayer(player, MinecraftServer.getServer().getEntityWorld());
             ItemStack[] crates = contents.toArray(new ItemStack[contents.size()]);
             ButtonGive[] messages = new ButtonGive[contents.size()];
-            int btnY = 0;
+            int btnY = 0; int btnX = 0;
+            int xFactor = 0; int yFactor = -1;
             for(int i=0; i<crates.length; i++){
+                xFactor++;
+                yFactor++;
                 ItemStack head = new ItemStack(Items.apple);
                 List<String> lore = new ArrayList<String>();
                 lore.add("Sent by; ");
-                if(i>4){
+                if(yFactor>4){
                     btnY=(int)((long)(i/4))*25;
+                    yFactor = 0;
+                    xFactor = 0;
                 }
-                messages[i] = new ButtonGive(10000+i, posX+10+(i*22), posY+50+btnY, player, head, crates[i]);
+                btnX = (xFactor*22);
+                messages[i] = new ButtonGive(10000+i, posX+10+btnX, posY+50+btnY, player, head, crates[i]);
                 buttonList.add(messages[i]);
                 hovering.put(10000+i, lore);
             }

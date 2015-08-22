@@ -5,10 +5,7 @@ package com.raizunne.redstonic;
  * on 03/02/2015, 09:47 PM.
  */
 
-import com.raizunne.redstonic.Handler.ConfigHandler;
-import com.raizunne.redstonic.Handler.GUIHandler;
-import com.raizunne.redstonic.Handler.RedstonicEventHandler;
-import com.raizunne.redstonic.Handler.RedstonicWorldData;
+import com.raizunne.redstonic.Handler.*;
 import com.raizunne.redstonic.Item.RedstonicContainer;
 import com.raizunne.redstonic.Network.PacketDrill;
 import com.raizunne.redstonic.Network.PacketDriller;
@@ -24,6 +21,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -34,6 +32,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
+
+import static com.raizunne.redstonic.Handler.RedstonicCommands.*;
 
 @Mod(modid = Redstonic.MODID, version = Redstonic.VERSION, dependencies = "after:ThermalExpansion;after:EnderIO")
 public class Redstonic {
@@ -93,6 +93,13 @@ public class Redstonic {
 
     public void load(FMLInitializationEvent event){
         new GUIHandler();
+    }
+
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(new RedstonicCommands().new RemoveMessages());
+        event.registerServerCommand(new RedstonicCommands().new Redstonic());
     }
 
 }

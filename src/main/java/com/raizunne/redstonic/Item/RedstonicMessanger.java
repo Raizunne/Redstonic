@@ -55,18 +55,12 @@ public class RedstonicMessanger extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if(player.isSneaking()){
-            if(!world.isRemote) {
-//                sendMessage(player, "Raizunne", new ItemStack[]{new ItemStack(Items.apple, 69), new ItemStack(Items.potato, 69)});
-                System.out.println("marked");
-                System.out.println(getCratesFromPlayer(player, world));
-            }
+            sendMessage(player, player.getDisplayName(), new ItemStack[]{new ItemStack(Items.apple, 69), new ItemStack(Items.potato, 69)});
+            getCratesFromPlayer(player, world);
+            System.out.println(stack.stackTagCompound);
             return stack;
         }
-        RedstonicWorldData worldData = RedstonicWorldData.get(world);
-        NBTTagCompound worldTag = worldData.getData();
-        if(!world.isRemote){
-            System.out.println(worldTag);
-        }
+
         FMLNetworkHandler.openGui(player, Redstonic.instance, 7, world, (int) player.posX, (int) player.posY, (int) player.posZ);
         return stack;
     }
@@ -86,21 +80,24 @@ public class RedstonicMessanger extends Item {
         worldData.markDirty();
     }
 
-    public static void resetMessages(EntityPlayer sender){
-        RedstonicWorldData worldData = RedstonicWorldData.get(sender.getEntityWorld());
+    public static void resetMessages(String sender, World world){
+        RedstonicWorldData worldData = RedstonicWorldData.get(world);
         NBTTagCompound worldTag = worldData.getData();
+        NBTTagList playerCrates = worldTag.getTagList(sender.toLowerCase(), 10);
+//        for(int i=0; i<playerCrates.tagCount(); i++){
+//            playerCrates.removeTag(i);
+//        }
+        worldTag.removeTag(sender);
         worldData.markDirty();
     }
 
     public static List<ItemStack> getCratesFromPlayer(EntityPlayer player, World world){
         List<ItemStack> crates = new ArrayList<ItemStack>();
-
-        System.out.println(player);
-        System.out.println(world);
-
-        RedstonicWorldData worldData = RedstonicWorldData.get(world);
+        RedstonicWorldData worldData = RedstonicWorldData.get(player.getEntityWorld());
         NBTTagCompound worldTag = worldData.getData();
         NBTTagList playerCrates = worldTag.getTagList(player.getDisplayName().toLowerCase(), 10);
+
+        System.out.println(playerCrates);
 
         for(int i=0; i<playerCrates.tagCount(); i++){
             crates.add(ItemStack.loadItemStackFromNBT(playerCrates.getCompoundTagAt(i)));

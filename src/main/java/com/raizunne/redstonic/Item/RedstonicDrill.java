@@ -1,6 +1,7 @@
 package com.raizunne.redstonic.Item;
 
 import cofh.api.energy.IEnergyContainerItem;
+import com.raizunne.redstonic.Handler.ConfigHandler;
 import com.raizunne.redstonic.Redstonic;
 import com.raizunne.redstonic.RedstonicItems;
 import com.raizunne.redstonic.Util.DrillUtil;
@@ -449,13 +450,13 @@ public class RedstonicDrill extends ItemPickaxe implements IEnergyContainerItem 
 
         int head = tag.getInteger("head");
         switch(head){
-            case 0: return 10F * multiplier;
-            case 1: return 25F * multiplier;
-            case 2: return 15F * multiplier;
-            case 3: return 8F * multiplier;
-            case 4: return 5F * multiplier;
-            case 5: return 8F * multiplier;
-            case 6: return 10F * multiplier;
+            case 0: return (float) ConfigHandler.ironDrillSpeed * multiplier;
+            case 1: return (float) ConfigHandler.goldDrillSpeed * multiplier;
+            case 2: return (float) ConfigHandler.diamondDrillSpeed * multiplier;
+            case 3: return (float) ConfigHandler.heavyDrillSpeed * multiplier;
+            case 4: return (float) ConfigHandler.fortuitousDrillSpeed * multiplier;
+            case 5: return (float) ConfigHandler.silkyDrillSpeed * multiplier;
+            case 6: return (float) ConfigHandler.blazerDrillSpeed * multiplier;
             case 7: return 200F * multiplier;
             default: return 1F;
         }

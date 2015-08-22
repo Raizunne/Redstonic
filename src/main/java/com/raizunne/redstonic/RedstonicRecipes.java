@@ -28,75 +28,75 @@ public class RedstonicRecipes {
         GameRegistry.addShapelessRecipe(new ItemStack(RedstonicItems.ManualBook), new Object[]{Items.book, Items.stone_pickaxe});
 
         //MOD RECIPES
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.IronHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronHead), new Object[]{
                 " I ",
                 "IBI",
-                "IBI", 'I', Items.iron_ingot, 'B', Blocks.iron_block});
+                "IBI", 'I', "ingotIron", 'B', "blockIron"}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.GoldHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.GoldHead), new Object[]{
                 " I ",
                 "IBI",
-                "IBI", 'I', Items.gold_ingot, 'B', Blocks.gold_block});
+                "IBI", 'I', "ingotGold", 'B', "blockGold"}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.DiamondHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.DiamondHead), new Object[]{
                 " I ",
                 "III",
-                "IBI", 'I', Items.diamond, 'B', Blocks.diamond_block});
+                "IBI", 'I', "gemDiamond", 'B', "blockDiamond"}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.HeavyHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.HeavyHead), new Object[]{
                 " I ",
                 "IDI",
-                "GBH", 'D', RedstonicItems.DiamondHead, 'G', RedstonicItems.GoldHead, 'H', RedstonicItems.IronHead, 'I', Items.iron_ingot, 'B', Blocks.iron_block});
+                "GBH", 'D', RedstonicItems.DiamondHead, 'G', RedstonicItems.GoldHead, 'H', RedstonicItems.IronHead, 'I', "ingotIron", 'B', "blockIron"}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.FortuitousHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.FortuitousHead), new Object[]{
                 " I ",
                 "IDI",
-                "GBH", 'D', RedstonicItems.DiamondHead, 'G', RedstonicItems.GoldHead, 'H', RedstonicItems.IronHead, 'I', Items.iron_ingot, 'B', Blocks.lapis_block});
+                "GBH", 'D', RedstonicItems.DiamondHead, 'G', RedstonicItems.GoldHead, 'H', RedstonicItems.IronHead, 'I', "ingotIron", 'B', "blockLapis"}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.SpeedAugment), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.SpeedAugment), new Object[]{
                 "III",
                 "IBI",
-                "III", 'I', Items.iron_ingot, 'B', RedstonicItems.GoldHead});
+                "III", 'I', "ironIngot", 'B', RedstonicItems.GoldHead}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.SpeedIIAugment), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.SpeedIIAugment), new Object[]{
                 "I I",
                 "BAB",
-                "I I", 'I', Items.iron_ingot, 'A', RedstonicItems.SpeedAugment, 'B', Blocks.iron_block, 'D', RedstonicItems.GoldHead});
+                "I I", 'I', "ingotIron", 'A', RedstonicItems.SpeedAugment, 'B', "blockIron", 'D', RedstonicItems.GoldHead}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.HotswapAugment), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.HotswapAugment), new Object[]{
                 "III",
                 "DCD",
-                "III", 'C', Blocks.chest, 'D', RedstonicItems.IronHead, 'I', Items.iron_ingot});
+                "III", 'C', Blocks.chest, 'D', RedstonicItems.IronHead, 'I', "ingotIron"}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.SilkyHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.SilkyHead), new Object[]{
                 " E ",
                 "EGE",
-                "GDG", 'E', Items.emerald, 'G', Items.gold_ingot, 'D', RedstonicItems.DiamondHead});
+                "GDG", 'E', "gemEmerald", 'G', "ingotGold", 'D', RedstonicItems.DiamondHead}));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.BlazerHead), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.BlazerHead), new Object[]{
                 " C ",
                 "CGC",
-                "EDE", 'C', Blocks.coal_block, 'E', Items.emerald, 'G', RedstonicItems.DiamondHead, 'D', RedstonicItems.GoldHead});
+                "EDE", 'C', "blockCoal", 'E', "gemEmerald", 'G', RedstonicItems.DiamondHead, 'D', RedstonicItems.GoldHead}));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicBlocks.Modifier),
                 "WIW",
                 "IGI",
-                "WIW", 'W', Blocks.log, 'I', Items.iron_ingot, 'G', "gearIron"));
+                "WIW", 'W', Blocks.log, 'I', "ingotIron", 'G', "gearIron"));
 
-        GameRegistry.addRecipe(new ItemStack(RedstonicItems.BlockAugment), new Object[]{
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.BlockAugment), new Object[]{
                 "I I",
                 " B ",
-                "I I", 'I', Items.iron_ingot, 'B', Blocks.stonebrick});
+                "I I", 'I', "ingotIron", 'B', Blocks.stonebrick}));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.capacitor),
                 " R ",
                 "RCR",
-                "GRG", 'R', Items.redstone, 'C', "ingotCopper", 'G', Items.gold_nugget));
+                "GRG", 'R', "dustRedstone", 'C', "ingotCopper", 'G', "nuggetGold"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.basicBattery),
                 " R ",
                 "SCS",
-                "RAR", 'R', Blocks.redstone_block, 'S', "ingotInvar", 'C', "ingotCopper", 'A', RedstonicItems.capacitor));
+                "RAR", 'R', "blockRedstone", 'S', "ingotInvar", 'C', "ingotCopper", 'A', RedstonicItems.capacitor));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.infiniteBattery),
                 "III", "III", "III", 'I', RedstonicItems.infiniteBattery));
@@ -104,52 +104,52 @@ public class RedstonicRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicBlocks.Driller),
                 "CEC",
                 "IBI",
-                "CCC", 'C', Blocks.cobblestone, 'E', RedstonicItems.EnergizerFull, 'I', Blocks.iron_block, 'B', "redstonicMidTierBody"));
+                "CCC", 'C', "cobblestone", 'E', RedstonicItems.EnergizerFull, 'I', "blockIron", 'B', "redstonicMidTierBody"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.MagnetAugment),
                 "III",
                 " LB",
-                "III", 'I', Items.iron_ingot, 'L', "ingotLumium", 'B', RedstonicItems.basicBattery));
+                "III", 'I', "ingotIron", 'L', "ingotLumium", 'B', RedstonicItems.basicBattery));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronHandle),
                 " I ",
                 "ISI",
-                "BI ", 'I', Items.iron_ingot, 'S', RedstonicItems.redstoneStick, 'B', Blocks.iron_block));
+                "BI ", 'I', "ingotIron", 'S', RedstonicItems.redstoneStick, 'B', "blockIron"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.WoodHandle),
                 " I ",
                 "ISI",
-                "II ", 'I', Blocks.log, 'S', Items.stick));
+                "II ", 'I', "logWood", 'S', "stickWood"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronBlade),
                 "  I",
                 " B ",
-                "B  ", 'I', Items.iron_ingot, 'B', Blocks.iron_block));
+                "B  ", 'I', "ingotIron", 'B', "blockIron"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.DiamondBlade),
                 "  I",
                 " B ",
-                "B  ", 'I', Items.diamond, 'B', Blocks.diamond_block));
+                "B  ", 'I', "gemDiamond", 'B', "blockDiamond"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.BerserkSwordAugment),
                 "III",
                 "KBK",
-                "III", 'I', Items.iron_ingot, 'B', RedstonicItems.IronBlade, 'K', Blocks.iron_block));
+                "III", 'I', "ingotIron", 'B', RedstonicItems.IronBlade, 'K', "blockIron"));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.BerserkIISwordAugment),
                 "IKI",
                 "IBI",
-                "III", 'I', Items.iron_ingot, 'B', "redstonicMidTierBlade", 'K', RedstonicItems.BerserkSwordAugment));
+                "III", 'I', "ingotIron", 'B', "redstonicMidTierBlade", 'K', RedstonicItems.BerserkSwordAugment));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.BlazerSwordAugment),
                 "CIC",
                 "IBI",
-                "CIC", 'I', Items.iron_ingot, 'B', "redstonicMidTierBlade", 'C', Items.fire_charge));
+                "CIC", 'I', "ingotIron", 'B', "redstonicMidTierBlade", 'C', Items.fire_charge));
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.FortuitousSwordAugment),
                 "CIC",
                 "IBI",
-                "CIC", 'I', Items.iron_ingot, 'B', Util.toStack(Items.dye, 1, 4), 'C', Blocks.lapis_block));
+                "CIC", 'I', "ingotIron", 'B', "gemLapis", 'C', "blockLapis"));
 
         //TE RECIPES
         if(Loader.isModLoaded("ThermalExpansion")) {
@@ -160,17 +160,17 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
                     "III",
                     "IBI",
-                    "III", 'I', Items.iron_ingot, 'B', TEHelper.capacitorRedstone});
+                    "III", 'I', "ingotIron", 'B', TEHelper.capacitorRedstone});
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronBody),
                     " G ",
                     "IBG",
-                    "II ", 'I', Items.iron_ingot, 'B', TEHelper.coilElectrum, 'G', "gearIron"));
+                    "II ", 'I', "ingotIron", 'B', TEHelper.coilElectrum, 'G', "gearIron"));
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.ElectrumBody),
                     " G ",
                     "IBG",
-                    "II ", 'I', "ingotElectrum", 'B', TEHelper.coilElectrum, 'G', TEHelper.gearElectrum));
+                    "II ", 'I', "ingotElectrum", 'B', TEHelper.coilElectrum, 'G', "gearElectrum"));
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnderiumBody),
                     " G ",
@@ -210,7 +210,7 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.MagnetAugment),
                     "III",
                     " LB",
-                    "III", 'I', Items.iron_ingot, 'L', "ingotLumium", 'B', TEHelper.capacitorHardened));
+                    "III", 'I', "ingotIron", 'L', "ingotLumium", 'B', TEHelper.capacitorHardened));
 
             TEHelper.addSmelterRecipe(32000, new ItemStack(RedstonicItems.Energizer), new ItemStack(Blocks.redstone_block, 40), new ItemStack(RedstonicItems.EnergizerFull));
             TEHelper.addSmelterRecipe(1600, new ItemStack(Items.stick), new ItemStack(Items.redstone, 20), new ItemStack(RedstonicItems.redstoneStick));
@@ -233,14 +233,14 @@ public class RedstonicRecipes {
                     " G ",
                     "IWG",
                     "II ", 'W', Items.nether_star, 'I', RedstonicItems.ingotVibrantium, 'G', RedstonicItems.EnergizerFull));
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.EndHead), new Object[]{
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EndHead), new Object[]{
                     " D ",
                     "IWG",
-                    "ECE", 'D', RedstonicItems.DiamondHead, 'I', RedstonicItems.IronHead, 'W', Items.nether_star, 'G', RedstonicItems.GoldHead, 'E', RedstonicItems.EnergizerFull, 'C', EIOHelper.basicCapacitor});
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.gearIron), new Object[]{
+                    "ECE", 'D', RedstonicItems.DiamondHead, 'I', RedstonicItems.IronHead, 'W', Items.nether_star, 'G', RedstonicItems.GoldHead, 'E', RedstonicItems.EnergizerFull, 'C', EIOHelper.basicCapacitor}));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.gearIron), new Object[]{
                     " I ",
                     "IGI",
-                    " I ", 'I', Items.iron_ingot, 'G', EIOHelper.basicGear});
+                    " I ", 'I', "ingotIron", 'G', EIOHelper.basicGear}));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.gearEnergized),
                     " I ",
                     "IGI",
@@ -252,7 +252,7 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronBody),
                     " G ",
                     "IBG",
-                    "II ", 'I', Items.iron_ingot, 'B', EIOHelper.basicCapacitor, 'G', "gearIron"));
+                    "II ", 'I', "ingotIron", 'B', EIOHelper.basicCapacitor, 'G', "gearIron"));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnergeticBody),
                     " G ",
                     "IBG",
@@ -293,7 +293,7 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.energizedBattery),
                     " R ",
                     "SCS",
-                    "RAR", 'R', Blocks.redstone_block, 'S', "ingotEnergeticAlloy", 'C', "blockPhasedIron", 'A', basicBattery));
+                    "RAR", 'R', "blockRedstone", 'S', "ingotEnergeticAlloy", 'C', "blockPhasedIron", 'A', basicBattery));
 
             ItemStack energizedBattery = new ItemStack(RedstonicItems.energizedBattery);
             energizedBattery.setItemDamage(OreDictionary.WILDCARD_VALUE);
@@ -301,12 +301,12 @@ public class RedstonicRecipes {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.greatBattery),
                     " R ",
                     "SCS",
-                    "RAR", 'R', Blocks.redstone_block, 'S', RedstonicItems.ingotGlowSteel, 'C', "blockPhasedGold" , 'A', energizedBattery));
+                    "RAR", 'R', "blockRedstone", 'S', RedstonicItems.ingotGlowSteel, 'C', "blockPhasedGold" , 'A', energizedBattery));
 
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
                     "III",
                     "IBI",
-                    "III", 'I', Items.iron_ingot, 'B', RedstonicItems.energizedBattery});
+                    "III", 'I', "ingotIron", 'B', RedstonicItems.energizedBattery}));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicBlocks.GlowSteel),
                     "III", "III", "III", 'I', RedstonicItems.ingotGlowSteel));
 

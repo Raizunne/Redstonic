@@ -84,7 +84,7 @@ public class GUIHandler implements IGuiHandler{
             }
             break;
             case 7: if(player.inventory.getCurrentItem().getItem() instanceof RedstonicMessanger) {
-                return new GuiMessanger(player, world);
+                return new GuiMessanger(player, player.getEntityWorld());
             }
             break;
             default: return null;

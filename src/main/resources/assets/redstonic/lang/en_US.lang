@@ -49,6 +49,7 @@ item.RedstonicDrill.name=§cRedstonic Drill
 item.Manual.name=§cRedstonic Manual
 item.RedstonicContainer.name=§cRedstonic Container
 item.RedstonicSword.name=§6Redstonic Sword
+item.RedstonicMessanger.name=§cRedstonic Messanger
 
 item.RedstonicCrate.name=§2Redstonic Crate
 
@@ -63,7 +64,7 @@ item.Vibrantium.name=Vibrantium Ingot
 item.gearIron.name=Iron Gear
 item.gearEnergized.name=Energetic Alloy Gear
 item.gearVibrant.name=Vibrant Alloy Gear
-item.ingotGlowSteel.name=Glowstone Infused Steel
+item.ingotGlowSteel.name=Glowstonic Steel
 item.capacitor.name=Capacitor
 item.redstoneStick.name=Redstone Infused Stick
 
