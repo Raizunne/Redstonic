@@ -157,10 +157,10 @@ public class RedstonicRecipes {
                     "LUL",
                     "UHU",
                     "LUL", 'L', "ingotLead", 'U', "ingotLumium", 'H', "blockGlassHardened", 'D', RedstonicItems.GoldHead));
-            GameRegistry.addRecipe(new ItemStack(RedstonicItems.EnergyAugment), new Object[]{
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.EnergyAugment),
                     "III",
                     "IBI",
-                    "III", 'I', "ingotIron", 'B', TEHelper.capacitorRedstone});
+                    "III", 'I', "ingotIron", 'B', TEHelper.capacitorRedstone));
 
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RedstonicItems.IronBody),
                     " G ",
