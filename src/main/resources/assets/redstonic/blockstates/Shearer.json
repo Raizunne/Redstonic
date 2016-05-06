@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "redstonic:Shearer",
+        "uvlock": true
+    },
+    "variants": {
+        "facing":{
+			"south":{"y": 180},
+			"north":{},
+			"east":{"y": 90},
+			"west":{"y":270}
+		}
+    }
+}

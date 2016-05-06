@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "redstonic:blocks/machine_top",
+        "front": "redstonic:blocks/butcher_front",
+        "side": "redstonic:blocks/machine_side"
+    }
+}
