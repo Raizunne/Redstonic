@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "redstonic:Cone",
+        "uvlock": false
+    },
+    "variants": {
+        "normal":{
+			"model": "redstonic:Cone",
+			"uvlock": false
+		}
+    }
+}

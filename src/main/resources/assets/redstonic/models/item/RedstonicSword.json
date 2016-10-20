@@ -1,0 +1,46 @@
+
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "redstonic:items/Sword/Placeholder"
+    },
+    "overrides":[
+
+		{"predicate": {"blade": 0, "handle": 0}, "model": "redstonic:item/Sword/Sword.0.0"},
+		{"predicate": {"blade": 0, "handle": 1}, "model": "redstonic:item/Sword/Sword.0.1"},
+		{"predicate": {"blade": 0, "handle": 2}, "model": "redstonic:item/Sword/Sword.0.2"},
+		{"predicate": {"blade": 0, "handle": 3}, "model": "redstonic:item/Sword/Sword.0.3"},
+		{"predicate": {"blade": 0, "handle": 4}, "model": "redstonic:item/Sword/Sword.0.4"},
+		{"predicate": {"blade": 0, "handle": 5}, "model": "redstonic:item/Sword/Sword.0.5"},
+		{"predicate": {"blade": 1, "handle": 0}, "model": "redstonic:item/Sword/Sword.1.0"},
+		{"predicate": {"blade": 1, "handle": 1}, "model": "redstonic:item/Sword/Sword.1.1"},
+		{"predicate": {"blade": 1, "handle": 2}, "model": "redstonic:item/Sword/Sword.1.2"},
+		{"predicate": {"blade": 1, "handle": 3}, "model": "redstonic:item/Sword/Sword.1.3"},
+		{"predicate": {"blade": 1, "handle": 4}, "model": "redstonic:item/Sword/Sword.1.4"},
+		{"predicate": {"blade": 1, "handle": 5}, "model": "redstonic:item/Sword/Sword.1.5"},
+		{"predicate": {"blade": 2, "handle": 0}, "model": "redstonic:item/Sword/Sword.2.0"},
+		{"predicate": {"blade": 2, "handle": 1}, "model": "redstonic:item/Sword/Sword.2.1"},
+		{"predicate": {"blade": 2, "handle": 2}, "model": "redstonic:item/Sword/Sword.2.2"},
+		{"predicate": {"blade": 2, "handle": 3}, "model": "redstonic:item/Sword/Sword.2.3"},
+		{"predicate": {"blade": 2, "handle": 4}, "model": "redstonic:item/Sword/Sword.2.4"},
+		{"predicate": {"blade": 2, "handle": 5}, "model": "redstonic:item/Sword/Sword.2.5"},
+		{"predicate": {"blade": 3, "handle": 0}, "model": "redstonic:item/Sword/Sword.3.0"},
+		{"predicate": {"blade": 3, "handle": 1}, "model": "redstonic:item/Sword/Sword.3.1"},
+		{"predicate": {"blade": 3, "handle": 2}, "model": "redstonic:item/Sword/Sword.3.2"},
+		{"predicate": {"blade": 3, "handle": 3}, "model": "redstonic:item/Sword/Sword.3.3"},
+		{"predicate": {"blade": 3, "handle": 4}, "model": "redstonic:item/Sword/Sword.3.4"},
+		{"predicate": {"blade": 3, "handle": 5}, "model": "redstonic:item/Sword/Sword.3.5"},
+		{"predicate": {"blade": 4, "handle": 0}, "model": "redstonic:item/Sword/Sword.4.0"},
+		{"predicate": {"blade": 4, "handle": 1}, "model": "redstonic:item/Sword/Sword.4.1"},
+		{"predicate": {"blade": 4, "handle": 2}, "model": "redstonic:item/Sword/Sword.4.2"},
+		{"predicate": {"blade": 4, "handle": 3}, "model": "redstonic:item/Sword/Sword.4.3"},
+		{"predicate": {"blade": 4, "handle": 4}, "model": "redstonic:item/Sword/Sword.4.4"},
+		{"predicate": {"blade": 4, "handle": 5}, "model": "redstonic:item/Sword/Sword.4.5"},
+		{"predicate": {"blade": 5, "handle": 0}, "model": "redstonic:item/Sword/Sword.5.0"},
+		{"predicate": {"blade": 5, "handle": 1}, "model": "redstonic:item/Sword/Sword.5.1"},
+		{"predicate": {"blade": 5, "handle": 2}, "model": "redstonic:item/Sword/Sword.5.2"},
+		{"predicate": {"blade": 5, "handle": 3}, "model": "redstonic:item/Sword/Sword.5.3"},
+		{"predicate": {"blade": 5, "handle": 4}, "model": "redstonic:item/Sword/Sword.5.4"},
+		{"predicate": {"blade": 5, "handle": 5}, "model": "redstonic:item/Sword/Sword.5.5"}
+	]
+}

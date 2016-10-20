@@ -1,0 +1,18 @@
+
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "redstonic:items/Drill/Heads/IconTemplate"
+    },
+    "overrides":[
+
+		{"predicate": {"metadata": 0}, "model": "redstonic:item/Drill/Heads/Iron"},
+		{"predicate": {"metadata": 1}, "model": "redstonic:item/Drill/Heads/Gold"},
+		{"predicate": {"metadata": 2}, "model": "redstonic:item/Drill/Heads/Diamond"},
+		{"predicate": {"metadata": 3}, "model": "redstonic:item/Drill/Heads/Heavy"},
+		{"predicate": {"metadata": 4}, "model": "redstonic:item/Drill/Heads/Fortuitous"},
+		{"predicate": {"metadata": 5}, "model": "redstonic:item/Drill/Heads/Silky"},
+		{"predicate": {"metadata": 6}, "model": "redstonic:item/Drill/Heads/Blazer"},
+		{"predicate": {"metadata": 7}, "model": "redstonic:item/Drill/Heads/Ultimate"}
+	]
+}

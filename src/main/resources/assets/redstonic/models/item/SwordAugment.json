@@ -1,0 +1,12 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "redstonic:items/Augment/Sword/IconTemplate"
+    },
+    "overrides":[
+		{"predicate": {"metadata": 0}, "model": "redstonic:item/Sword/Augment/Berserk"},
+		{"predicate": {"metadata": 1}, "model": "redstonic:item/Sword/Augment/BerserkII"},
+		{"predicate": {"metadata": 2}, "model": "redstonic:item/Sword/Augment/Blazer"},
+		{"predicate": {"metadata": 3}, "model": "redstonic:item/Sword/Augment/Fortuitous"}
+	]
+}

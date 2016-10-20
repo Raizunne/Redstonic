@@ -1,1 +1,0 @@
-Fixed critical bug when building a drill.

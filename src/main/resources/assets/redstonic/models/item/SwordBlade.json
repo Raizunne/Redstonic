@@ -1,0 +1,16 @@
+
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "redstonic:items/Sword/Blades/Template"
+    },
+    "overrides":[
+
+		{"predicate": {"metadata": 0}, "model": "redstonic:item/Sword/Blades/Iron"},
+		{"predicate": {"metadata": 1}, "model": "redstonic:item/Sword/Blades/Diamond"},
+		{"predicate": {"metadata": 2}, "model": "redstonic:item/Sword/Blades/Electrum"},
+		{"predicate": {"metadata": 3}, "model": "redstonic:item/Sword/Blades/Enderium"},
+		{"predicate": {"metadata": 4}, "model": "redstonic:item/Sword/Blades/Energized"},
+		{"predicate": {"metadata": 5}, "model": "redstonic:item/Sword/Blades/Vibrant"}
+	]
+}

@@ -1,0 +1,13 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "redstonic:items/Augment/Drill/IconTemplate"
+    },
+    "overrides":[
+		{"predicate": {"metadata": 0}, "model": "redstonic:item/Drill/Augment/Energy"},
+		{"predicate": {"metadata": 1}, "model": "redstonic:item/Drill/Augment/Speed"},
+		{"predicate": {"metadata": 2}, "model": "redstonic:item/Drill/Augment/SpeedII"},
+		{"predicate": {"metadata": 3}, "model": "redstonic:item/Drill/Augment/Hotswap"},
+		{"predicate": {"metadata": 4}, "model": "redstonic:item/Drill/Augment/Heavy"}
+	]
+}

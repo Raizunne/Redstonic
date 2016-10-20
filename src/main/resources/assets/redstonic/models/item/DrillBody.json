@@ -1,0 +1,16 @@
+
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "redstonic:items/Drill/Bodies/Template"
+    },
+    "overrides":[
+
+		{"predicate": {"metadata": 0}, "model": "redstonic:item/Drill/Bodies/Iron"},
+		{"predicate": {"metadata": 1}, "model": "redstonic:item/Drill/Bodies/Electrum"},
+		{"predicate": {"metadata": 2}, "model": "redstonic:item/Drill/Bodies/Enderium"},
+		{"predicate": {"metadata": 3}, "model": "redstonic:item/Drill/Bodies/Energetic"},
+		{"predicate": {"metadata": 4}, "model": "redstonic:item/Drill/Bodies/Vibrant"},
+		{"predicate": {"metadata": 5}, "model": "redstonic:item/Drill/Bodies/End"}
+	]
+}

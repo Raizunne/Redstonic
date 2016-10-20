@@ -2,13 +2,13 @@
 {
   "modid": "redstonic",
   "name": "Redstonic",
-  "description": "Several tools and blocks that use RF",
+  "description": "Redstonic by Raizunne",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Raizunne"],
-  "credits": "Everyone that helped me on the MinecraftForge Forums!",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
