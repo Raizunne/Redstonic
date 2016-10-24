@@ -1,6 +1,8 @@
 package com.raizu.redstonic.Items.Sword;
 
+import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
+import com.raizu.redstonic.Utils.StringUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,9 +26,9 @@ import java.util.List;
  * as a part of Redstonic
  **/
 public class SwordBlade extends Item {
-    public String[] blades = {"Iron", "Diamond", "Electrum", "Enderium", "Energized", "Vibrant"};
+    public String[] blades = {"Iron", "Diamond", "Electrum", "Enderium", "Energetic", "Vibrant"};
     public int[] energyCost = {300, 1000, 1500, 3000, 1500, 3000};
-    public float[] damageBase = {3, 4, 6, 8, 6, 8};
+    public float[] damageBase = {3, 4, 5, 7, 5, 7};
     public String[] oreDic = {"bladeLowTier", "baseLowMidTier", "bladeMidTier", "bladeHighTier", "bladeMidTier", "bladeHighTier"};
 
 
@@ -48,9 +50,9 @@ public class SwordBlade extends Item {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, playerIn, tooltip, advanced);
-        tooltip.add(TextFormatting.RED + "" + damageBase[stack.getMetadata()] + " Heart " + TextFormatting.GRAY + "Base Damage.");
+        tooltip.add(TextFormatting.RED +""+ damageBase[stack.getMetadata()] +" "+ StringUtils.localize("redstonic.sword.basedamage", TextFormatting.GRAY));
         if(stack.getTagCompound()!=null){
-            tooltip.add("Kills: "+stack.getTagCompound().getInteger("kills"));
+            tooltip.add(StringUtils.localize("redstonic.sword.kills")+": "+stack.getTagCompound().getInteger("kills"));
         }
     }
 
@@ -71,8 +73,14 @@ public class SwordBlade extends Item {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < blades.length; i++) {
-            subItems.add(new ItemStack(itemIn, 1, i));
-            OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+            if(OreDictionary.getOres("ingot"+blades[i]).size()>0 || OreDictionary.getOres("ingot"+blades[i]+"Alloy").size()>0 || blades[i].equals("Diamond")) {
+                subItems.add(new ItemStack(itemIn, 1, i));
+                OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+            }
         }
+    }
+
+    public static ItemStack getBlade(SwordPart part){
+        return new ItemStack(RedItems.swordBlade, 1, part.part);
     }
 }

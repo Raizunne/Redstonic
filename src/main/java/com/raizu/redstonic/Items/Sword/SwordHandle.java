@@ -1,6 +1,8 @@
 package com.raizu.redstonic.Items.Sword;
 
+import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
+import com.raizu.redstonic.Utils.StringUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +24,7 @@ import java.util.List;
  **/
 public class SwordHandle extends Item {
 
-    public String[] handles = {"Wood", "Iron", "Electrum", "Enderium", "Energized", "Vibrant"};
+    public String[] handles = {"Wood", "Iron", "Electrum", "Enderium", "Energetic", "Vibrant"};
     public int[] augmentSlots = {0, 1, 2, 3, 2, 3};
     public String[] oreDic = {"handleLowTier", "handleLowMidTier", "handleMidTier", "handleHighTier", "handleMidTier", "handleHighTier"};
 
@@ -45,12 +47,12 @@ public class SwordHandle extends Item {
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, playerIn, tooltip, advanced);
         switch(stack.getMetadata()){
-            case 0: tooltip.add("0 Augment Slot"); break;
-            case 1: tooltip.add("1 Augment Slot"); break;
-            case 2: tooltip.add("2 Augment Slot"); break;
-            case 3: tooltip.add("3 Augment Slot"); break;
-            case 4: tooltip.add("2 Augment Slot"); break;
-            case 5: tooltip.add("3 Augment Slot"); break;
+            case 0: tooltip.add("0 " + StringUtils.localize("redstonic.drill.augmentslot")); break;
+            case 1: tooltip.add("1 " + StringUtils.localize("redstonic.drill.augmentslot")); break;
+            case 2: tooltip.add("2 " + StringUtils.localize("redstonic.drill.augmentslot")); break;
+            case 3: tooltip.add("3 " + StringUtils.localize("redstonic.drill.augmentslot")); break;
+            case 4: tooltip.add("2 " + StringUtils.localize("redstonic.drill.augmentslot")); break;
+            case 5: tooltip.add("3 " + StringUtils.localize("redstonic.drill.augmentslot")); break;
         }
     }
 
@@ -62,8 +64,14 @@ public class SwordHandle extends Item {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < handles.length; i++) {
-            subItems.add(new ItemStack(itemIn, 1, i));
-            OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+            if(handles[i]=="Wood" || OreDictionary.getOres("ingot"+handles[i]).size()>0 || OreDictionary.getOres("ingot"+handles[i]+"Alloy").size()>0) {
+                subItems.add(new ItemStack(itemIn, 1, i));
+                OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+            }
         }
+    }
+
+    public static ItemStack getHandle(SwordPart part){
+        return new ItemStack(RedItems.swordHandle, 1, part.part);
     }
 }

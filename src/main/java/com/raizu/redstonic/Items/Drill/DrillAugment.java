@@ -2,6 +2,7 @@ package com.raizu.redstonic.Items.Drill;
 
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
+import com.raizu.redstonic.Utils.StringUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -64,12 +65,19 @@ public class DrillAugment extends Item {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         switch(stack.getMetadata()){
+            case 1: tooltip.add("x1.3 "+ StringUtils.localize("redstonic.drill.augment.speedmult")); break;
+            case 2: tooltip.add("x1.4 "+ StringUtils.localize("redstonic.drill.augment.speedmult")); break;
             case 3: {
-                tooltip.add("Swap Drill Heads on the go!");
-                tooltip.add("1500 RF per swap.");
-                String headName = stack.getTagCompound()==null ? "None" : stack.getTagCompound().getInteger("hotswapHead")==-1 ? "None" : RedItems.drillHead.heads[stack.getTagCompound().getInteger("hotswapHead")]+" Drill Head";
-                tooltip.add("Head: " + TextFormatting.YELLOW+headName);
+                tooltip.add(StringUtils.localize("redstonic.drill.augment.hotswap1"));
+                tooltip.add("1500 RF " + StringUtils.localize("redstonic.drill.augment.hotswap2") + ".");
+                String headName = stack.getTagCompound()==null ? StringUtils.localize("redstonic.drill.none") : stack.getTagCompound().getInteger("hotswapHead")==-1 ? StringUtils.localize("redstonic.drill.none") : StringUtils.localize(RedItems.drillHead.heads[stack.getTagCompound().getInteger("hotswapHead")]+"Head.name");
+                tooltip.add(StringUtils.localize("redstonic.drill.head")+": " + TextFormatting.YELLOW+headName);
             }
+            case 4: tooltip.add("3x3 "+StringUtils.localize("redstonic.drill.mining"));
         }
+    }
+
+    public static ItemStack getAugment(DrillPart part){
+        return new ItemStack(RedItems.drillAugment, 1, part.part);
     }
 }

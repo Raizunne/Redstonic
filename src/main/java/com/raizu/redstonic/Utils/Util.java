@@ -5,7 +5,11 @@ import com.raizu.redstonic.Blocks.Modifier.TEModifier;
 import com.raizu.redstonic.Items.Drill.Drill;
 import com.raizu.redstonic.Items.Drill.DrillAugment;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,4 +63,39 @@ public class Util {
         return false;
     }
 
+    public static void addAlloySmelterRecipe(String name, int energy, ItemStack slot1, ItemStack slot2, ItemStack slot3, ItemStack output) {
+        StringBuilder sending = new StringBuilder();
+        sending.append("<recipeGroup name=\"Redstonic\">");{
+            sending.append("<recipe name=\"" + name + "\" energyCost=\"" + energy + "\">");{
+                sending.append("<input>");{
+                    if(slot1!=null){
+                        ResourceLocation item1 = slot1.getItem().getRegistryName();
+                        sending.append("<itemStack modID=\"" + item1.getResourceDomain() + "\" itemName=\"" + item1.getResourcePath() + "\" itemMeta=\"" + slot1.getItemDamage() + "\" number=\"" + slot1.stackSize + "\" />");
+                    }
+                    if(slot2!=null){
+                        ResourceLocation item2 = slot2.getItem().getRegistryName();
+                        sending.append("<itemStack modID=\"" + item2.getResourceDomain() + "\" itemName=\"" + item2.getResourcePath() + "\" itemMeta=\"" + slot2.getItemDamage() + "\" number=\"" + slot2.stackSize + "\" />");
+                    }
+                    if(slot3!=null) {
+                        ResourceLocation item3 = slot3.getItem().getRegistryName();
+                        sending.append("<itemStack modID=\"" + item3.getResourceDomain() + "\" itemName=\"" + item3.getResourcePath() + "\" itemMeta=\"" + slot3.getItemDamage() + "\" number=\"" + slot3.stackSize + "\" />");
+                    }
+                }
+                sending.append("</input>");
+                sending.append("<output>");{
+                    ResourceLocation outputerino = Item.REGISTRY.getNameForObject(output.getItem());
+                    sending.append("<itemStack modID=\"" + outputerino.getResourceDomain() + "\" itemName=\"" + outputerino.getResourcePath() + "\" itemMeta=\"" + output.getItemDamage() + "\" number=\"" + output.stackSize + "\" />");
+                }
+                sending.append("</output>");
+            }
+            sending.append("</recipe>");
+        }
+        sending.append("</recipeGroup>");
+
+        FMLInterModComms.sendMessage("EnderIO", "recipe:alloysmelter", sending.toString());
+    }
+
+    public static ItemStack findItemStack(String modid, String name, int amount, int meta){
+        return new ItemStack(Item.REGISTRY.getObject(new ResourceLocation(modid+":"+name)), amount, meta);
+    }
 }

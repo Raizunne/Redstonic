@@ -26,6 +26,8 @@ public class RedBlocks {
     public static ItemBlock coneItem = new ConeItem(cone);
     public static Block modifier = new Modifier();
     public static ItemBlock modifierItem = new ModifierItem(modifier);
+
+
     public static void init(){
         GameRegistry.register(cone);
         GameRegistry.register(coneItem);

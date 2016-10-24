@@ -94,7 +94,7 @@ public class Config {
 
         //BATTERIES
         BasicBattery = config.get("Batteries", "BasicBattery", BasicBattery).getBoolean(BasicBattery);
-        EnergizedBattery = config.get("Batteries", "EnergizedBattery", EnergizedBattery).getBoolean(EnergizedBattery);
+        EnergizedBattery = config.get("Batteries", "EnergeticBattery", EnergizedBattery).getBoolean(EnergizedBattery);
         GreatBattery = config.get("Batteries", "GreatBattery", GreatBattery).getBoolean(GreatBattery);
         InfiniteBattery = config.get("Batteries", "InfiniteBattery", InfiniteBattery).getBoolean(InfiniteBattery);
 

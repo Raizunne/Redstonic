@@ -21,7 +21,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.10.2-12.18.2.2099"
+    version = "1.10.2-12.18.2.2104"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -42,9 +42,9 @@ repositories {
 
 dependencies {
 	// compile against the JEI API
-	deobfCompile "mezz.jei:jei_1.10.2:3.12.7.312:api"
+	deobfCompile "mezz.JEI:jei_1.10.2:3.12.7.312:api"
 	// at runtime, use the full JEI jar
-	runtime "mezz.jei:jei_1.10.2:3.12.7.312:"
+	runtime "mezz.JEI:jei_1.10.2:3.12.7.312:"
 }
 
 processResources

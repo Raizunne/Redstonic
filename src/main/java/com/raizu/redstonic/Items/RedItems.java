@@ -32,6 +32,7 @@ public class RedItems {
     public static SwordBlade swordBlade;
     public static SwordHandle swordHandle;
     public static SwordAugment swordAugment;
+    public static Material material;
 
     public static void init(){
         Random random = new Random();
@@ -54,6 +55,9 @@ public class RedItems {
         GameRegistry.register(swordBlade);
         GameRegistry.register(swordHandle);
         GameRegistry.register(swordAugment);
+
+        material = new Material();
+        GameRegistry.register(material);
     }
 
     @SideOnly(Side.CLIENT)
@@ -80,6 +84,9 @@ public class RedItems {
         }
         for (int i = 0; i < swordAugment.augments.length; i++) {
             registerRender(swordAugment, i);
+        }
+        for (int i = 0; i < Materials.values().length; i++) {
+            registerRender(material, i);
         }
     }
 

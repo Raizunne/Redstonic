@@ -1,5 +1,6 @@
 package com.raizu.redstonic.Utils;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
@@ -37,5 +38,9 @@ public class StringUtils {
         if(color)progress+=TextFormatting.GRAY;
         progress +="]";
         return progress;
+    }
+
+    public static String localize(String input, Object ... format) {
+        return I18n.format(input, format);
     }
 }

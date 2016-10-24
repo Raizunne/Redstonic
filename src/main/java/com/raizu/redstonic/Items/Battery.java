@@ -78,22 +78,22 @@ public class Battery extends Item implements IEnergyContainerItem {
         int maxEnergy = this.maxEnergy[stack.getMetadata()], maxReceive = this.maxReceive[stack.getMetadata()];
         if(stack.getTagCompound()==null){
             if(maxEnergy==-1){
-                tooltip.add("Max charge: §k10000§r§7 RF");
+                tooltip.add(StringUtils.localize("redstonic.energy.maxcharge") + ": §k10000§r§7 RF");
             }else{
-                tooltip.add("Max charge: " + NumberFormat.getInstance().format(maxEnergy));
+                tooltip.add(StringUtils.localize("redstonic.energy.maxcharge") + ": " + NumberFormat.getInstance().format(maxEnergy) + " RF");
             }
-            tooltip.add("In/Out: " + NumberFormat.getInstance().format(maxReceive));
+            tooltip.add(StringUtils.localize("redstonic.energy.inout") + ": " + NumberFormat.getInstance().format(maxReceive) + " RF/t");
         }else{
             NBTTagCompound tag = stack.getTagCompound();
             int energyStored = tag.getInteger("Energy");
             if(maxEnergy!=-1){
-                tooltip.add("Charge: " + StringUtils.progressBar(energyStored, maxEnergy, 30) + " " + ((energyStored*100)/maxEnergy)+"%");
+                tooltip.add(StringUtils.localize("redstonic.energy.charge") + ": " + StringUtils.progressBar(energyStored, maxEnergy, 30) + " " + ((energyStored*100)/maxEnergy)+"%");
                 tooltip.add("-   " + TextFormatting.YELLOW + NumberFormat.getInstance().format(energyStored) + TextFormatting.GRAY +"/" + TextFormatting.YELLOW + NumberFormat.getInstance().format(maxEnergy) + TextFormatting.GRAY + " RF");
-                tooltip.add("-   In/Out: " + NumberFormat.getInstance().format(maxReceive) + "RF/t");
+                tooltip.add("-   " + StringUtils.localize("redstonic.energy.inout") +": " + NumberFormat.getInstance().format(maxReceive) + "RF/t");
             }else{
-                tooltip.add("Charge: [" + TextFormatting.LIGHT_PURPLE +  "==/==/==/==" + TextFormatting.GRAY + "] " + "101%");
+                tooltip.add(StringUtils.localize("redstonic.energy.charge") + ": [" + TextFormatting.LIGHT_PURPLE +  "==/==/==/==" + TextFormatting.GRAY + "] " + "101%");
                 tooltip.add("-   §k10000§r§7 / §k10000§r§7 RF");
-                tooltip.add("-   In/Out: " + NumberFormat.getInstance().format(maxReceive) + "RF/t");
+                tooltip.add("-   " + StringUtils.localize("redstonic.energy.inout") + ": " + NumberFormat.getInstance().format(maxReceive) + "RF/t");
             }
         }
     }
@@ -139,5 +139,17 @@ public class Battery extends Item implements IEnergyContainerItem {
     @Override
     public int getMaxEnergyStored(ItemStack stack) {
         return this.maxReceive[stack.getMetadata()];
+    }
+
+    public enum Types{
+        BASIC(0),ENERGETIC(1),GREAT(2);
+        int meta;
+        Types(int i){
+            meta=i;
+        }
+    }
+
+    public static ItemStack getBattery(Types type){
+        return new ItemStack(RedItems.battery, 1, type.meta);
     }
 }

@@ -1,6 +1,7 @@
 package com.raizu.redstonic.Blocks.Modifier;
 
 import com.raizu.redstonic.Redstonic;
+import com.raizu.redstonic.Utils.StringUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -23,7 +24,7 @@ public class ModifierItem extends ItemBlock {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        tooltip.add("Used to craft Redstonic");
-        tooltip.add("drills and swords.");
+        tooltip.add(StringUtils.localize("redstonic.modifier.tip1"));
+        tooltip.add(StringUtils.localize("redstonic.modifier.tip2"));
     }
 }

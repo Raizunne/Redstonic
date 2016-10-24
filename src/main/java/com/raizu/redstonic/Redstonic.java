@@ -10,6 +10,7 @@ import com.raizu.redstonic.Proxy.CommonProxy;
 import com.raizu.redstonic.Recipe.RedRecipes;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -26,7 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * as a part of Redstonic
  **/
 
-@Mod(modid = Redstonic.MODID, version = Redstonic.VERSION, dependencies = "")
+@Mod(modid = Redstonic.MODID, version = Redstonic.VERSION, dependencies = "after:EnderIO")
 public class Redstonic {
     public static final String MODID = "redstonic";
     public static final String VERSION = "2.0";

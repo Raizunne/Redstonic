@@ -29,6 +29,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
@@ -38,7 +39,6 @@ import java.security.Key;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static jdk.nashorn.internal.parser.TokenKind.IR;
@@ -80,7 +80,7 @@ public class Sword extends Item implements IEnergyContainerItem {
     }
 
     public static float getBasicSwordDamage(ItemStack stack){
-        float damage = (float)RedItems.swordBlade.damageBase[stack.getTagCompound().getInteger("blade")];
+        float damage = RedItems.swordBlade.damageBase[stack.getTagCompound().getInteger("blade")];
         for (int i = 0; i < 3; i++) {
             if(stack.getTagCompound().hasKey("aug"+i)){
                 switch(stack.getTagCompound().getInteger("aug"+i)){
@@ -96,8 +96,8 @@ public class Sword extends Item implements IEnergyContainerItem {
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         if(stack.getTagCompound()!=null){
             if(hasAugment(2, stack) || hasAugment(3, stack)){
-                if(!Util.hasEnchantment(stack, "looting", 3))stack.addEnchantment(Enchantment.getEnchantmentByLocation("looting"), 3);
-                if(!Util.hasEnchantment(stack, "fire_aspect", 2))stack.addEnchantment(Enchantment.getEnchantmentByLocation("fire_aspect"), 2);
+                if(!Util.hasEnchantment(stack, "looting", 3) && hasAugment(3, stack))stack.addEnchantment(Enchantment.getEnchantmentByLocation("looting"), 3);
+                if(!Util.hasEnchantment(stack, "fire_aspect", 2) && hasAugment(2, stack))stack.addEnchantment(Enchantment.getEnchantmentByLocation("fire_aspect"), 2);
             }else{
                 NBTTagCompound tag = stack.getTagCompound();
                 tag.removeTag("ench");
@@ -116,7 +116,19 @@ public class Sword extends Item implements IEnergyContainerItem {
 
     public static int getEnergyCost(ItemStack stack){
         if(stack==null || stack.getTagCompound()==null)return 0;
-        return RedItems.swordBlade.energyCost[stack.getTagCompound().getInteger("blade")];
+        int baseCost = RedItems.swordBlade.energyCost[stack.getTagCompound().getInteger("blade")];
+        int cost = baseCost;
+        for (int i = 0; i < 3; i++) {
+            if(stack.getTagCompound().hasKey("aug"+i)){
+                switch(stack.getTagCompound().getInteger("aug"+1)){
+                    case 0: cost+=baseCost*0.5; break;
+                    case 1: cost+=baseCost*0.6; break;
+                    case 2: cost+=baseCost*0.3; break;
+                    case 3: cost+=baseCost*0.5; break;
+                }
+            }
+        }
+        return cost;
     }
 
     @Override
@@ -159,7 +171,7 @@ public class Sword extends Item implements IEnergyContainerItem {
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, playerIn, tooltip, advanced);
         if(stack.getTagCompound()==null){
-            tooltip.add(TextFormatting.RED+"Crafted in Redstonic Modifier");
+            tooltip.add(TextFormatting.RED+StringUtils.localize("redstonic.drill.craftedinmodifier"));
         }else{
             NBTTagCompound tag = stack.getTagCompound();
             if(!tag.hasKey("blade") || !tag.hasKey("handle") || !tag.hasKey("maxEnergy") || !tag.hasKey("Energy")){
@@ -169,36 +181,37 @@ public class Sword extends Item implements IEnergyContainerItem {
             }
             int blade = tag.getInteger("blade");
             int energyStored = tag.getInteger("Energy"), maxEnergy = tag.getInteger("maxEnergy");
-            String damageTip = "Damage: " + TextFormatting.RED + (getBasicSwordDamage(stack))+ " Hearts";
+            String damageTip = StringUtils.localize("redstonic.sword.damage")+": " + TextFormatting.RED + (getBasicSwordDamage(stack))+ " "+StringUtils.localize("redstonic.info.hearts");
             if(maxEnergy==-1){
-                tooltip.add("Charge: [" + TextFormatting.LIGHT_PURPLE +  "==/==/==/==" + TextFormatting.GRAY + "] " + "101%");
+                tooltip.add(StringUtils.localize("redstonic.energy.charge")+": [" + TextFormatting.LIGHT_PURPLE +  "==/==/==/==" + TextFormatting.GRAY + "] " + "101%");
                 tooltip.add(damageTip);
                 tooltip.add("-   §k10000§r§7 / §k10000§r§7 RF");
             }else{
-                tooltip.add("Charge: " + StringUtils.progressBar(energyStored, maxEnergy, 30) + " " + ((energyStored*100)/maxEnergy)+"%");
+                int percent = ((energyStored/100)*100)/(maxEnergy/100);
+                tooltip.add(StringUtils.localize("redstonic.energy.charge")+": " + StringUtils.progressBar(energyStored, maxEnergy, 30) + " " + percent+"%");
                 tooltip.add(damageTip);
                 tooltip.add("-   " + TextFormatting.YELLOW + NumberFormat.getInstance().format(energyStored) + TextFormatting.GRAY +"/" + TextFormatting.YELLOW + NumberFormat.getInstance().format(maxEnergy) + TextFormatting.GRAY + " RF");
             }
-            tooltip.add("-   "+ TextFormatting.YELLOW + getEnergyCost(stack) + TextFormatting.GRAY + " RF per swing");
+            tooltip.add("-   "+ TextFormatting.YELLOW + getEnergyCost(stack) + TextFormatting.GRAY + " RF " + StringUtils.localize("redstonic.sword.perhit"));
             if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)){
                 int handle = tag.getInteger("handle"), battery = tag.getInteger("battery");
                 tooltip.add("--------------------");
-                tooltip.add(TextFormatting.BOLD+""+TextFormatting.RED+"Kills"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " +tag.getInteger("kills"));
-                tooltip.add(TextFormatting.BOLD+"Head"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.swordBlade.blades[blade]+" Blade");
-                tooltip.add(TextFormatting.BOLD+"Body"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.swordHandle.handles[handle]+" Handle");
-                tooltip.add(TextFormatting.BOLD+"Battery"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.battery.names[battery]+" Battery");
+                tooltip.add(TextFormatting.BOLD+""+TextFormatting.RED+StringUtils.localize("redstonic.sword.kills")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " +tag.getInteger("kills"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.sword.blade")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.swordBlade.blades[blade]+"Blade.name"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.sword.handle")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.swordHandle.handles[handle]+"Handle.name"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.energy.battery")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.battery.names[battery]+"Battery.name"));
             }else{
-                tooltip.add(TextFormatting.GRAY+"Press "+TextFormatting.BLUE+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY+" for info.");
+                tooltip.add(TextFormatting.GRAY+StringUtils.localize("redstonic.info.press", TextFormatting.BLUE+""+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY));
             }
             if(hasAugments(stack)){
                 if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)){
                     for (int i = 0; i < 3; i++) {
                         if(stack.getTagCompound().hasKey("aug"+(i))){
-                            tooltip.add(TextFormatting.BOLD+"Augment "+(i+1)+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.swordAugment.augments[stack.getTagCompound().getInteger("aug"+(i))]+" Augment");
+                            tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.drill.augment")+" "+(i+1)+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.swordAugment.augments[stack.getTagCompound().getInteger("aug"+(i))]+"SwordAugment.name"));
                         }
                     }
                 }else{
-                    tooltip.add(TextFormatting.GRAY+"Press "+TextFormatting.RED+TextFormatting.ITALIC+"CTRL"+TextFormatting.RESET+TextFormatting.GRAY+" for augment info.");
+                    tooltip.add(TextFormatting.GRAY+StringUtils.localize("redstonic.info.press", TextFormatting.RED+""+TextFormatting.ITALIC+"CTRL"+TextFormatting.RESET+TextFormatting.GRAY));
                 }
             }
         }

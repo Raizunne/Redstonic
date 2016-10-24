@@ -20,6 +20,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -47,20 +48,19 @@ public class EventHandler {
                 }
             }
         }else if(e.getItemStack().getItem() instanceof Sword){
-//            List<String> newTip = new ArrayList<String>();
-//            for (int i = 0; i < tip.size(); i++) {
-//
-//                if((tip.get(i).startsWith("When on") || tip.get(i).startsWith("When in"))){
-//                    i+=2;
-//                }else{
-//                    if(!tip.get(i).equals(""))newTip.add(tip.get(i));
-//                }
-//            }
-//            tip.clear();
-//            tip.addAll(newTip);
+            List<String> newTip = new ArrayList<String>();
+            for (int i = 0; i < tip.size(); i++) {
+
+                if((tip.get(i).startsWith("When on") || tip.get(i).startsWith("When in"))){
+                    i+=2;
+                }else{
+                    if(!tip.get(i).equals(""))newTip.add(tip.get(i));
+                }
+            }
+            tip.clear();
+            tip.addAll(newTip);
         }
     }
-
 
     @SubscribeEvent
     public void AttackEvent(AttackEntityEvent e){
@@ -75,6 +75,7 @@ public class EventHandler {
             if(canHit){
                 tag.setInteger("Energy", tag.getInteger("Energy")-Sword.getEnergyCost(sword));
                 e.getTarget().attackEntityFrom(source, damage);
+                if(Sword.hasAugment(2, sword))e.getTarget().setFire(8);
                 double walked = (double)(player.distanceWalkedModified - player.prevDistanceWalkedModified);
                 boolean canSweep = player.getCooledAttackStrength(0.5F)>0.9F;
                 boolean isMovingV = player.fallDistance>0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding();
@@ -85,8 +86,10 @@ public class EventHandler {
                             entitylivingbase.attackEntityFrom(source, 1F);
                         }
                     }
+                    player.worldObj.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.getSoundCategory(), 1.0F, 1.0F);
+                }else{
+                    player.worldObj.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_STRONG, player.getSoundCategory(), 1.0F, 1.0F);
                 }
-                player.worldObj.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.getSoundCategory(), 1.0F, 1.0F);
                 if(canSweep)player.spawnSweepParticles();
             }else{
                 tag.setInteger("Energy", tag.getInteger("Energy"));

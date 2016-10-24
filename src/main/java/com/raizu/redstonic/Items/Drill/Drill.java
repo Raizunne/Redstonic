@@ -2,6 +2,7 @@ package com.raizu.redstonic.Items.Drill;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.raizu.redstonic.Handler.Config;
+import com.raizu.redstonic.Items.Battery;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
@@ -71,13 +72,14 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
         }
         int head = tag.getInteger("head");
         tag.setInteger("Energy", tag.getInteger("Energy")-(tag.getInteger("Energy")<getEnergyCost(stack)? tag.getInteger("Energy") : getEnergyCost(stack)));
+        if(head!=3)tag.setInteger("blocks", tag.getInteger("blocks")+1);
         stack.setTagCompound(tag);
         switch(head){
             case 3: //HEAVY
                 threebythree((EntityPlayer)entityLiving, worldIn, state, pos, stack);
                 break;
             case 6: //BLAZER
-                worldIn.playSound((EntityPlayer)entityLiving, pos, new SoundEvent(new ResourceLocation("mob.ghast.firebal")), SoundCategory.BLOCKS, 0.5F, 2F);
+                worldIn.playSound((EntityPlayer)entityLiving, pos, new SoundEvent(new ResourceLocation("entity.ghast.shoot")), SoundCategory.BLOCKS, 0.5F, 2F);
                 worldIn.spawnParticle(EnumParticleTypes.FLAME, entityLiving.posX, entityLiving.posY+1, entityLiving.posZ,1, 1, 1);
                 break;
         }
@@ -155,7 +157,7 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         if(stack.getTagCompound()==null){
-            tooltip.add(TextFormatting.RED+"Crafted in Redstonic Modifier");
+            tooltip.add(TextFormatting.RED+StringUtils.localize("redstonic.drill.craftedinmodifier"));
         }else{
             NBTTagCompound tag = stack.getTagCompound();
             if(!tag.hasKey("head") || !tag.hasKey("body") || !tag.hasKey("maxEnergy") || !tag.hasKey("Energy")){
@@ -166,29 +168,31 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
             int head = tag.getInteger("head");
             int energyStored = tag.getInteger("Energy"), maxEnergy = tag.getInteger("maxEnergy");
             if(maxEnergy==-1){
-                tooltip.add("Charge: [" + TextFormatting.LIGHT_PURPLE +  "==/==/==/==" + TextFormatting.GRAY + "] " + "101%");
+                tooltip.add(StringUtils.localize("redstonic.energy.charge")+": [" + TextFormatting.LIGHT_PURPLE +  "==/==/==/==" + TextFormatting.GRAY + "] " + "101%");
                 tooltip.add("-   §k10000§r§7 / §k10000§r§7 RF");
             }else{
-                tooltip.add("Charge: " + StringUtils.progressBar(energyStored, maxEnergy, 30) + " " + ((energyStored*100)/maxEnergy)+"%");
+                int percent = ((energyStored/100)*100)/(maxEnergy/100);
+                tooltip.add(StringUtils.localize("redstonic.energy.charge")+": " + StringUtils.progressBar(energyStored, maxEnergy, 30) + " " + (percent)+"%");
                 tooltip.add("-   " + TextFormatting.YELLOW + NumberFormat.getInstance().format(energyStored) + TextFormatting.GRAY +"/" + TextFormatting.YELLOW + NumberFormat.getInstance().format(maxEnergy) + TextFormatting.GRAY + " RF");
             }
-            tooltip.add("-   "+ TextFormatting.YELLOW + getEnergyCost(stack) + TextFormatting.GRAY + " RF" + (head==3 ? "/9 blocks" : "/block"));
-            tooltip.add("Speed: " + TextFormatting.RED + getStrVsBlock(stack, null));
+            tooltip.add("-   "+ TextFormatting.YELLOW + getEnergyCost(stack) + TextFormatting.GRAY + " RF" + (head==3 ? "/9 "+StringUtils.localize("stat.blocksButton") : "/block"));
+            tooltip.add(StringUtils.localize("redstonic.drill.speed")+": " + TextFormatting.RED + getStrVsBlock(stack, null));
             if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)){
                 int body = tag.getInteger("body"), battery = tag.getInteger("battery");
                 tooltip.add("--------------------");
-                tooltip.add(TextFormatting.RED+""+TextFormatting.BOLD+"Blocks"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " +tag.getInteger("blocks") +" blocks mined");
-                tooltip.add(TextFormatting.BOLD+"Head"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.drillHead.heads[head]+" Head");
-                tooltip.add(TextFormatting.BOLD+"Body"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.drillBody.bodies[body]+" Body");
-                tooltip.add(TextFormatting.BOLD+"Battery"+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.battery.names[battery]+" Battery");
+                tooltip.add(TextFormatting.RED+""+TextFormatting.BOLD+StringUtils.localize("stat.blocksButton")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " +tag.getInteger("blocks") +" " + StringUtils.localize("redstonic.drill.blocksmined"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.drill.head")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.drillHead.heads[head]+"Head.name"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.drill.body")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.drillBody.bodies[body]+"Body.name"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.energy.battery")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.battery.names[battery]+"Battery.name"));
             }else{
-                tooltip.add(TextFormatting.GRAY+"Press "+TextFormatting.BLUE+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY+" for info.");
+                tooltip.add(TextFormatting.GRAY+StringUtils.localize("redstonic.info.press", TextFormatting.BLUE+""+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY));
+//                tooltip.add(TextFormatting.GRAY+String.format(StringUtils.localize("redstonic.info.press"), (TextFormatting.BLUE+""+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY)));
             }
             if(hasAugments(stack)){
                 if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)){
                     for (int i = 0; i < 3; i++) {
                         if(stack.getTagCompound().hasKey("aug"+(i))){
-                            tooltip.add(TextFormatting.BOLD+"Augment "+(i+1)+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+RedItems.drillAugment.augments[stack.getTagCompound().getInteger("aug"+(i))]+" Augment");
+                            tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.drill.augment")+" "+(i+1)+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.drillAugment.augments[stack.getTagCompound().getInteger("aug"+(i))]+"DrillAugment.name"));
                             if(stack.getTagCompound().getInteger("aug"+i)==3){
                                 String hotswapHead = "No head selected.";
                                 if(stack.getTagCompound()!=null && stack.getTagCompound().hasKey("hotswapHead") && stack.getTagCompound().getInteger("hotswapHead")>-1) hotswapHead = RedItems.drillHead.heads[stack.getTagCompound().getInteger("hotswapHead")]+" Hotswap Head";
@@ -197,7 +201,7 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
                         }
                     }
                 }else{
-                    tooltip.add(TextFormatting.GRAY+"Press "+TextFormatting.RED+TextFormatting.ITALIC+"CTRL"+TextFormatting.RESET+TextFormatting.GRAY+" for augment info.");
+                    tooltip.add(TextFormatting.GRAY+StringUtils.localize("redstonic.info.press", TextFormatting.RED+""+TextFormatting.ITALIC+"CTRL"+TextFormatting.RESET+TextFormatting.GRAY));
                 }
             }
         }
@@ -368,7 +372,7 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
     public int receiveEnergy(ItemStack stack, int maxReceive, boolean simulate) {
         NBTTagCompound tag = stack.getTagCompound();
         int energyStored = tag.getInteger("Energy");
-        int energyReceived = Math.min(stack.getTagCompound().getInteger("maxEnergy")  - energyStored, Math.min(stack.getTagCompound().getInteger("maxEnergy") , maxReceive));
+        int energyReceived = Math.min(stack.getTagCompound().getInteger("maxEnergy")  - energyStored, Math.min(RedItems.battery.maxReceive[stack.getTagCompound().getInteger("battery")] , maxReceive));
         if (!simulate) {
             energyStored += energyReceived;
             tag.setInteger("Energy", energyStored);

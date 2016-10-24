@@ -6,6 +6,56 @@ item.RedstonicSword.name=Redstonic Sword
 tile.Cone.name=Dozer Cone
 tile.RedstonicModifier.name=Redstonic Modifier
 
+redstonic.gui.modifier=Redstonic Modifier
+redstonic.gui.build=Build
+redstonic.gui.deconstruct=Deconstruct
+
+redstonic.modifier.tip1=Used to craft Redstonic
+redstonic.modifier.tip2=drills and swords.
+
+redstonic.drill.drill=Drill
+redstonic.drill.head=Head
+redstonic.drill.none=None
+redstonic.drill.body=Body
+redstonic.drill.speed=Speed
+redstonic.drill.blockmined=Blocks Mined
+redstonic.drill.miningspeed=Mining SpeedSpeed
+redstonic.drill.mining=Mining
+redstonic.drill.regular=Regular
+redstonic.drill.veryfast=Very Fast
+redstonic.drill.instant=Instant
+redstonic.drill.fast=Fast
+redstonic.drill.autosmelt=Auto-Smelt
+redstonic.drill.augmentslot=Augment Slot
+redstonic.drill.requires=Requires
+redstonic.drill.craftedinmodifier=Crafted in Redstonic Modifier
+redstonic.drill.malformed=Malformed
+redstonic.drill.blocksmined=Blocks Mined
+redstonic.drill.augment=Augment
+
+redstonic.drill.augment.hotswap1=Swap Drill Heads on the go!
+redstonic.drill.augment.hotswap2=per swap
+redstonic.drill.augment.hotswaphead=Hotswap Head
+redstonic.drill.augment.speedmult=Speed Multiplier
+
+redstonic.sword.basedamage=Heart%s Base Damage.
+redstonic.sword.kills=Kills
+redstonic.sword.damage=Damage
+redstonic.sword.blade=Blade
+redstonic.sword.handle=Handle
+redstonic.sword.perhit=per hit
+redstonic.sword.heartdamage=Heart Damage
+
+redstonic.sword.augment.damagemult=
+
+redstonic.info.press=Press %s for info.
+redstonic.info.hearts=Hearts
+
+redstonic.energy.maxcharge=Max Charge
+redstonic.energy.inout=In/Out
+redstonic.energy.charge=Charge
+redstonic.energy.battery=Battery
+
 IronHead.name=Iron Drill Head
 GoldHead.name=Gold Drill Head
 DiamondHead.name=Diamond Drill Head
@@ -37,14 +87,14 @@ IronBlade.name=Iron Sword Blade
 DiamondBlade.name=Diamond Sword Blade
 ElectrumBlade.name=Electrum Sword Blade
 EnderiumBlade.name=Enderium Sword Blade
-EnergizedBlade.name=Energized Sword Blade
+EnergeticBlade.name=Energetic Sword Blade
 VibrantBlade.name=Vibrant Sword Blade
 
 WoodHandle.name=Wood Sword Handle
 IronHandle.name=Iron Sword Handle
 ElectrumHandle.name=Electrum Sword Handle
 EnderiumHandle.name=Enderium Sword Handle
-EnergizedHandle.name=Energized Sword Handle
+EnergeticHandle.name=Energetic Sword Handle
 VibrantHandle.name=Vibrant Sword Handle
 
 BerserkSwordAugment.name=Berserk Sword Augment
@@ -52,3 +102,12 @@ BerserkIISwordAugment.name=Berserk II Sword Augment
 BlazerSwordAugment.name=Blazer Sword Augment
 FortuitousSwordAugment.name=Fortuitous Sword Augment
 
+IngotVibrantium.name=Vibrantium Ingot
+GearIron.name=Iron Gear
+GearEnergized.name=Energetic Gear
+GearVibrant.name=Vibrant Gear
+GearElectrum.name=Electrum Gear
+IngotGlowsteel.name=Glowsteel Ingot
+RedstoneStick.name=Redstone Infused Stick
+EnergizedCapsuleFull.name=Full Energized Capsule
+EnergizedCapsuleEmpty.name=Empty Energized Capsule

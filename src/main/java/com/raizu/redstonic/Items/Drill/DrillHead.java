@@ -1,6 +1,8 @@
 package com.raizu.redstonic.Items.Drill;
 
+import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
+import com.raizu.redstonic.Utils.StringUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,14 +52,14 @@ public class DrillHead extends Item {
             tooltip.add("Blocks Mined: "+stack.getTagCompound().getInteger("blocks"));
         }
         switch(stack.getMetadata()){
-            case 0: tooltip.add("Regular Mining Speed"); break;
-            case 1: tooltip.add("Very Fast Mining Speed"); break;
-            case 2: tooltip.add("Fast Mining Speed"); break;
-            case 3: tooltip.add("3x3 Mining"); break;
-            case 4: tooltip.add("Fortune IV Mining"); break;
-            case 5: tooltip.add("Silk Touch Mining"); break;
-            case 6: tooltip.add("Auto-Smelt Mining"); break;
-            case 7: tooltip.add("Instant Mining Speed");tooltip.add("Requires Ultimate Drill Body"); break;
+            case 0: tooltip.add(StringUtils.localize("redstonic.drill.regular") + " " + StringUtils.localize("redstonic.drill.miningspeed")); break;
+            case 1: tooltip.add(StringUtils.localize("redstonic.drill.veryfast") + " " + StringUtils.localize("redstonic.drill.miningspeed")); break;
+            case 2: tooltip.add(StringUtils.localize("redstonic.drill.fast") + " " + StringUtils.localize("redstonic.drill.miningspeed")); break;
+            case 3: tooltip.add("3x3 " + StringUtils.localize("redstonic.drill.mining")); break;
+            case 4: tooltip.add(StringUtils.localize("enchantment.lootBonusDigger") + " IV " + StringUtils.localize("redstonic.drill.mining")); break;
+            case 5: tooltip.add(StringUtils.localize("enchantment.untouching") + " " + StringUtils.localize("redstonic.drill.mining")); break;
+            case 6: tooltip.add(StringUtils.localize("redstonic.drill.autosmelt") + " " + StringUtils.localize("redstonic.drill.mining")); break;
+            case 7: tooltip.add(StringUtils.localize("redstonic.drill.instant") + " " + StringUtils.localize("redstonic.drill.miningspeed"));tooltip.add(StringUtils.localize("redstonic.drill.requires") + " " + StringUtils.localize("EndBody.name")); break;
         }
     }
 
@@ -80,5 +82,9 @@ public class DrillHead extends Item {
         for (int i = 0; i < headCount; i++) {
             subItems.add(new ItemStack(itemIn, 1, i));
         }
+    }
+
+    public static ItemStack getHead(DrillPart part){
+        return new ItemStack(RedItems.drillHead, 1, part.part);
     }
 }
