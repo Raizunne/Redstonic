@@ -1,8 +1,12 @@
 package com.raizu.redstonic.Items;
 
 import cofh.api.energy.IEnergyContainerItem;
+import com.raizu.redstonic.Handler.Config;
+import com.raizu.redstonic.Handler.TeslaItemHandler;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
+import net.darkhax.tesla.api.implementation.BaseTeslaContainer;
+import net.darkhax.tesla.api.implementation.BaseTeslaContainerProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nullable;
 import java.text.NumberFormat;
@@ -26,7 +31,7 @@ import java.util.List;
 public class Battery extends Item implements IEnergyContainerItem {
 
     public int batteryCount = 4;
-    public String[] names = {"Basic", "Energized", "Great", "Absolute"};
+    public String[] batteries = {"Basic", "Energized", "Great", "Absolute"};
     public int[] maxEnergy = {500000, 5000000, 25000000, -1};
     public int[] maxReceive = {1600, 16000, 80000, 100000};
 
@@ -58,13 +63,13 @@ public class Battery extends Item implements IEnergyContainerItem {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return names[stack.getMetadata()]+"Battery";
+        return batteries[stack.getMetadata()]+"Battery";
     }
 
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < batteryCount; i++) {
-            subItems.add(new ItemStack(itemIn, 1, i));
+            if(Config.disabledBatteries.contains(i))subItems.add(new ItemStack(itemIn, 1, i));
         }
     }
 
@@ -103,7 +108,7 @@ public class Battery extends Item implements IEnergyContainerItem {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("max", maxEnergy[stack.getMetadata()]);
             tag.setInteger("Energy", 0);
-            tag.setString("name", names[stack.getMetadata()]);
+            tag.setString("name", batteries[stack.getMetadata()]);
             tag.setInteger("maxReceive", maxReceive[stack.getMetadata()]);
             stack.setTagCompound(tag);
         }
@@ -125,7 +130,17 @@ public class Battery extends Item implements IEnergyContainerItem {
 
     @Override
     public int extractEnergy(ItemStack stack, int maxExtract, boolean simulate) {
-        return 0;
+        if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("Energy")) {
+            return 0;
+        }
+        int energy = stack.getTagCompound().getInteger("Energy");
+        int energyExtracted = Math.min(energy, Math.min(this.maxReceive[stack.getMetadata()], maxExtract));
+
+        if (!simulate) {
+            energy -= energyExtracted;
+            stack.getTagCompound().setInteger("Energy", energy);
+        }
+        return energyExtracted;
     }
 
     @Override
@@ -152,4 +167,10 @@ public class Battery extends Item implements IEnergyContainerItem {
     public static ItemStack getBattery(Types type){
         return new ItemStack(RedItems.battery, 1, type.meta);
     }
+
+//    @Override
+//    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+////        return new TeslaItemHandler(stack, this, true);
+//        return new BaseTeslaContainerProvider(new TeslaItemHandler(stack, true));
+//    }
 }

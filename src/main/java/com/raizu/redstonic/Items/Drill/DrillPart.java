@@ -1,5 +1,7 @@
 package com.raizu.redstonic.Items.Drill;
 
+import net.minecraft.item.ItemStack;
+
 /**
  * Created by Raizu on 22/10/2016.
  * as a part of Redstonic

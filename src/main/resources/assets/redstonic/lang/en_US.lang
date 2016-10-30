@@ -2,6 +2,7 @@ itemGroup.Redstonic=Redstonic
 
 item.RedstonicDrill.name=Redstonic Drill
 item.RedstonicSword.name=Redstonic Sword
+item.RedstonicManual.name=Redstonic Manual
 
 tile.Cone.name=Dozer Cone
 tile.RedstonicModifier.name=Redstonic Modifier
@@ -9,6 +10,7 @@ tile.RedstonicModifier.name=Redstonic Modifier
 redstonic.gui.modifier=Redstonic Modifier
 redstonic.gui.build=Build
 redstonic.gui.deconstruct=Deconstruct
+gui.redstonic.modifier=Redstonic Modifier
 
 redstonic.modifier.tip1=Used to craft Redstonic
 redstonic.modifier.tip2=drills and swords.
@@ -111,3 +113,19 @@ IngotGlowsteel.name=Glowsteel Ingot
 RedstoneStick.name=Redstone Infused Stick
 EnergizedCapsuleFull.name=Full Energized Capsule
 EnergizedCapsuleEmpty.name=Empty Energized Capsule
+
+redstonic.category.drillHeads=Drill Heads
+redstonic.category.drillBodies=Drill Bodies
+redstonic.category.swordBlades=Sword Blades
+redstonic.category.swordHandles=Sword Handles
+
+redstonic.entry.ironHead.name=Iron Head
+redstonic.entry.goldHead.name=Gold Head
+redstonic.entry.diamondHead.name=Diamond Head
+redstonic.entry.heavyHead.name=Heavy Head
+redstonic.entry.fortuitousHead.name=Fortuitous Head
+redstonic.entry.silkyHead.name=Silky Head
+redstonic.entry.blazerHead.name=Blazer Head
+redstonic.entry.endHead.name=Ultimate Head
+
+redstonic.entry.ironHead1=The most basic head. Has one of the slowest dig speeds but also the lowest energy usage.\n Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.

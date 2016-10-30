@@ -2,6 +2,8 @@ package com.raizu.redstonic.Handler;
 
 import com.raizu.redstonic.Items.Drill.Drill;
 import com.raizu.redstonic.Items.Sword.Sword;
+import com.raizu.redstonic.Proxy.ClientProxy;
+import com.raizu.redstonic.Redstonic;
 import net.minecraft.block.BlockLog;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +15,10 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -102,17 +106,17 @@ public class EventHandler {
         }
     }
 
-//    @SubscribeEvent
-//    public void HarvestDrop(BlockEvent.HarvestDropsEvent e){
-//        ItemStack heldHand = e.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
-//        if(heldHand!=null && heldHand.getItem() instanceof Drill){
-//            if(heldHand.getTagCompound()!=null && Drill.hasAugment(4, heldHand)){
-//                e.getDrops().clear();
-//                ItemStack stack = new ItemStack(e.getState().getBlock(), 1, e.getState().getBlock().getMetaFromState(e.getState()));
-//                e.getDrops().add(stack);
-//            }
-//        }
-//    }
+    @SubscribeEvent
+    public void OnJoinWorld(EntityJoinWorldEvent e){
+        if(e.getEntity() instanceof EntityPlayer && !ClientProxy.newVersion.equals("0.0") && !ClientProxy.gotTold){
+            if (!ClientProxy.newVersion.equals(Redstonic.VERSION)){
+                EntityPlayer player = (EntityPlayer)e.getEntity();
+                player.addChatMessage(new TextComponentString("["+TextFormatting.RED+"REDSTONIC"+TextFormatting.WHITE+"]: Redstonic is out of date!"));
+                player.addChatMessage(new TextComponentString("   - What's new? - "+ ClientProxy.newChangelog));
+                ClientProxy.gotTold=true;
+            }
+        }
+    }
 
     @SubscribeEvent
     public void BlazerBlaze(BlockEvent.HarvestDropsEvent event){

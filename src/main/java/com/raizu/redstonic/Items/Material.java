@@ -1,5 +1,6 @@
 package com.raizu.redstonic.Items;
 
+import com.raizu.redstonic.Handler.Config;
 import com.raizu.redstonic.Redstonic;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,8 +46,10 @@ public class Material extends Item {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < Materials.values().length; i++) {
-            subItems.add(new ItemStack(itemIn, 1, i));
-            if(Materials.values()[i].ore) OreDictionary.registerOre(Materials.values()[i].oreDic, new ItemStack(itemIn, 1, i));
+            if(Config.disabledMaterials.contains(i)) {
+                subItems.add(new ItemStack(itemIn, 1, i));
+                if (Materials.values()[i].ore)OreDictionary.registerOre(Materials.values()[i].oreDic, new ItemStack(itemIn, 1, i));
+            }
         }
     }
 

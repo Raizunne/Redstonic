@@ -5,6 +5,7 @@ import com.raizu.redstonic.Blocks.Cone.ConeItem;
 import com.raizu.redstonic.Blocks.Modifier.Modifier;
 import com.raizu.redstonic.Blocks.Modifier.ModifierItem;
 import com.raizu.redstonic.Blocks.Modifier.TEModifier;
+import com.raizu.redstonic.Handler.Config;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -29,10 +30,14 @@ public class RedBlocks {
 
 
     public static void init(){
-        GameRegistry.register(cone);
-        GameRegistry.register(coneItem);
-        GameRegistry.register(modifier);
-        GameRegistry.register(modifierItem);
+        if(Config.RedstonicModifier) {
+            GameRegistry.register(cone);
+            GameRegistry.register(coneItem);
+        }
+        if(Config.DozerCone) {
+            GameRegistry.register(modifier);
+            GameRegistry.register(modifierItem);
+        }
     }
 
 

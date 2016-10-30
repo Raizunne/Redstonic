@@ -2,10 +2,13 @@ package com.raizu.redstonic.Items.Drill;
 
 import cofh.api.energy.IEnergyContainerItem;
 import com.raizu.redstonic.Handler.Config;
+import com.raizu.redstonic.Handler.EnergyCapabilityProvider;
+import com.raizu.redstonic.Handler.TeslaItemHandler;
 import com.raizu.redstonic.Items.Battery;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
+import net.darkhax.tesla.api.implementation.BaseTeslaContainerProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
@@ -183,7 +187,7 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
                 tooltip.add(TextFormatting.RED+""+TextFormatting.BOLD+StringUtils.localize("stat.blocksButton")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " +tag.getInteger("blocks") +" " + StringUtils.localize("redstonic.drill.blocksmined"));
                 tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.drill.head")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.drillHead.heads[head]+"Head.name"));
                 tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.drill.body")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.drillBody.bodies[body]+"Body.name"));
-                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.energy.battery")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.battery.names[battery]+"Battery.name"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.energy.battery")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.battery.batteries[battery]+"Battery.name"));
             }else{
                 tooltip.add(TextFormatting.GRAY+StringUtils.localize("redstonic.info.press", TextFormatting.BLUE+""+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY));
 //                tooltip.add(TextFormatting.GRAY+String.format(StringUtils.localize("redstonic.info.press"), (TextFormatting.BLUE+""+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY)));
@@ -398,4 +402,9 @@ public class Drill extends ItemPickaxe implements IEnergyContainerItem {
     public int getMaxEnergyStored(ItemStack stack) {
         return stack.getTagCompound().getInteger("maxEnergy");
     }
+
+//    @Override
+//    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+//        return new EnergyCapabilityProvider(stack, false);
+//    }
 }

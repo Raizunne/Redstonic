@@ -1,9 +1,11 @@
 package com.raizu.redstonic.Items;
 
+import com.raizu.redstonic.Handler.Config;
 import com.raizu.redstonic.Items.Drill.Drill;
 import com.raizu.redstonic.Items.Drill.DrillAugment;
 import com.raizu.redstonic.Items.Drill.DrillBody;
 import com.raizu.redstonic.Items.Drill.DrillHead;
+import com.raizu.redstonic.Items.Manual.Manual;
 import com.raizu.redstonic.Items.Sword.Sword;
 import com.raizu.redstonic.Items.Sword.SwordAugment;
 import com.raizu.redstonic.Items.Sword.SwordBlade;
@@ -33,6 +35,7 @@ public class RedItems {
     public static SwordHandle swordHandle;
     public static SwordAugment swordAugment;
     public static Material material;
+    public static Manual manual;
 
     public static void init(){
         Random random = new Random();
@@ -40,7 +43,7 @@ public class RedItems {
         drillBody = new DrillBody();
         battery = new Battery();
         drillAugment = new DrillAugment();
-        drill = new Drill(random.nextInt(drillHead.heads.length), random.nextInt(drillBody.bodies.length));
+        if(Config.redstonicDrill)drill = new Drill(random.nextInt(drillHead.heads.length), random.nextInt(drillBody.bodies.length));
         GameRegistry.register(drill);
         GameRegistry.register(drillHead);
         GameRegistry.register(drillBody);
@@ -50,7 +53,7 @@ public class RedItems {
         swordBlade = new SwordBlade();
         swordHandle = new SwordHandle();
         swordAugment = new SwordAugment();
-        sword = new Sword(random.nextInt(swordBlade.blades.length), swordHandle.handles.length);
+        if(Config.redstonicSword)sword = new Sword(random.nextInt(swordBlade.blades.length), swordHandle.handles.length);
         GameRegistry.register(sword);
         GameRegistry.register(swordBlade);
         GameRegistry.register(swordHandle);
@@ -58,12 +61,15 @@ public class RedItems {
 
         material = new Material();
         GameRegistry.register(material);
+        manual = new Manual();
+        GameRegistry.register(manual);
     }
 
     @SideOnly(Side.CLIENT)
     public static void registerRenderers(){
         registerRender(drill);
         registerRender(sword);
+        registerRender(manual);
         for (int i = 0; i < drillHead.headCount; i++) {
             registerRender(drillHead, i);
         }

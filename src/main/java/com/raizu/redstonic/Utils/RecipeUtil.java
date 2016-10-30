@@ -27,7 +27,7 @@ public class RecipeUtil {
             drillHeads.add(new ItemStack(RedItems.drillHead, 1, i));
             for (int j = 0; j < RedItems.drillBody.bodies.length; j++) {
                 drillBodies.add(new ItemStack(RedItems.drillBody, 1, j));
-                for (int k = 0; k < RedItems.battery.names.length-1; k++) {
+                for (int k = 0; k < RedItems.battery.batteries.length-1; k++) {
                     batteries.add(new ItemStack(RedItems.battery, 1, k));
                     NBTTagCompound tag = new NBTTagCompound();
                     tag.setInteger("head", i);
@@ -65,7 +65,7 @@ public class RecipeUtil {
             swordBlades.add(new ItemStack(RedItems.swordBlade, 1, i));
             for (int j = 0; j < RedItems.swordHandle.handles.length; j++) {
                 swordHandles.add(new ItemStack(RedItems.swordHandle, 1, j));
-                for (int k = 0; k < RedItems.battery.names.length-1; k++) {
+                for (int k = 0; k < RedItems.battery.batteries.length-1; k++) {
                     batteries.add(new ItemStack(RedItems.battery, 1, k));
                     NBTTagCompound tag = new NBTTagCompound();
                     tag.setInteger("blade", i);

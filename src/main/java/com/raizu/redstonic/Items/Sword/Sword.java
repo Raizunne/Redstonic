@@ -3,10 +3,13 @@ package com.raizu.redstonic.Items.Sword;
 import cofh.api.energy.IEnergyContainerItem;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.raizu.redstonic.Handler.Config;
+import com.raizu.redstonic.Handler.TeslaItemHandler;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
 import com.raizu.redstonic.Utils.Util;
+import net.darkhax.tesla.api.implementation.BaseTeslaContainerProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.enchantment.Enchantment;
@@ -27,6 +30,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.oredict.OreDictionary;
@@ -80,7 +84,7 @@ public class Sword extends Item implements IEnergyContainerItem {
     }
 
     public static float getBasicSwordDamage(ItemStack stack){
-        float damage = RedItems.swordBlade.damageBase[stack.getTagCompound().getInteger("blade")];
+        float damage = Config.swordDamages[stack.getTagCompound().getInteger("blade")];
         for (int i = 0; i < 3; i++) {
             if(stack.getTagCompound().hasKey("aug"+i)){
                 switch(stack.getTagCompound().getInteger("aug"+i)){
@@ -199,7 +203,7 @@ public class Sword extends Item implements IEnergyContainerItem {
                 tooltip.add(TextFormatting.BOLD+""+TextFormatting.RED+StringUtils.localize("redstonic.sword.kills")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " +tag.getInteger("kills"));
                 tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.sword.blade")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.swordBlade.blades[blade]+"Blade.name"));
                 tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.sword.handle")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.swordHandle.handles[handle]+"Handle.name"));
-                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.energy.battery")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.battery.names[battery]+"Battery.name"));
+                tooltip.add(TextFormatting.BOLD+StringUtils.localize("redstonic.energy.battery")+ TextFormatting.RESET + TextFormatting.GRAY+ ": " + TextFormatting.DARK_GRAY+StringUtils.localize(RedItems.battery.batteries[battery]+"Battery.name"));
             }else{
                 tooltip.add(TextFormatting.GRAY+StringUtils.localize("redstonic.info.press", TextFormatting.BLUE+""+TextFormatting.ITALIC+"SHIFT"+TextFormatting.RESET+TextFormatting.GRAY));
             }
@@ -271,4 +275,9 @@ public class Sword extends Item implements IEnergyContainerItem {
     public int getMaxEnergyStored(ItemStack stack) {
         return stack.getTagCompound().getInteger("maxEnergy");
     }
+
+//    @Override
+//    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+//        return new BaseTeslaContainerProvider(new TeslaItemHandler(stack, false));
+//    }
 }

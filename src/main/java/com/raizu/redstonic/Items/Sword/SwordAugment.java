@@ -1,5 +1,6 @@
 package com.raizu.redstonic.Items.Sword;
 
+import com.raizu.redstonic.Handler.Config;
 import com.raizu.redstonic.Items.Material;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
@@ -56,7 +57,7 @@ public class SwordAugment extends Item {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < augments.length; i++) {
-            subItems.add(new ItemStack(itemIn, 1, i));
+            if(Config.disabledSwordAugments.contains(i))subItems.add(new ItemStack(itemIn, 1, i));
         }
     }
 

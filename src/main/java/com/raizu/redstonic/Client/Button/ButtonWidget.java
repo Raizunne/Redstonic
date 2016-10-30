@@ -60,7 +60,6 @@ public class ButtonWidget extends GuiButton {
             drawTexturedModalRect(x+5, y+3, 1+(15*(u-1)), 226+(15*(v-1)), 14, 14);
         else
             mc.getRenderItem().renderItemAndEffectIntoGUI(stack, x+4, y+1);
-
     }
 
     public void setIcon(int u, int v){

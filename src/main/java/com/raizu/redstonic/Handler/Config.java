@@ -1,11 +1,16 @@
 package com.raizu.redstonic.Handler;
 
+import com.raizu.redstonic.Items.Materials;
+import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Raizu on 15/10/2016.
@@ -23,51 +28,8 @@ public class Config {
     public static boolean DozerCone = true;
     //DRILL
     public static boolean redstonicDrill = true;
-    public static boolean IronHead = true;
-    public static boolean GoldHead = true;
-    public static boolean DiamondHead = true;
-    public static boolean HeavyHead = true;
-    public static boolean FortuitousHead = true;
-    public static boolean SilkyHead = true;
-    public static boolean BlazerHead = true;
-    public static boolean EndHead = true;
-
-    public static boolean IronBody = true;
-    public static boolean ElectrumBody = true;
-    public static boolean EnderiumBody = true;
-    public static boolean EnergeticBody = true;
-    public static boolean VibrantBody = true;
-    public static boolean UltimateBody = true;
-    //SWORD
     public static boolean redstonicSword = true;
-    public static boolean IronBlade = true;
-    public static boolean DiamondBlade = true;
-    public static boolean ElectrumBlade = true;
-    public static boolean EnderiumBlade = true;
-    public static boolean EnergeticBlade = true;
-    public static boolean VibrantBlade = true;
-    public static boolean IronHandle = true;
-    public static boolean WoodHandle = true;
-    public static boolean ElectrumHandle = true;
-    public static boolean EnderiumHandle = true;
-    public static boolean EnergeticHandle = true;
-    public static boolean VibrantHandle = true;
-    //BATTERY
-    public static boolean BasicBattery = true;
-    public static boolean EnergizedBattery = true;
-    public static boolean GreatBattery = true;
-    public static boolean InfiniteBattery = true;
-    //AUGMENT
-    public static boolean SpeedAugment = true;
-    public static boolean EnergyAugment = true;
-    public static boolean HotswapAugment = true;
-    public static boolean PlaceBlockAugment = true;
-    public static boolean MagnetizationAugment = true;
-    public static boolean SpeedIIAugment = true;
-    public static boolean BerserkAugment = true;
-    public static boolean BerserkIIAugment = true;
-    public static boolean FortuitousAugment = true;
-    public static boolean BlazerAugment = true;
+
     //BALANCE
     public static int ironDrillSpeed = 10;
     public static int goldDrillSpeed = 25;
@@ -77,12 +39,32 @@ public class Config {
     public static int silkyDrillSpeed = 8;
     public static int blazerDrillSpeed = 10;
 
+    public static int[] swordDamages = {3, 4, 5, 7, 5, 7};
+    public static boolean noticeUpdate = true;
+
+    public static List<Integer> disabledHeads;
+    public static List<Integer> disabledBodies;
+    public static List<Integer> disabledBatteries;
+    public static List<Integer> disabledBlades;
+    public static List<Integer> disabledHandles;
+    public static List<Integer> disabledDrillAugments;
+    public static List<Integer> disabledSwordAugments;
+    public static List<Integer> disabledMaterials;
+
     public static void load(FMLPreInitializationEvent event) {
         config = new Configuration(event.getSuggestedConfigurationFile());
         reloadConfig();
     }
 
     private static void reloadConfig() {
+        disabledHeads = new ArrayList<Integer>();
+        disabledBodies = new ArrayList<Integer>();
+        disabledBatteries = new ArrayList<Integer>();
+        disabledBlades = new ArrayList<Integer>();
+        disabledHandles= new ArrayList<Integer>();
+        disabledDrillAugments = new ArrayList<Integer>();
+        disabledSwordAugments = new ArrayList<Integer>();
+        disabledMaterials = new ArrayList<Integer>();
         //MACHINES
         RedstonicModifier = config.get("Machines", "Redstonic Modifier", RedstonicModifier).getBoolean(RedstonicModifier);
 
@@ -91,12 +73,6 @@ public class Config {
 
         //BLOCKS
         Manual = config.get("Blocks", "Dozer Cone", DozerCone).getBoolean(DozerCone);
-
-        //BATTERIES
-        BasicBattery = config.get("Batteries", "BasicBattery", BasicBattery).getBoolean(BasicBattery);
-        EnergizedBattery = config.get("Batteries", "EnergeticBattery", EnergizedBattery).getBoolean(EnergizedBattery);
-        GreatBattery = config.get("Batteries", "GreatBattery", GreatBattery).getBoolean(GreatBattery);
-        InfiniteBattery = config.get("Batteries", "InfiniteBattery", InfiniteBattery).getBoolean(InfiniteBattery);
 
         //DRILL SPEEDS
         ironDrillSpeed = config.get("Drill Base Speeds", "Iron", ironDrillSpeed).getInt(ironDrillSpeed);
@@ -107,49 +83,39 @@ public class Config {
         silkyDrillSpeed = config.get("Drill Base Speeds", "Silky", silkyDrillSpeed).getInt(silkyDrillSpeed);
         blazerDrillSpeed = config.get("Drill Base Speeds", "Blazer", blazerDrillSpeed).getInt(blazerDrillSpeed);
 
-        //REDSTONIC DRILL
         redstonicDrill = config.get("RedstonicDrill", "Enable Redstonic Drill", redstonicDrill).getBoolean(redstonicDrill);
-        IronHead = config.get("RedstonicDrill", "IronHead", IronHead).getBoolean(IronHead);
-        GoldHead = config.get("RedstonicDrill", "GoldHead", GoldHead).getBoolean(GoldHead);
-        DiamondHead = config.get("RedstonicDrill", "DiamondHead", DiamondHead).getBoolean(DiamondHead);
-        HeavyHead = config.get("RedstonicDrill", "HeavyHead", HeavyHead).getBoolean(HeavyHead);
-        FortuitousHead = config.get("RedstonicDrill", "FortuitousHead", FortuitousHead).getBoolean(FortuitousHead);
-        BlazerHead = config.get("RedstonicDrill", "BlazerHead", BlazerHead).getBoolean(BlazerHead);
-        SilkyHead = config.get("RedstonicDrill", "SilkyHead", SilkyHead).getBoolean(SilkyHead);
-        EndHead = config.get("RedstonicDrill", "EndHead", EndHead).getBoolean(EndHead);
-        IronBody = config.get("RedstonicDrill", "IronBody", IronBody).getBoolean(IronBody);
-        ElectrumBody = config.get("RedstonicDrill", "ElectrumBody", ElectrumBody).getBoolean(ElectrumBody);
-        EnderiumBody = config.get("RedstonicDrill", "EnderiumBody", EnderiumBody).getBoolean(EnderiumBody);
-        EnergeticBody = config.get("RedstonicDrill", "EnergeticBody", EnergeticBody).getBoolean(EnergeticBody);
-        VibrantBody = config.get("RedstonicDrill", "VibrantBody", VibrantBody).getBoolean(VibrantBody);
-        UltimateBody = config.get("RedstonicDrill", "UltimateBody", UltimateBody).getBoolean(UltimateBody);
-
-        //REDSTONIC SWORD
         redstonicSword = config.get("RedstonicSword", "Enable Redstonic Sword", redstonicSword).getBoolean(redstonicSword);
-        IronHandle = config.get("RedstonicSword", "IronHandle", IronHandle).getBoolean(IronHandle);
-        WoodHandle = config.get("RedstonicSword", "WoodHandle", WoodHandle).getBoolean(WoodHandle);
-        ElectrumHandle = config.get("RedstonicSword", "ElectrumHandle", ElectrumHandle).getBoolean(ElectrumHandle);
-        EnderiumHandle = config.get("RedstonicSword", "EnderiumHandle", EnderiumHandle).getBoolean(EnderiumHandle);
-        EnergeticHandle = config.get("RedstonicSword", "EnergeticHandle", EnergeticHandle).getBoolean(EnergeticHandle);
-        VibrantHandle = config.get("RedstonicSword", "VibrantHandle", VibrantHandle).getBoolean(VibrantHandle);
-        IronBlade = config.get("RedstonicSword", "IronBlade", IronBlade).getBoolean(IronBlade);
-        DiamondBlade = config.get("RedstonicSword", "DiamondBlade", DiamondBlade).getBoolean(DiamondBlade);
-        ElectrumBlade = config.get("RedstonicSword", "ElectrumBlade", ElectrumBlade).getBoolean(ElectrumBlade);
-        EnderiumBlade = config.get("RedstonicSword", "EnderiumBlade", EnderiumBlade).getBoolean(EnderiumBlade);
-        EnergeticBlade = config.get("RedstonicSword", "EnergeticBlade", EnergeticBlade).getBoolean(EnergeticBlade);
-        VibrantBlade = config.get("RedstonicSword", "VibrantBlade", VibrantBlade).getBoolean(VibrantBlade);
 
-        //AUGMENTS
-        SpeedAugment = config.get("Augments", "SpeedAugment", SpeedAugment).getBoolean(SpeedAugment);
-        EnergyAugment = config.get("Augments", "EnergyAugment", EnergyAugment).getBoolean(EnergyAugment);
-        HotswapAugment = config.get("Augments", "HotswapAugment", HotswapAugment).getBoolean(HotswapAugment);
-        PlaceBlockAugment = config.get("Augments", "PlaceBlockAugment", PlaceBlockAugment).getBoolean(PlaceBlockAugment);
-        MagnetizationAugment = config.get("Augments", "MagnetizationAugment", MagnetizationAugment).getBoolean(MagnetizationAugment);
-        SpeedIIAugment = config.get("Augments", "SpeedIIAugment", SpeedIIAugment).getBoolean(SpeedIIAugment);
-        BerserkAugment = config.get("Augments", "BerserkAugment", BerserkAugment).getBoolean(BerserkAugment);
-        BerserkIIAugment = config.get("Augments", "BerserkIIAugment", BerserkIIAugment).getBoolean(BerserkIIAugment);
-        FortuitousAugment = config.get("Augments", "FortuitousAugment", FortuitousAugment).getBoolean(FortuitousAugment);
-        BlazerAugment = config.get("Augments", "BlazerAugment", BlazerAugment).getBoolean(BlazerAugment);
+        noticeUpdate = config.get("Config", "Notify new update in chat", noticeUpdate).getBoolean(noticeUpdate);
+
+        for (int i = 0; i < RedItems.drillHead.heads.length; i++) {
+            if(config.get("RedstonicDrill", RedItems.drillHead.heads[i]+"Head", true).getBoolean(true))disabledHeads.add(i);
+        }
+        for (int i = 0; i < RedItems.drillBody.bodies.length; i++) {
+            if(config.get("RedstonicDrill", RedItems.drillBody.bodies[i]+"Body", true).getBoolean(true))disabledBodies.add(i);
+        }
+        for (int i = 0; i < RedItems.drillAugment.augments.length; i++) {
+            if(config.get("Augments", RedItems.drillAugment.augments[i]+"Augment", true).getBoolean(true))disabledDrillAugments.add(i);
+        }
+
+        for (int i = 0; i < RedItems.swordBlade.blades.length; i++) {
+            if(config.get("RedstonicSword", RedItems.swordBlade.blades[i]+"Blade", true).getBoolean(true))disabledBlades.add(i);
+            swordDamages[i] = config.get("Sword Blades Damages", RedItems.swordBlade.blades[i]+"Blade", swordDamages[i]).getInt(swordDamages[i]);
+        }
+        for (int i = 0; i < RedItems.swordHandle.handles.length; i++) {
+            if(config.get("RedstonicSword", RedItems.swordHandle.handles[i]+"Handle", true).getBoolean(true))disabledHandles.add(i);
+        }
+        for (int i = 0; i < RedItems.swordAugment.augments.length; i++) {
+            if(config.get("Augments", RedItems.swordAugment.augments[i]+"Augment", true).getBoolean(true))disabledSwordAugments.add(i);
+        }
+
+        for (int i = 0; i < RedItems.battery.batteries.length; i++) {
+            if(config.get("Batteries", RedItems.battery.batteries[i]+"Battery", true).getBoolean(true))disabledBatteries.add(i);
+        }
+        for (int i = 0; i < Materials.values().length; i++) {
+            if(config.get("Materials", Materials.values()[i].name(), true).getBoolean(true))disabledMaterials.add(i);
+        }
+
         if (config.hasChanged()) {
             config.save();
         }

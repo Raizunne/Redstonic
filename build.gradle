@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
 
-version = "2.0-BETA-2"
+version = "1.5.2"
 group= "com.raizu.redstonic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Redstonic"
 
@@ -34,19 +34,20 @@ minecraft {
 }
 
 repositories {
-  maven {
-    // location of the maven that hosts JEI files
-    url "http://dvs1.progwml6.com/files/maven"
-  }
+    maven {
+		url "http://dvs1.progwml6.com/files/maven"
+    }
+	maven {
+		url 'http://maven.epoxide.xyz'
+    }
 }
 
 dependencies {
-	// compile against the JEI API
-	deobfCompile "mezz.JEI:jei_1.10.2:3.12.7.312:api"
-	// at runtime, use the full JEI jar
-	runtime "mezz.JEI:jei_1.10.2:3.12.7.312:"
+    compile "net.darkhax.tesla:Tesla:1.10.2-1.2.1.49"
+	
+	deobfCompile "mezz.jei:jei_1.10.2:3.13.0.329:api"
+	runtime "mezz.jei:jei_1.10.2:3.13.0.329"
 }
-
 processResources
 {
     // this will ensure that this task is redone when the versions change.

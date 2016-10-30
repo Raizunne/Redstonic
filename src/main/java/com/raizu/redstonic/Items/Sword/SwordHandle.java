@@ -1,5 +1,6 @@
 package com.raizu.redstonic.Items.Sword;
 
+import com.raizu.redstonic.Handler.Config;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
@@ -65,8 +66,10 @@ public class SwordHandle extends Item {
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < handles.length; i++) {
             if(handles[i]=="Wood" || OreDictionary.getOres("ingot"+handles[i]).size()>0 || OreDictionary.getOres("ingot"+handles[i]+"Alloy").size()>0) {
-                subItems.add(new ItemStack(itemIn, 1, i));
-                OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+                if(Config.disabledHandles.contains(i)) {
+                    subItems.add(new ItemStack(itemIn, 1, i));
+                    OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+                }
             }
         }
     }

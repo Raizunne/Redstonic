@@ -1,5 +1,6 @@
 package com.raizu.redstonic.Items.Drill;
 
+import com.raizu.redstonic.Handler.Config;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
@@ -69,8 +70,10 @@ public class DrillBody extends Item {
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 0; i < bodyCount; i++) {
             if(OreDictionary.getOres("ingot"+bodies[i]).size()>0 || OreDictionary.getOres("ingot"+bodies[i]+"Alloy").size()>0 || bodies[i].equals("End")) {
-                subItems.add(new ItemStack(itemIn, 1, i));
-                OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+                if(Config.disabledBodies.contains(i)) {
+                    subItems.add(new ItemStack(itemIn, 1, i));
+                    OreDictionary.registerOre(oreDic[i], new ItemStack(itemIn, 1, i));
+                }
             }
         }
     }

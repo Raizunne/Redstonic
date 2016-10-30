@@ -1,6 +1,7 @@
 package com.raizu.redstonic.Blocks.Modifier;
 
 import cofh.api.energy.IEnergyContainerItem;
+import com.raizu.redstonic.Client.Button.ButtonArrow;
 import com.raizu.redstonic.Client.Button.ButtonIcon;
 import com.raizu.redstonic.Client.Button.ButtonWidget;
 import com.raizu.redstonic.Items.Battery;
@@ -27,10 +28,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import scala.actors.threadpool.Arrays;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -168,7 +169,9 @@ public class GUIModifier extends GuiContainer{
         buildButton.visible=false;
 
         ButtonWidget textures = new ButtonWidget(100, ButtonWidget.Direction.LEFT, posX-21, posY+10, 1,2);
+        ButtonArrow arrpw = new ButtonArrow(102, posX+20, posY+40, ButtonArrow.Direction.UP);
 
+        buttonList.add(arrpw);
         buttonList.add(textures);
         buttonList.add(buildButton);
     }

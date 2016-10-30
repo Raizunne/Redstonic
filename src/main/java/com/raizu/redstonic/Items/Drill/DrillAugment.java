@@ -1,5 +1,6 @@
 package com.raizu.redstonic.Items.Drill;
 
+import com.raizu.redstonic.Handler.Config;
 import com.raizu.redstonic.Items.RedItems;
 import com.raizu.redstonic.Redstonic;
 import com.raizu.redstonic.Utils.StringUtils;
@@ -49,7 +50,7 @@ public class DrillAugment extends Item {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
         for (int i = 1; i < augments.length; i++) {
-            subItems.add(new ItemStack(itemIn, 1, i));
+            if(Config.disabledDrillAugments.contains(i))subItems.add(new ItemStack(itemIn, 1, i));
         }
     }
 
