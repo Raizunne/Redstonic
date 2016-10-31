@@ -1,14 +1,11 @@
 package com.raizu.redstonic.Items.Manual;
 
-import com.raizu.redstonic.Items.Manual.Pages.ManualPage;
+import com.raizu.redstonic.Items.Manual.Pages.PageBase;
 import com.raizu.redstonic.Utils.StringUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
-import scala.actors.threadpool.Arrays;
 
-import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +18,7 @@ public class ManualEntry {
     ManualCategory category;
     ItemStack stack;
     boolean hasIcon;
-    ManualPage[] pages;
+    PageBase[] pages;
 
     public ManualEntry(String unloclName, ManualCategory cat, ItemStack stack){
         this.unlocalName = unloclName;
@@ -39,7 +36,7 @@ public class ManualEntry {
         return category;
     }
 
-    public ManualEntry setPages(ManualPage... pages){
+    public ManualEntry setPages(PageBase... pages){
         for (int i = 0; i < pages.length; i++) {
             pages[i].setParentEntry(this);
         }
@@ -47,20 +44,19 @@ public class ManualEntry {
         return this;
     }
 
-    public ManualPage[] getPages() {
+    public ItemStack getStack() {
+        return stack;
+    }
+
+    public void setStack(ItemStack stack) {
+        this.stack = stack;
+    }
+
+    public PageBase[] getPages() {
         return pages;
     }
 
-    public List<ManualPage> getPagesList(){
+    public List<PageBase> getPagesList(){
         return Arrays.asList(pages);
-    }
-
-    public void renderEntry(GUIManual screen){
-        GL11.glPushMatrix();
-        screen.mc.fontRendererObj.drawString(getName(), screen.posX+18, screen.posY+12, 0x990000, false);
-        GL11.glScalef(0.8F, 0.8F, 0.8F);
-        screen.mc.fontRendererObj.drawSplitString(StringUtils.localize("redstonic.entry."+unlocalName), (int)((screen.posX+18)/0.8), (int)((screen.posY+25)/0.8), 135, 0);
-        GL11.glScalef(1F, 1F, 1F);
-        GL11.glPopMatrix();
     }
 }

@@ -1,10 +1,7 @@
 package com.raizu.redstonic.Items.Manual.Pages;
 
 import com.raizu.redstonic.Client.Button.ButtonArrow;
-import com.raizu.redstonic.Items.Manual.GUICategory;
-import com.raizu.redstonic.Items.Manual.GUIManual;
 import com.raizu.redstonic.Items.Manual.ManualEntry;
-import com.raizu.redstonic.Items.Manual.ManualEntryRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
  * Created by Raizu on 29/10/2016.
  * as a part of Redstonic
  **/
-public class ManualPage extends GuiScreen {
+public class PageBase extends GuiScreen {
 
     int posX, posY;
     ResourceLocation tex = new ResourceLocation("redstonic", "textures/gui/ManualGUI.png");
@@ -57,6 +54,12 @@ public class ManualPage extends GuiScreen {
     }
 
     @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        if(mouseButton==1)actionPerformed(new GuiButton(-3, 10,10, "shit"));
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+    }
+
+    @Override
     public boolean doesGuiPauseGame() {
         return false;
     }
@@ -66,7 +69,7 @@ public class ManualPage extends GuiScreen {
         int pageIndex = parentEntry.getPagesList().indexOf(this);
         switch (button.id){
             case -3:
-                Minecraft.getMinecraft().displayGuiScreen(new GUICategory(ManualEntryRegistry.getEntriesByCategory(parentEntry.getCategory()), new GUIManual(Minecraft.getMinecraft().thePlayer)));
+                Minecraft.getMinecraft().displayGuiScreen(new PageCategory(parentEntry.getCategory()));
                 break;
             case -2:
                 if(pageIndex!=0)mc.displayGuiScreen(parentEntry.getPagesList().get(pageIndex-1));

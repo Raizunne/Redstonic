@@ -65,7 +65,7 @@ public class ButtonMenu extends GuiButton {
         GlStateManager.enableDepth();
         GlStateManager.pushMatrix();
 
-        mc.getRenderItem().renderItemAndEffectIntoGUI(stack, (int)(this.xPosition/0.6)-4, (int)(this.yPosition/0.6)+2);
+        mc.getRenderItem().renderItemAndEffectIntoGUI(stack, (int)(this.xPosition/0.6)-6, (int)(this.yPosition/0.6)+2);
 
         GlStateManager.popMatrix();
         RenderHelper.disableStandardItemLighting();

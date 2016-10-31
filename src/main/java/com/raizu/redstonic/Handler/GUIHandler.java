@@ -3,7 +3,9 @@ package com.raizu.redstonic.Handler;
 import com.raizu.redstonic.Blocks.Modifier.ContainerModifier;
 import com.raizu.redstonic.Blocks.Modifier.GUIModifier;
 import com.raizu.redstonic.Blocks.Modifier.TEModifier;
-import com.raizu.redstonic.Items.Manual.GUIManual;
+import com.raizu.redstonic.Items.Manual.Pages.PageCategory;
+import com.raizu.redstonic.Items.Manual.ManualData;
+import com.raizu.redstonic.Items.Manual.ManualEntryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +39,7 @@ public class GUIHandler implements IGuiHandler {
                 return new GUIModifier(player.inventory, (TEModifier) te);
             }
             break;
-            case 1: return new GUIManual(player);
+            case 1: return new PageCategory(ManualData.mainMenu);
         }
         return null;
     }

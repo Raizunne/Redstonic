@@ -60,11 +60,15 @@ public class ButtonArrow extends GuiButton {
             List<String> st = new ArrayList<String>();
             st.add(text);
             GlStateManager.pushMatrix();
-            GuiUtils.drawHoveringText(st, mouseX, mouseY, 200, new ScaledResolution(mc).getScaledHeight(),new ScaledResolution(mc).getScaledWidth(), Minecraft.getMinecraft().fontRendererObj);
+            GuiUtils.drawHoveringText(st, mouseX, mouseY, new ScaledResolution(mc).getScaledWidth(),new ScaledResolution(mc).getScaledHeight(), 200, Minecraft.getMinecraft().fontRendererObj);
             RenderHelper.disableStandardItemLighting();
             GlStateManager.popMatrix();
         }
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override

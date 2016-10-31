@@ -114,10 +114,16 @@ RedstoneStick.name=Redstone Infused Stick
 EnergizedCapsuleFull.name=Full Energized Capsule
 EnergizedCapsuleEmpty.name=Empty Energized Capsule
 
+redstonic.category.mainMenu=Main Menu
+redstonic.category.drill=Redstonic Drill
+redstonic.category.sword=Redstonic Sword
+redstonic.category.batteries=Batteries
 redstonic.category.drillHeads=Drill Heads
 redstonic.category.drillBodies=Drill Bodies
+redstonic.category.drillAugments=Drill Augments
 redstonic.category.swordBlades=Sword Blades
 redstonic.category.swordHandles=Sword Handles
+redstonic.category.swordAugments=Sword Augments
 
 redstonic.entry.ironHead.name=Iron Head
 redstonic.entry.goldHead.name=Gold Head
@@ -128,4 +134,53 @@ redstonic.entry.silkyHead.name=Silky Head
 redstonic.entry.blazerHead.name=Blazer Head
 redstonic.entry.endHead.name=Ultimate Head
 
-redstonic.entry.ironHead1=The most basic head. Has one of the slowest dig speeds but also the lowest energy usage.\n Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.ironBody.name=Iron Body
+redstonic.entry.energeticBody.name=Energetic Body
+redstonic.entry.vibrantBody.name=Vibrant Body
+redstonic.entry.ultimateBody.name=End Body
+redstonic.entry.electrumBody.name=Electrum Body
+redstonic.entry.enderiumBody.name=Enderium Body
+
+redstonic.entry.ironBlade.name=Iron Blade
+redstonic.entry.diamondBlade.name=Diamond Blade
+redstonic.entry.energeticBlade.name=Energetic Blade
+redstonic.entry.vibrantBlade.name=Vibrant Blade
+redstonic.entry.electrumBlade.name=Electrum Blade
+redstonic.entry.enderiumBlade.name=Enderium Blade
+
+redstonic.entry.woodHandle.name=Wood Handle
+redstonic.entry.ironHandle.name=Iron Handle
+redstonic.entry.energeticHandle.name=Energetic Handle
+redstonic.entry.vibrantHandle.name=Vibrant Handle
+redstonic.entry.electrumHandle.name=Electrum Handle
+redstonic.entry.enderiumHandle.name=Enderium Handle
+
+redstonic.entry.ironHead1=The most basic head. Has one of the slowest dig speeds but also the lowest energy usage. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.goldHead1=The fastest drill head. It is borderline instant mine, but not there. Has one of the highest energy usage but the speed is worth it. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.diamondHead1=Faster than the iron head, slower than the gold head. It has a moderate energy usage but its high cost makes it not worth for players looking for speed. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.heavyHead1=This drill head is not only heavy but allows the user to mine a 3x3 grid around the block mined. It will not mine tileentities (machines) and will not mine blocks that are way harder than the original block mined. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.fortuitousHead1=Drill head that has a Fortune IV enchantment. This comes with a cost of a relatively high energy cost. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.silkyHead1=Drill head that includes a Silk Touch enchantment. Although the energy cost is up there, the loads of smooth stone make it worth. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.blazerHead1=The blazer drill head comes hot off the crafting table, smelting all the blocks that the user mines. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+redstonic.entry.endHead1=The ultimate head. This drill head REQUIRES A END DRILL BODY. This drill head is an instant mine. Although the energy cost is high, there's not waiting when you are mining with this head. Just like the other drill heads, it can break any block like any diamond pickaxe, shovel and axe.
+
+redstonic.entry.ironBody1=The most basic drill body. This body only has 1 augment slot. Drill bodies do not modify the drill speed or energy cost.
+redstonic.entry.energeticBody1=Mid tier drill body, allows the user to add 2 augments. Augments cannot be repeated. Drill bodies do not modify the drill speed or energy cost.
+redstonic.entry.vibrantBody1=High tier drill body. Can hold up to 3 augments. Augments cannot be repeated. Drill bodies do not modify the drill speed or energy cost.
+redstonic.entry.electrumBody1=Mid tier drill body, allows the user to add 2 augments. Augments cannot be repeated. Drill bodies do not modify the drill speed or energy cost.
+redstonic.entry.enderiumBody1=High tier drill body. Can hold up to 3 augments. Augments cannot be repeated. Drill bodies do not modify the drill speed or energy cost.
+redstonic.entry.ultimateBody1=Ultimate tier drill body. The requirement of the ultimate drill head. This drill body has NO augment slots. Drill bodies do not modify the drill speed or energy cost.
+
+redstonic.entry.ironBlade1=Low tier sword blade. Has 3 heart base damage, making it WAY better than the vanilla Iron Sword. It has the lowest energy cost out of all the sword blades. Sword blade only changes the amount of damage done by the sword.
+redstonic.entry.diamondBlade1=Base tier sword blade. Has 4 heart base damage, making it better than a vanilla Diamond Sword. Sword blade only changes the amount of damage done by the sword.
+redstonic.entry.energeticBlade1=Mid tier sword blade. Has 5 heart base damage. Sword blade only changes the amount of damage done by the sword.
+redstonic.entry.vibrantBlade1=High tier sword blade. Has 7 heart base damage. Its high damage makes its high cost and energy usage worth. Sword blade only changes the amount of damage done by the sword.
+redstonic.entry.electrumBlade1=Mid tier sword blade. Has 5 heart base damage. Sword blade only changes the amount of damage done by the sword.
+redstonic.entry.enderiumBlade1=High tier sword blade. Has 7 heart base damage. Its high damage makes its high cost and energy usage worth. Sword blade only changes the amount of damage done by the sword.
+
+redstonic.entry.ironHandle1=Basic sword handle. Has 1 augment slot that can be used to upgrade the sword. Sword handles do not alter the speed and damage of the sword.
+redstonic.entry.woodHandle1=The most basic sword handle. Has NO augment slots but other than that its similar than the other handles. Sword handles do not alter the speed and damage of the sword.
+redstonic.entry.energeticHandle1=Mid tier sword handle. Has 2 augment slots, augments cannot be stacked. Sword handles do not alter the speed and damage of the sword.
+redstonic.entry.vibrantHandle1=High tier sword handle. Has 3 augment, augments cannot be stacked. Sword handles do not alter the speed and damage of the sword.
+redstonic.entry.electrumHandle1=Mid tier sword handle. Has 2 augment slots, augments cannot be stacked. Sword handles do not alter the speed and damage of the sword.
+redstonic.entry.enderiumHandle1=High tier sword handle. Has 3 augment, augments cannot be stacked. Sword handles do not alter the speed and damage of the sword.
